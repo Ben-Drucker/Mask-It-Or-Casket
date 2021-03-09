@@ -5,7 +5,7 @@ class City {
         this.constituents = [];
         this.groups = new Map();
         this.totalInfected = 0;
-        let max = 10
+        let max = 15
         for (let i = 0; i < this.population; i++) {
             let maxInteractions;
             if (this.population < max) {
@@ -44,7 +44,7 @@ class City {
 
     iteration() {
         var t = this.constituents;
-        var transmissionRisk = 0.15 //TODO: SUBJECT TO CHANGE
+        var transmissionRisk = 0.1*.65//TODO: SUBJECT TO CHANGE
         let itGroups = this.groups;
         let itTotalInfected = this.totalInfected;
         itGroups.forEach(function (group) {  //for each group... 
@@ -52,14 +52,14 @@ class City {
                 group.forEach(function (person2) {//for each person 2 in each group...
                     if (person1.isInfected) {
                         var chance = Math.random();
-                        if (chance < transmissionRisk*person2.risk) {
+                        if (chance < transmissionRisk && !person2.isInfected) {
                             person2.isInfected = true;
                             itTotalInfected++;
                         }
                     }
                     if (person2.isInfected) {
                         chance = Math.random();
-                        if (chance < transmissionRisk*person1.risk) {
+                        if (chance < transmissionRisk && !person1.isInfected) {
                             person1.isInfected = true;
                             itTotalInfected++;
                         }
@@ -67,6 +67,7 @@ class City {
                 })
             })
         })
+        this.totalInfected = itTotalInfected;
     }
 
     iterate() {
@@ -76,6 +77,7 @@ class City {
     }
 
     clearPrint() { 
+        console.log(this.totalInfected);
         for (let i = 0; i < this.population; i++) {
             console.log(this.constituents[i]);
         }
@@ -98,7 +100,7 @@ class Person {
 }
 
 function main() {
-    let testCity = new City(100);
+    let testCity = new City(100000);
     testCity.generateGroups();
     testCity.injectIllness(1);
     testCity.iterate();
