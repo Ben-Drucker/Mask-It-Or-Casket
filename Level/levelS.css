@@ -1,3 +1,26 @@
 body{
 	margin:0;
 }
+
+.clr{
+	clear:both;
+}
+
+.button{
+    background-color: white;
+    border-color: black;
+    color: black;
+    margin: 10px;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    width:30%;
+}
+
+canvas{
+	width:500px;
+	height: 500px;
+	border: 1px solid black;
+}
