@@ -43,15 +43,15 @@ class City {
     }
 
     iteration() {
-        var t = this.constituents;
-        var transmissionRisk = 0.1*.65//TODO: SUBJECT TO CHANGE
+        let t = this.constituents;
+        let transmissionRisk = 0.1*.65;//TODO: SUBJECT TO CHANGE
         let itGroups = this.groups;
         let itTotalInfected = this.totalInfected;
         itGroups.forEach(function (group) {  //for each group... 
             group.forEach(function (person1) {//for each person 1 in each group...
                 group.forEach(function (person2) {//for each person 2 in each group...
                     if (person1.isInfected) {
-                        var chance = Math.random();
+                        let chance = Math.random();
                         if (chance < transmissionRisk && !person2.isInfected) {
                             person2.isInfected = true;
                             itTotalInfected++;
