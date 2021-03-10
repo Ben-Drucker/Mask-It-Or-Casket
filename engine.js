@@ -44,7 +44,7 @@ class City {
 
     iteration() {
         let t = this.constituents;
-        let transmissionRisk = 0.1*.65;//TODO: SUBJECT TO CHANGE
+        let transmissionRisk = 0.1*.65;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
         let itGroups = this.groups;
         let itTotalInfected = this.totalInfected;
         itGroups.forEach(function (group) {  //for each group... 
