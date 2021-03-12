@@ -5,4 +5,4 @@
 .vscode
 
 #Mac folders
-*.DS_Store
+.DS_Store
