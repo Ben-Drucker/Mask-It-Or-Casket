@@ -1,8 +1,8 @@
 # Dot Underscore files
-._*
+*._*
 
 #VS Code config files
-.vscode
+*.vscode
 
 #Mac folders
-.DS_Store
+*.DS_Store
