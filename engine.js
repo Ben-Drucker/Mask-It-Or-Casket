@@ -26,12 +26,12 @@ class City {
         let genPopulation = this.population;
         genConstituents.forEach(function (person) {
             genGroups.set(person, new Set());
-            while (genGroups.get(person).size < person.gregarious) {
+            while (genGroups.get(person).size < person.gregarious && person.gregarious != 0) {
                 let randPerson = genConstituents[Math.floor(genPopulation * Math.random())];
                 if (!genGroups.get(person).has(randPerson)) {
                     genGroups.get(person).add(randPerson);
                 }
-            }
+            } 
         })
     }
 
@@ -50,8 +50,9 @@ class City {
         itGroups.forEach(function (group) {  //for each group... 
             group.forEach(function (person1) {//for each person 1 in each group...
                 group.forEach(function (person2) {//for each person 2 in each group...
+                    let chance;
                     if (person1.isInfected) {
-                        let chance = Math.random();
+                        chance = Math.random();
                         if (chance < transmissionRisk && !person2.isInfected) {
                             person2.isInfected = true;
                             itTotalInfected++;
@@ -83,6 +84,21 @@ class City {
         }
         console.log(this.totalInfected);
     }
+
+    clearPrintGroups(){
+        let printGroups = this.groups;
+        let count = [];
+        for (let i = 0; i < 10; i++){
+            count[i] = 0;
+        }
+        printGroups.forEach(function(group){
+            console.log(group, "================================");
+            group.forEach(function(person){
+                count[person.gregarious]++;
+            })
+        })
+        console.log(count);
+    }
 }
 
 
@@ -100,11 +116,14 @@ class Person {
 }
 
 function main() {
-    let testCity = new City(100000);
+    let testCity = new City(10);
     testCity.generateGroups();
     testCity.injectIllness(1);
     testCity.iterate();
     testCity.clearPrint();
+    testCity.clearPrintGroups();
+    
+    console.log(testCity.groups);
 }
 
 main()
