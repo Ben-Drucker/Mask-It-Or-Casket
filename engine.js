@@ -30,6 +30,7 @@ class City {
                 let randPerson = genConstituents[Math.floor(genPopulation * Math.random())];
                 if (!genGroups.get(person).has(randPerson)) {
                     genGroups.get(person).add(randPerson);
+                    randPerson.addedToGroups ++;
                 }
             } 
         })
@@ -111,6 +112,7 @@ class Person {
         this.risk = risk;
         this.isDead = false;
         this.isVaxed = false;
+        this.addedToGroups = 0;
     }
 
 }
@@ -120,10 +122,9 @@ function main() {
     testCity.generateGroups();
     testCity.injectIllness(1);
     testCity.iterate();
-    testCity.clearPrint();
-    testCity.clearPrintGroups();
-    
-    console.log(testCity.groups);
+    //testCity.clearPrint();
+    //testCity.clearPrintGroups();
+    console.log(testCity.constituents);
 }
 
 main()
