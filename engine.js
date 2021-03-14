@@ -8,7 +8,8 @@ class City {
         this.totalInfected = 0;
         this.connectionDensity = 0.3;
         // this.maxConnections = this.population / 5;
-        this.maxConnections = 20;
+        this.maxGroupSize = 25;
+        this.maxConnectionsInGroup = 50;
         this.connections = 0;
         for (let i = 0; i < this.population; i++) {
             let gregarious = Math.floor(Math.random() * this.maxConnections);
@@ -18,19 +19,46 @@ class City {
     }
 
     generateGroups() {
-        let randResult;
         for (let i = 0; i < this.population; i++) {   //initialize groups dictionary
             this.groups.set(this.constituents[i], new Set());
         }
-        for (let i = 0; i < this.population; i++) {
-            let howManyInRow = Math.floor(Math.random() * this.maxConnections/2);
-            for (let k = 0; k < howManyInRow; k++) {
-                let j = Math.floor(Math.random() * (this.population - i)) + i;
-                this.groups.get(this.constituents[j]).add(this.constituents[i]);
-                this.groups.get(this.constituents[i]).add(this.constituents[j]);
-                this.connections++;
+        let j = 0;
+        let i = 0;
+        let groupSize;
+        let done = false;
+        let iter = 0;
+        do {
+            iter ++;
+            if(iter > 200){
+                done = true;
             }
-        }
+            groupSize = Math.floor(this.maxGroupSize * Math.random());
+            for (j = i; j < groupSize + i; j++) {
+                let internalGroupConnections = Math.floor(0.75 * this.maxConnectionsInGroup * Math.random());
+                let externalGroupConnections = Math.floor(0.25 * this.maxConnectionsInGroup * Math.random());
+                if (i + this.maxConnectionsInGroup > this.population) {
+                    this.maxConnectionsInGroup = this.population - i - 1;
+                    done = true;
+                    break
+                }
+                for (let k = 0; k < internalGroupConnections; k++) {
+                    let p1 = Math.floor(Math.random() * groupSize) + i;
+                    let p2 = Math.floor(Math.random() * groupSize) + i;
+                    this.groups.get(this.constituents[p1]).add(this.constituents[p2]);
+                    this.groups.get(this.constituents[p2]).add(this.constituents[p1]);
+                    this.connections++;
+                }
+                for (let l = 0; l < externalGroupConnections; l++) {
+                    let p1 = Math.floor(Math.random() * groupSize) + i;
+                    let p2 = Math.floor(Math.random() * this.population);
+                    this.groups.get(this.constituents[p1]).add(this.constituents[p2]);
+                    this.groups.get(this.constituents[p2]).add(this.constituents[p1]);
+                    this.connections++;
+                }
+                i += groupSize;
+                groupSize = Math.floor(this.maxGroupSize * Math.random());
+            }
+        } while (i < this.population && !done);
     }
 
     injectIllness(numberInjected) {
@@ -43,7 +71,7 @@ class City {
     iteration() {
         let tr = 0;
         let t = this.constituents;
-        let transmissionRisk = 0.2;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
+        let transmissionRisk = 0.7;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
         let itGroups = this.groups;
         let itTotalInfected = this.totalInfected;
         itGroups.forEach(function (group) {  //for each group... 
@@ -56,7 +84,7 @@ class City {
                             console.log(person1.id, "gave it to ", person2.id);
                             person2.isInfected = true;
                             itTotalInfected++;
-                            tr ++;
+                            tr++;
                         }
                     }
                     if (person2.isInfected) {
@@ -65,18 +93,18 @@ class City {
                             console.log(person2.id, "gave it to ", person1.id);
                             person1.isInfected = true;
                             itTotalInfected++;
-                            tr ++;
+                            tr++;
                         }
                     }
                 })
             })
         })
         this.totalInfected = itTotalInfected;
-        this.transmitted = tr;
+        this.transmitted += tr;
     }
 
     iterate() {
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 10; i++) {
             this.iteration();
         }
     }
@@ -98,12 +126,15 @@ class Person {
 }
 
 function main() {
-    let testCity = new City(1000);
+    let testCity = new City(100);
     testCity.generateGroups();
-    testCity.injectIllness(1);
+    testCity.injectIllness(10);
     testCity.iterate();
     console.log(testCity.groups, "Connections = ", testCity.connections);
-    console.log(testCity.transmitted);
+    for (let i = 0; i < testCity.population; i++) {
+        console.log(testCity.constituents[i], testCity.constituents[i].isInfected);
+    }
+    console.log(testCity.transmitted, "/", testCity.population);
 }
 
 main()
