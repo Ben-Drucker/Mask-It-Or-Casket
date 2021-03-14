@@ -1,39 +1,36 @@
 class City {
 
     constructor(population) {
+        this.transmitted = 0;
         this.population = population;
         this.constituents = [];
         this.groups = new Map();
         this.totalInfected = 0;
-        let max = 15
+        this.connectionDensity = 0.3;
+        // this.maxConnections = this.population / 5;
+        this.maxConnections = 20;
+        this.connections = 0;
         for (let i = 0; i < this.population; i++) {
-            let maxInteractions;
-            if (this.population < max) {
-                maxInteractions = this.population;
-            }
-            else {
-                maxInteractions = max;
-            }
-            let gregarious = Math.floor(Math.random() * maxInteractions);
+            let gregarious = Math.floor(Math.random() * this.maxConnections);
             let risk = Math.random();
             this.constituents.push(new Person(i, gregarious, risk));
         }
     }
 
     generateGroups() {
-        let genGroups = this.groups;
-        let genConstituents = this.constituents;
-        let genPopulation = this.population;
-        genConstituents.forEach(function (person) {
-            genGroups.set(person, new Set());
-            while (genGroups.get(person).size < person.gregarious && person.gregarious != 0) {
-                let randPerson = genConstituents[Math.floor(genPopulation * Math.random())];
-                if (!genGroups.get(person).has(randPerson)) {
-                    genGroups.get(person).add(randPerson);
-                    randPerson.addedToGroups ++;
-                }
-            } 
-        })
+        let randResult;
+        for (let i = 0; i < this.population; i++) {   //initialize groups dictionary
+            this.groups.set(this.constituents[i], new Set());
+        }
+        for (let i = 0; i < this.population; i++) {
+            let howManyInRow = Math.floor(Math.random() * this.maxConnections/2);
+            for (let k = 0; k < howManyInRow; k++) {
+                let j = Math.floor(Math.random() * (this.population - i)) + i;
+                this.groups.get(this.constituents[j]).add(this.constituents[i]);
+                this.groups.get(this.constituents[i]).add(this.constituents[j]);
+                this.connections++;
+            }
+        }
     }
 
     injectIllness(numberInjected) {
@@ -44,8 +41,9 @@ class City {
     }
 
     iteration() {
+        let tr = 0;
         let t = this.constituents;
-        let transmissionRisk = 0.1*.65;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
+        let transmissionRisk = 0.2;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
         let itGroups = this.groups;
         let itTotalInfected = this.totalInfected;
         itGroups.forEach(function (group) {  //for each group... 
@@ -55,50 +53,32 @@ class City {
                     if (person1.isInfected) {
                         chance = Math.random();
                         if (chance < transmissionRisk && !person2.isInfected) {
+                            console.log(person1.id, "gave it to ", person2.id);
                             person2.isInfected = true;
                             itTotalInfected++;
+                            tr ++;
                         }
                     }
                     if (person2.isInfected) {
                         chance = Math.random();
                         if (chance < transmissionRisk && !person1.isInfected) {
+                            console.log(person2.id, "gave it to ", person1.id);
                             person1.isInfected = true;
                             itTotalInfected++;
+                            tr ++;
                         }
                     }
                 })
             })
         })
         this.totalInfected = itTotalInfected;
+        this.transmitted = tr;
     }
 
     iterate() {
         for (let i = 0; i < 1; i++) {
             this.iteration();
         }
-    }
-
-    clearPrint() { 
-        console.log(this.totalInfected);
-        for (let i = 0; i < this.population; i++) {
-            console.log(this.constituents[i]);
-        }
-        console.log(this.totalInfected);
-    }
-
-    clearPrintGroups(){
-        let printGroups = this.groups;
-        let count = [];
-        for (let i = 0; i < 10; i++){
-            count[i] = 0;
-        }
-        printGroups.forEach(function(group){
-            console.log(group, "================================");
-            group.forEach(function(person){
-                count[person.gregarious]++;
-            })
-        })
-        console.log(count);
     }
 }
 
@@ -118,13 +98,12 @@ class Person {
 }
 
 function main() {
-    let testCity = new City(10);
+    let testCity = new City(1000);
     testCity.generateGroups();
     testCity.injectIllness(1);
     testCity.iterate();
-    //testCity.clearPrint();
-    //testCity.clearPrintGroups();
-    console.log(testCity.constituents);
+    console.log(testCity.groups, "Connections = ", testCity.connections);
+    console.log(testCity.transmitted);
 }
 
 main()
