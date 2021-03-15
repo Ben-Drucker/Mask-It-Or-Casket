@@ -1,13 +1,15 @@
 class City {
 
     constructor(population) {
+        this.log = []
+        this.iterNum = 0;
         this.transmitted = 0;
         this.population = population;
         this.constituents = [];
         this.groups = new Map();
         this.totalInfected = 0;
         this.connectionDensity = 0.3;
-        // this.maxConnections = this.population / 5;
+        this.out_inRatio = 0.2;
         this.maxGroupSize = 25;
         this.maxConnectionsInGroup = 50;
         this.connections = 0;
@@ -26,34 +28,46 @@ class City {
         let i = 0;
         let groupSize;
         let done = false;
-        let iter = 0;
         do {
-            iter ++;
-            if(iter > 200){
-                done = true;
-            }
             groupSize = Math.floor(this.maxGroupSize * Math.random());
             for (j = i; j < groupSize + i; j++) {
-                let internalGroupConnections = Math.floor(0.75 * this.maxConnectionsInGroup * Math.random());
-                let externalGroupConnections = Math.floor(0.25 * this.maxConnectionsInGroup * Math.random());
-                if (i + this.maxConnectionsInGroup > this.population) {
-                    this.maxConnectionsInGroup = this.population - i - 1;
-                    done = true;
+                if (done) {
                     break
+                }
+                let internalGroupConnections = Math.floor((1 - this.out_inRatio) * this.maxConnectionsInGroup * Math.random());
+                let externalGroupConnections = Math.floor(this.out_inRatio * this.maxConnectionsInGroup * Math.random());
+                if (i + groupSize > this.population) {
+                    done = true;
                 }
                 for (let k = 0; k < internalGroupConnections; k++) {
                     let p1 = Math.floor(Math.random() * groupSize) + i;
                     let p2 = Math.floor(Math.random() * groupSize) + i;
-                    this.groups.get(this.constituents[p1]).add(this.constituents[p2]);
-                    this.groups.get(this.constituents[p2]).add(this.constituents[p1]);
-                    this.connections++;
+                    if (p1 > this.population - 1) {
+                        p1 = Math.floor(Math.random() * this.population);
+                    }
+                    if (p2 > this.population - 1) {
+                        p2 = Math.floor(Math.random() * this.population);
+                    }
+                    if (p1 < this.population && p2 < this.population) {
+                        this.groups.get(this.constituents[p1]).add(this.constituents[p2]);
+                        this.groups.get(this.constituents[p2]).add(this.constituents[p1]);
+                        this.connections;
+                    }
                 }
                 for (let l = 0; l < externalGroupConnections; l++) {
                     let p1 = Math.floor(Math.random() * groupSize) + i;
                     let p2 = Math.floor(Math.random() * this.population);
-                    this.groups.get(this.constituents[p1]).add(this.constituents[p2]);
-                    this.groups.get(this.constituents[p2]).add(this.constituents[p1]);
-                    this.connections++;
+                    if (p1 > this.population - 1) {
+                        p1 = Math.floor(Math.random() * this.population);
+                    }
+                    if (p2 > this.population - 1) {
+                        p2 = Math.floor(Math.random() * this.population);
+                    }
+                    if (p1 < this.population && p2 < this.population) {
+                        this.groups.get(this.constituents[p1]).add(this.constituents[p2]);
+                        this.groups.get(this.constituents[p2]).add(this.constituents[p1]);
+                        this.connections++;
+                    }
                 }
                 i += groupSize;
                 groupSize = Math.floor(this.maxGroupSize * Math.random());
@@ -69,6 +83,8 @@ class City {
     }
 
     iteration() {
+        let log = this.log;
+        let iter = this.iterNum;
         let tr = 0;
         let t = this.constituents;
         let transmissionRisk = 0.7;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
@@ -81,7 +97,7 @@ class City {
                     if (person1.isInfected) {
                         chance = Math.random();
                         if (chance < transmissionRisk && !person2.isInfected) {
-                            console.log(person1.id, "gave it to ", person2.id);
+                            log.push(person1.id + " gave it to " + person2.id + " in iteration " + iter);
                             person2.isInfected = true;
                             itTotalInfected++;
                             tr++;
@@ -90,7 +106,7 @@ class City {
                     if (person2.isInfected) {
                         chance = Math.random();
                         if (chance < transmissionRisk && !person1.isInfected) {
-                            console.log(person2.id, "gave it to ", person1.id);
+                            log.push(person2.id + " gave it to " + person1.id + " in iteration " + iter);
                             person1.isInfected = true;
                             itTotalInfected++;
                             tr++;
@@ -101,12 +117,38 @@ class City {
         })
         this.totalInfected = itTotalInfected;
         this.transmitted += tr;
+        this.iterNum++;
     }
 
-    iterate() {
-        for (let i = 0; i < 10; i++) {
+    iterate(i) {
+        for (let j = 0; j < i; j++) {
             this.iteration();
         }
+    }
+
+    getConnections(i) {
+        let res = i + ": ";
+        let vert = this.groups.get(this.constituents[i]);
+        vert.forEach(function (neighbor) {
+            res += neighbor.id + ", ";
+        });
+        return res;
+    }
+
+    printGroups() {
+        for (let i = 0; i < this.population; i++) {
+            console.log(this.getConnections(i));
+        }
+    }
+
+    countEligible() {
+        let count = 0;
+        this.groups.forEach(function (group){
+            if(group.size!= 0){
+                count ++;
+            }
+        })
+        return count;
     }
 }
 
@@ -126,15 +168,16 @@ class Person {
 }
 
 function main() {
-    let testCity = new City(100);
+    let testCity = new City(1000);
     testCity.generateGroups();
-    testCity.injectIllness(10);
-    testCity.iterate();
-    console.log(testCity.groups, "Connections = ", testCity.connections);
-    for (let i = 0; i < testCity.population; i++) {
-        console.log(testCity.constituents[i], testCity.constituents[i].isInfected);
-    }
-    console.log(testCity.transmitted, "/", testCity.population);
+    testCity.injectIllness(5);
+    testCity.iterate(5);
+    console.log("Connections = ", testCity.connections);
+    console.log(testCity.transmitted, "/", testCity.countEligible(),"/", testCity.population);
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`")
+    testCity.printGroups();
+    console.log(testCity.log);
+
 }
 
 main()
