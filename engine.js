@@ -1,104 +1,146 @@
 class City {
 
     constructor(population) {
+        this.currentRiskLevel; //TODO: Implement risk levels
         this.population = population;
-        this.constituents = [];
+        this.sicknessLog = []
+        this.currentIteration = 0;
+        this.numOfTransmissions = 0;
+        this.citizens = [];
         this.groups = new Map();
-        this.totalInfected = 0;
-        let max = 15
+        this.numInfected = 0;
+        this.connectionDensity = 0.3;
+        this.bipartiteRatio = 0.2;
+        this.maxGroupSize = 25;
+        this.maxConnectionsInGroup = 50;
+        this.numOfConnections = 0;
         for (let i = 0; i < this.population; i++) {
-            let maxInteractions;
-            if (this.population < max) {
-                maxInteractions = this.population;
-            }
-            else {
-                maxInteractions = max;
-            }
-            let gregarious = Math.floor(Math.random() * maxInteractions);
+            let gregarious = Math.floor(Math.random() * this.maxConnections);
             let risk = Math.random();
-            this.constituents.push(new Person(i, gregarious, risk));
+            this.citizens.push(new Person(i, gregarious, risk));
         }
     }
 
     generateGroups() {
-        let genGroups = this.groups;
-        let genConstituents = this.constituents;
-        let genPopulation = this.population;
-        genConstituents.forEach(function (person) {
-            genGroups.set(person, new Set());
-            while (genGroups.get(person).size < person.gregarious && person.gregarious != 0) {
-                let randPerson = genConstituents[Math.floor(genPopulation * Math.random())];
-                if (!genGroups.get(person).has(randPerson)) {
-                    genGroups.get(person).add(randPerson);
-                    randPerson.addedToGroups ++;
+        for (let i = 0; i < this.population; i++) {   //initialize groups dictionary
+            this.groups.set(this.citizens[i], new Set());
+        }
+        let intermediate_int = 0;
+        let group_ind = 0;
+        let groupSize;
+        let done = false;
+        do {
+            groupSize = Math.floor(this.maxGroupSize * Math.random());
+            for (intermediate_int = group_ind; intermediate_int < groupSize + group_ind; intermediate_int++) {
+                if (done) {
+                    break
                 }
-            } 
-        })
+                let internalGroupConnections = Math.floor((1 - this.bipartiteRatio) * this.maxConnectionsInGroup * Math.random());
+                let externalGroupConnections = Math.floor(this.bipartiteRatio * this.maxConnectionsInGroup * Math.random());
+                if (group_ind + groupSize > this.population) {
+                    done = true;
+                }
+                for (let k = 0; k < internalGroupConnections; k++) {
+                    let person1 = Math.floor(Math.random() * groupSize) + group_ind;
+                    let person2 = Math.floor(Math.random() * groupSize) + group_ind;
+                    if (person1 > this.population - 1) {
+                        person1 = Math.floor(Math.random() * this.population);
+                    }
+                    if (person2 > this.population - 1) {
+                        person2 = Math.floor(Math.random() * this.population);
+                    }
+                    if (person1 < this.population && person2 < this.population) {
+                        this.groups.get(this.citizens[person1]).add(this.citizens[person2]);
+                        this.groups.get(this.citizens[person2]).add(this.citizens[person1]);
+                        this.numOfConnections;
+                    }
+                }
+                for (let l = 0; l < externalGroupConnections; l++) {
+                    let person1 = Math.floor(Math.random() * groupSize) + group_ind;
+                    let person2 = Math.floor(Math.random() * this.population);
+                    if (person1 > this.population - 1) {
+                        person1 = Math.floor(Math.random() * this.population);
+                    }
+                    if (person2 > this.population - 1) {
+                        person2 = Math.floor(Math.random() * this.population);
+                    }
+                    if (person1 < this.population && person2 < this.population) {
+                        this.groups.get(this.citizens[person1]).add(this.citizens[person2]);
+                        this.groups.get(this.citizens[person2]).add(this.citizens[person1]);
+                        this.numOfConnections++;
+                    }
+                }
+                group_ind += groupSize;
+                groupSize = Math.floor(this.maxGroupSize * Math.random());
+            }
+        } while (group_ind < this.population && !done);
     }
 
     injectIllness(numberInjected) {
         for (let i = 0; i < numberInjected; i++) {
-            let injectee = this.constituents[Math.floor(this.population * Math.random())];
+            let injectee = this.citizens[Math.floor(this.population * Math.random())];
             injectee.isInfected = true;
         }
     }
 
     iteration() {
-        let t = this.constituents;
-        let transmissionRisk = 0.1*.65;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
-        let itGroups = this.groups;
-        let itTotalInfected = this.totalInfected;
-        itGroups.forEach(function (group) {  //for each group... 
-            group.forEach(function (person1) {//for each person 1 in each group...
-                group.forEach(function (person2) {//for each person 2 in each group...
+        let transmissionRisk = 0.7;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
+        this.groups.forEach((function (group) {  //for each group... 
+            group.forEach((function (person1) {//for each person 1 in each group...
+                group.forEach((function (person2) {//for each person 2 in each group...
                     let chance;
                     if (person1.isInfected) {
                         chance = Math.random();
                         if (chance < transmissionRisk && !person2.isInfected) {
+                            this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration);
                             person2.isInfected = true;
-                            itTotalInfected++;
+                            this.numInfected++;
+                            this.numOfTransmissions ++;
                         }
                     }
                     if (person2.isInfected) {
                         chance = Math.random();
                         if (chance < transmissionRisk && !person1.isInfected) {
+                            this.sicknessLog.push(person2.id + " gave it to " + person1.id + " in iteration " + this.currentIteration);
                             person1.isInfected = true;
-                            itTotalInfected++;
+                            this.numInfected++;
+                            this.numOfTransmissions ++;
                         }
                     }
-                })
-            })
-        })
-        this.totalInfected = itTotalInfected;
+                }).bind(this))
+            }).bind(this))
+        }).bind(this))
     }
 
-    iterate() {
-        for (let i = 0; i < 1; i++) {
+    iterate(i) {
+        for (let j = 0; j < i; j++) {
             this.iteration();
         }
     }
 
-    clearPrint() { 
-        console.log(this.totalInfected);
-        for (let i = 0; i < this.population; i++) {
-            console.log(this.constituents[i]);
-        }
-        console.log(this.totalInfected);
+    getConnections(i) {
+        let res = i + ": ";
+        let vert = this.groups.get(this.citizens[i]);
+        vert.forEach(function (neighbor) {
+            res += neighbor.id + ", ";
+        });
+        return res;
     }
 
-    clearPrintGroups(){
-        let printGroups = this.groups;
-        let count = [];
-        for (let i = 0; i < 10; i++){
-            count[i] = 0;
+    printGroups() {
+        for (let i = 0; i < this.population; i++) {
+            console.log(this.getConnections(i));
         }
-        printGroups.forEach(function(group){
-            console.log(group, "================================");
-            group.forEach(function(person){
-                count[person.gregarious]++;
-            })
+    }
+
+    countEligible() {
+        let count = 0;
+        this.groups.forEach(function (group){
+            if(group.size!= 0){
+                count ++;
+            }
         })
-        console.log(count);
+        return count;
     }
 }
 
@@ -118,13 +160,16 @@ class Person {
 }
 
 function main() {
-    let testCity = new City(10);
+    let testCity = new City(1000);
     testCity.generateGroups();
-    testCity.injectIllness(1);
-    testCity.iterate();
-    //testCity.clearPrint();
-    //testCity.clearPrintGroups();
-    console.log(testCity.constituents);
+    testCity.injectIllness(5);
+    testCity.iterate(5);
+    console.log("Connections = ", testCity.numOfConnections);
+    console.log(testCity.numOfTransmissions, "/", testCity.countEligible(),"/", testCity.population);
+    // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`")
+    // testCity.printGroups();
+    // console.log(testCity.sicknessLog);
+
 }
 
 main()
