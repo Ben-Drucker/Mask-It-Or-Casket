@@ -7,20 +7,43 @@
 </head>
 
 <body>
-    <h1>Level 1</h1>
+
+    <img src="images/levelTitle.png" alt="Level 1" class="center">
+
     <h3>Funds: $3000</h3>
 
-    <div>
-        <input class="button" type="image" src="images/vaccine.png" alt="Vaccine" name="vaccine">
-        <input class="button" type="image" src="images/distance.png" alt="Distance" name="distance">
-        <input class="button" type="image" src="images/ShutDown.png"alt="Shut Down" name="shutDown">
-        <input class="button" type="image" src="images/mask.png"alt="Masks" name="mask">
+    <div id="timer"></div>
+    <script src="timer.js"></script>
+
+    <div class = "slidercontainer">
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
     </div>
+    <script src = "slider.js"></script>
+
+    <!--Trigger/Open Modal-->
+    <div class="policies">
+        <input class="iButton" type="image" src="images/vaccine.png" alt="Vaccine" name="vaccine">
+        <input class="iButton" type="image" src="images/distance.png" alt="Distance" name="distance">
+        <input class="iButton" type="image" src="images/ShutDown.png"alt="Shut Down" name="shutDown">
+        <input class="iButton" type="image" src="images/mask.png"alt="Masks" name="mask">
+    </div>
+
+    <script src="canvas.js"></script>
+    <canvas></canvas>
 
     <div class="clr"></div>
 
-    <canvas></canvas>
-    <script src="canvas.js"></script>
+    <!--Modal Section
+    <script src="popUp.js"></script>
+    <div id="myModal" class="bg-modal">
+        <div class="modal-content">
+            <h1>Policy</h1>
+            <p>Description</p>
+            <button type="button">Yes</button>
+            <button class = "close" type="button">No</button>
+        </div>
+    </div>
+-->
 </body>
 
 </html>
