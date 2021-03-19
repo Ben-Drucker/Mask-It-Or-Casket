@@ -11,7 +11,7 @@ class City {
         this.groups = new Map();
         this.numInfected = 0;
         this.connectionDensity = 0.3;
-        this.bipartiteRatio = 0.1; //
+        this.bipartiteRatio = 0.5; //
         this.maxGroupSize = 25;
         this.maxConnectionsInGroup = 50;
         this.numOfConnections = 0;
@@ -42,7 +42,7 @@ class City {
                     done = true;
                 }
                 for (let k = 0; k < internalGroupConnections; k++) {
-                    let interactionChance = Math.E**(-0.5*k);
+                    let interactionChance = Math.E ** (-0.5 * k);
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * groupSize) + group_ind;
                     if (person1 > this.population - 1) {
@@ -58,7 +58,7 @@ class City {
                     }
                 }
                 for (let l = 0; l < externalGroupConnections; l++) {
-                    let interactionChance = Math.E**(-0.5*l);
+                    let interactionChance = Math.E ** (-0.5 * l);
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * this.population);
                     if (person1 > this.population - 1) {
@@ -82,39 +82,35 @@ class City {
     injectIllness(numberInjected) {
         for (let i = 0; i < numberInjected; i++) {
             let injectee = this.citizens[Math.floor(this.population * Math.random())];
-            injectee.isInfected = true;
+            if (injectee.isInfected) {
+                numberInjected++;
+            }
+            else {
+                injectee.isInfected = true;
+                this.personsInfected.push(injectee);
+                this.numOfTransmissions++;
+                this.sicknessLog.push(injectee.id.toString() + " injected.");
+            }
         }
     }
 
     iteration() {
         let transmissionRisk = 0.7;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
-        this.groups.forEach((function (group) {  //for each group... 
-            group.forEach((function (person1) {//for each person 1 in each group...
-                group.forEach((function (person2) {//for each person 2 in each group...
-                    let chance;
-                    if (person1[0].isInfected) {
-                        chance = Math.random();
-                        if (chance < transmissionRisk*person2[1] && !person2[0].isInfected) {
-                            this.sicknessLog.push(person1[0].id + " gave it to " + person2[0].id + " in iteration " + this.currentIteration);
-                            person2[0].isInfected = true;
-                            this.personsInfected.push(person2[0]);
-                            this.numInfected++;
-                            this.numOfTransmissions ++;
-                        }
-                    }
-                    if (person2[0].isInfected) {
-                        chance = Math.random();
-                        if (chance < transmissionRisk*person1[1] && !person1[0].isInfected) {
-                            this.sicknessLog.push(person2[0].id + " gave it to " + person1[0].id + " in iteration " + this.currentIteration);
-                            person1[0].isInfected = true;
-                            this.personsInfected.push(person1[0]);
-                            this.numInfected++;
-                            this.numOfTransmissions ++;
-                        }
-                    }
-                }).bind(this))
+        this.personsInfected.forEach((function (person1) {  //for each infected person1 
+            this.groups.get(person1).forEach((function (person2) {//for each person2 they are linked to
+                let chance = Math.random();
+                let interactionChance = person2[1];
+                person2 = person2[0];
+                if (chance < transmissionRisk * interactionChance && !person2.isInfected) {
+                    this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration);
+                    person2.isInfected = true;
+                    this.personsInfected.push(person2);
+                    this.numInfected++;
+                    this.numOfTransmissions++;
+                }
             }).bind(this))
         }).bind(this))
+        this.currentIteration++;
     }
 
     iterate(i) {
@@ -140,9 +136,9 @@ class City {
 
     countEligible() {
         let count = 0;
-        this.groups.forEach(function (group){
-            if(group.size!= 0){
-                count ++;
+        this.groups.forEach(function (group) {
+            if (group.size != 0) {
+                count++;
             }
         })
         return count;
@@ -164,4 +160,4 @@ class Person {
 
 }
 
-export {City, Person};
+export { City, Person };
