@@ -3,7 +3,8 @@ class City {
     constructor(population) {
         this.currentRiskLevel; //TODO: Implement risk levels
         this.population = population;
-        this.sicknessLog = []
+        this.personsInfected = [];
+        this.sicknessLog = [];
         this.currentIteration = 0;
         this.numOfTransmissions = 0;
         this.citizens = [];
@@ -41,7 +42,7 @@ class City {
                     done = true;
                 }
                 for (let k = 0; k < internalGroupConnections; k++) {
-                    let interactionChance = Math.E**k;
+                    let interactionChance = Math.E**(-0.5*k);
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * groupSize) + group_ind;
                     if (person1 > this.population - 1) {
@@ -57,7 +58,7 @@ class City {
                     }
                 }
                 for (let l = 0; l < externalGroupConnections; l++) {
-                    let interactionChance = Math.E**l;
+                    let interactionChance = Math.E**(-0.5*l);
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * this.population);
                     if (person1 > this.population - 1) {
@@ -91,20 +92,22 @@ class City {
             group.forEach((function (person1) {//for each person 1 in each group...
                 group.forEach((function (person2) {//for each person 2 in each group...
                     let chance;
-                    if (person1.isInfected) {
+                    if (person1[0].isInfected) {
                         chance = Math.random();
-                        if (chance < transmissionRisk && !person2.isInfected) {
-                            this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration);
-                            person2.isInfected = true;
+                        if (chance < transmissionRisk*person2[1] && !person2[0].isInfected) {
+                            this.sicknessLog.push(person1[0].id + " gave it to " + person2[0].id + " in iteration " + this.currentIteration);
+                            person2[0].isInfected = true;
+                            this.personsInfected.push(person2[0]);
                             this.numInfected++;
                             this.numOfTransmissions ++;
                         }
                     }
-                    if (person2.isInfected) {
+                    if (person2[0].isInfected) {
                         chance = Math.random();
-                        if (chance < transmissionRisk && !person1.isInfected) {
-                            this.sicknessLog.push(person2.id + " gave it to " + person1.id + " in iteration " + this.currentIteration);
-                            person1.isInfected = true;
+                        if (chance < transmissionRisk*person1[1] && !person1[0].isInfected) {
+                            this.sicknessLog.push(person2[0].id + " gave it to " + person1[0].id + " in iteration " + this.currentIteration);
+                            person1[0].isInfected = true;
+                            this.personsInfected.push(person1[0]);
                             this.numInfected++;
                             this.numOfTransmissions ++;
                         }
@@ -161,17 +164,4 @@ class Person {
 
 }
 
-function main() {
-    let testCity = new City(1000);
-    testCity.generateGroups();
-    testCity.injectIllness(5);
-    testCity.iterate(5);
-    console.log("Connections = ", testCity.numOfConnections);
-    console.log(testCity.numOfTransmissions, "/", testCity.countEligible(),"/", testCity.population);
-    // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`")
-    // testCity.printGroups();
-    // console.log(testCity.sicknessLog);
-
-}
-
-main()
+export {City, Person};
