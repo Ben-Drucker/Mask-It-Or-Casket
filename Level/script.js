@@ -1,3 +1,8 @@
+
+
+
+
+
 //const startingMinutes = 10;
 //let time = startingMinutes * 60;
 
@@ -40,8 +45,8 @@ var myfunc = setInterval(function () {
 */
 
 window.onload = function () {
-    var min = 10;
-    var sec = 00;
+    var min = 9;
+    var sec = 59;
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
         sec--;
