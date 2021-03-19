@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html
+<html>
 
 <head>
     <link rel="stylesheet" href="levelS.css">
@@ -10,8 +10,13 @@
     <h1 id= "level">Level 1</h1>
     <h3>Funds: $3000</h3>
 
-    <p id="timer"></p>
-    <script src="script.js"></script>
+    <div id="timer"></div>
+    <script src="timer.js"></script>
+
+    <div class = "slidercontainer">
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    </div>
+    <script src = "slider.js"></script> 
 
     <div class="buttons">
         <input class="button" type="image" src="images/vaccine.png" alt="Vaccine" name="vaccine">
@@ -30,7 +35,7 @@
             <h1>Policy</h1>
             <p>Description</p>
             <button type="button">Yes</button>
-            <button type="button">No</button>
+            <button class = "no" type="button">No</button>
         </div>
     </div>
 </body>

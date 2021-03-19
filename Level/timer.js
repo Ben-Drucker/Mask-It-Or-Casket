@@ -1,5 +1,8 @@
 window.onload = function () {
     var min = 9;
+    /* 
+    doesn't work if sec = 00
+    */
     var sec = 59;
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
