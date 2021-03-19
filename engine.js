@@ -11,7 +11,7 @@ class City {
         this.groups = new Map();
         this.numInfected = 0;
         this.connectionDensity = 0.3;
-        this.bipartiteRatio = 0.2;
+        this.bipartiteRatio = 0.1; //
         this.maxGroupSize = 25;
         this.maxConnectionsInGroup = 50;
         this.numOfConnections = 0;
@@ -154,12 +154,12 @@ class Person {
     constructor(id, gregarious, risk) {
         this.id = id;
         this.isInfected = false;
-        this.isSusceptible = true;
-        this.gregarious = gregarious;
-        this.risk = risk;
-        this.isDead = false;
-        this.isVaxed = false;
-        this.addedToGroups = 0;
+        // this.isSusceptible = true; // Not using these yet
+        // this.gregarious = gregarious;
+        // this.risk = risk;
+        // this.isDead = false;
+        // this.isVaxed = false;
+        // this.addedToGroups = 0;
     }
 
 }
