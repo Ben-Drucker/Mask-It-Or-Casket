@@ -1,8 +1,5 @@
 window.onload = function () {
     var min = 9;
-    /* 
-    doesn't work if sec = 00
-    */
     var sec = 59;
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
@@ -14,6 +11,13 @@ window.onload = function () {
                 clearInterval(countDownTimer)
                 document.getElementById("end").innerHTML = "GAME OVER!";
             }
+        }
+        /* 
+        To make the timer countdown 10, 09, 08, 07, ..., 01, 00 seconds
+        This may not show 00 
+        */
+        else if (sec < 10) {
+            sec = "0" + sec;
         }
     }, 1000);
 }
