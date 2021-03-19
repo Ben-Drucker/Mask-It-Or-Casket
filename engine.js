@@ -13,6 +13,7 @@ class City {
         this.connectionDensity = 0.3;
         this.bipartiteRatio = 0.5; //
         this.maxGroupSize = 25;
+        this.densityFactor = 2;
         this.maxConnectionsInGroup = 50;
         this.numOfConnections = 0;
         for (let i = 0; i < this.population; i++) {
@@ -23,8 +24,11 @@ class City {
     }
 
     generateGroups() {
+        var pairs = new Map();
         for (let i = 0; i < this.population; i++) {   //initialize groups dictionary
             this.groups.set(this.citizens[i], new Set());
+            pairs.set(this.citizens[i], new Set());
+            pairs.get(this.citizens[i]).add(this.citizens[i]);
         }
         let intermediate_int = 0;
         let group_ind = 0;
@@ -36,8 +40,8 @@ class City {
                 if (done) {
                     break
                 }
-                let internalGroupConnections = Math.floor((1 - this.bipartiteRatio) * this.maxConnectionsInGroup * Math.random());
-                let externalGroupConnections = Math.floor(this.bipartiteRatio * this.maxConnectionsInGroup * Math.random());
+                let internalGroupConnections = this.densityFactor * Math.floor((1 - this.bipartiteRatio) * this.maxConnectionsInGroup * Math.random());
+                let externalGroupConnections = this.densityFactor * Math.floor(this.bipartiteRatio * this.maxConnectionsInGroup * Math.random());
                 if (group_ind + groupSize > this.population) {
                     done = true;
                 }
@@ -51,10 +55,14 @@ class City {
                     if (person2 > this.population - 1) {
                         person2 = Math.floor(Math.random() * this.population);
                     }
-                    if (person1 < this.population && person2 < this.population) {
-                        this.groups.get(this.citizens[person1]).add([this.citizens[person2], interactionChance]);
-                        this.groups.get(this.citizens[person2]).add([this.citizens[person1], interactionChance]);
-                        this.numOfConnections;
+                    if (person1 < this.population && person2 < this.population && person1 != person2) {
+                        if (!pairs.get(this.citizens[person1]).has(this.citizens[person2])) {
+                            this.groups.get(this.citizens[person1]).add([this.citizens[person2], interactionChance]);
+                            this.groups.get(this.citizens[person2]).add([this.citizens[person1], interactionChance]);
+                            pairs.get(this.citizens[person1]).add(this.citizens[person2]);
+                            pairs.get(this.citizens[person2]).add(this.citizens[person1]);
+                        }
+                        this.numOfConnections++;
                     }
                 }
                 for (let l = 0; l < externalGroupConnections; l++) {
@@ -67,9 +75,13 @@ class City {
                     if (person2 > this.population - 1) {
                         person2 = Math.floor(Math.random() * this.population);
                     }
-                    if (person1 < this.population && person2 < this.population) {
-                        this.groups.get(this.citizens[person1]).add([this.citizens[person2], interactionChance]);
-                        this.groups.get(this.citizens[person2]).add([this.citizens[person1], interactionChance]);
+                    if (person1 < this.population && person2 < this.population && person1 != person2) {
+                        if (!pairs.get(this.citizens[person1]).has(this.citizens[person2])) {
+                            this.groups.get(this.citizens[person1]).add([this.citizens[person2], interactionChance]);
+                            this.groups.get(this.citizens[person2]).add([this.citizens[person1], interactionChance]);
+                            pairs.get(this.citizens[person1]).add(this.citizens[person2]);
+                            pairs.get(this.citizens[person2]).add(this.citizens[person1]);
+                        }
                         this.numOfConnections++;
                     }
                 }
@@ -123,7 +135,7 @@ class City {
         let res = i + ": ";
         let vert = this.groups.get(this.citizens[i]);
         vert.forEach(function (neighbor) {
-            res += neighbor.id + ", ";
+            res += neighbor[0].id + ", ";
         });
         return res;
     }
@@ -160,4 +172,4 @@ class Person {
 
 }
 
-export { City, Person };
+//export { City, Person };
