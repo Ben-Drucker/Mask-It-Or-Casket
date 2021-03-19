@@ -1,29 +1,33 @@
-body{
-}
-
 .clr{
 	clear:both;
 }
 
-.button{
+.h1{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttons{
+    float: left;
+    border: none;
     background-color: white;
-    border-color: black;
-    color: black;
-    margin: 10px;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
+    width:70px;
+    height:70px;
+}
+
+.button{
     display: block;
-    width: 50px;;
+    background-color: white;
+    padding: 10px 25px;
+    width:100%;
+    border: none;
 }
 
 canvas{
     width:750px;
 	height: 500px;
 	border: 1px solid black;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: fixed;
+    left: 125px;
+    /*float:right;*/
 }
