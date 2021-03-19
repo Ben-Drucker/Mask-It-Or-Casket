@@ -41,6 +41,7 @@ class City {
                     done = true;
                 }
                 for (let k = 0; k < internalGroupConnections; k++) {
+                    let interactionChance = Math.E**k;
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * groupSize) + group_ind;
                     if (person1 > this.population - 1) {
@@ -50,12 +51,13 @@ class City {
                         person2 = Math.floor(Math.random() * this.population);
                     }
                     if (person1 < this.population && person2 < this.population) {
-                        this.groups.get(this.citizens[person1]).add(this.citizens[person2]);
-                        this.groups.get(this.citizens[person2]).add(this.citizens[person1]);
+                        this.groups.get(this.citizens[person1]).add([this.citizens[person2], interactionChance]);
+                        this.groups.get(this.citizens[person2]).add([this.citizens[person1], interactionChance]);
                         this.numOfConnections;
                     }
                 }
                 for (let l = 0; l < externalGroupConnections; l++) {
+                    let interactionChance = Math.E**l;
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * this.population);
                     if (person1 > this.population - 1) {
@@ -65,8 +67,8 @@ class City {
                         person2 = Math.floor(Math.random() * this.population);
                     }
                     if (person1 < this.population && person2 < this.population) {
-                        this.groups.get(this.citizens[person1]).add(this.citizens[person2]);
-                        this.groups.get(this.citizens[person2]).add(this.citizens[person1]);
+                        this.groups.get(this.citizens[person1]).add([this.citizens[person2], interactionChance]);
+                        this.groups.get(this.citizens[person2]).add([this.citizens[person1], interactionChance]);
                         this.numOfConnections++;
                     }
                 }
