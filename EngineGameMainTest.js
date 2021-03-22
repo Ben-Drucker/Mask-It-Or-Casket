@@ -1,17 +1,31 @@
-//import {City} from "./engine.js";
+import { City } from "./engine.js";
+
+let lastPctg = 0;
 
 function main() {
-    let testCity = new City(1000);
+    let testCity = new City(50000);
     testCity.generateGroups();
-    testCity.injectIllness(10);
-    testCity.iterate(120);
-    console.log("Total number of connections = ", testCity.numOfConnections);
-    console.log(testCity.numOfTransmissions, "were infected /", testCity.countEligible()," could have been infected/", "out of", testCity.population);
-    //testCity.printGroups();
-    // for(let i = 0; i< testCity.sicknessLog.length; i++){
-    //     console.log(testCity.sicknessLog[i]);
-    // }
-    //console.log(testCity.groups);
+    testCity.injectIllness(100);
+    iterateByTime(testCity);
 }
 
-main()
+function timedIteration(city, numberOfIterationsDesired, iterationTimer) {
+    city.iteration();
+    console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected /", city.countEligible(), " could have been infected/", "out of", city.population, "(", city.percentageInfected,"% infected ) %Δ = ",city.percentageInfected - lastPctg);
+    lastPctg = city.percentageInfected;
+    if (city.currentIteration >= numberOfIterationsDesired) {
+        clearInterval(iterationTimer)
+    }
+}
+
+function iterateByTime(city) {
+    let numberOfMins = 5;
+    let intervalSeconds = 1;
+    let numberOfIterationsDesired = 60*numberOfMins/intervalSeconds;
+    timedIteration(city, numberOfIterationsDesired, null);
+    let timedIntervals = setInterval(function(){
+        timedIteration(city, numberOfIterationsDesired, timedIntervals);
+    }, intervalSeconds * 1000);
+}
+
+main();
