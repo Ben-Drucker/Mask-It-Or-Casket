@@ -1,6 +1,7 @@
 class City {
 
     constructor(population) {
+        
         this.currentRiskLevel; //TODO: Implement risk levels
         this.population = population;
         this.personsInfected = [];
@@ -21,6 +22,7 @@ class City {
             let risk = Math.random();
             this.citizens.push(new Person(i, gregarious, risk));
         }
+        this.percentageInfected = 0;
     }
 
     generateGroups() {
@@ -46,7 +48,7 @@ class City {
                     done = true;
                 }
                 for (let k = 0; k < internalGroupConnections; k++) {
-                    let interactionChance = Math.E ** (-0.5 * k);
+                    let interactionChance = 0.9*Math.E ** (-3 * k);
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * groupSize) + group_ind;
                     if (person1 > this.population - 1) {
@@ -123,6 +125,7 @@ class City {
             }).bind(this))
         }).bind(this))
         this.currentIteration++;
+        this.percentageInfected = 100*(this.numOfTransmissions/this.population);
     }
 
     iterate(i) {

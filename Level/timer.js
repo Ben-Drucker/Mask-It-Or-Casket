@@ -1,6 +1,11 @@
+//import {Game} from "./game.js";
+
 window.onload = function () {
-    var min = 9;
+    let interIteratoryTime = 1 //time between iterations, in seconds.
+    var min = 0;
     var sec = 59;
+    let game = new Game(75000, 75);
+    game.iterateByTime(game.city, interIteratoryTime, (60*min + sec)/interIteratoryTime);
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
         sec--;
