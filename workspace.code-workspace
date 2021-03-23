@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "SSH FS - swatcs",
+			"uri": "ssh://swatcs/"
+		}
+	],
+	"settings": {}
+}

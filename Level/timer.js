@@ -2,10 +2,10 @@
 
 window.onload = function () {
     let interIteratoryTime = 1 //time between iterations, in seconds.
-    var min = 0;
-    var sec = 59;
+    var min = 2;
+    var sec = 59; //BUG Cannot be zero -> leads to bug
     let game = new Game(75000, 75);
-    game.iterateByTime(game.city, interIteratoryTime, (60*min + sec)/interIteratoryTime);
+    game.iterateByTime(game.city, 2, (60*min + sec)/interIteratoryTime);
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
         sec--;

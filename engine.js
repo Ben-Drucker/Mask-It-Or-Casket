@@ -1,8 +1,6 @@
 class City {
 
     constructor(population) {
-        
-        this.currentRiskLevel; //TODO: Implement risk levels
         this.population = population;
         this.personsInfected = [];
         this.sicknessLog = [];
@@ -11,18 +9,20 @@ class City {
         this.citizens = [];
         this.groups = new Map();
         this.numInfected = 0;
-        this.connectionDensity = 0.3;
-        this.bipartiteRatio = 0.5; //
-        this.maxGroupSize = 25;
-        this.densityFactor = 2;
-        this.maxConnectionsInGroup = 50;
         this.numOfConnections = 0;
         for (let i = 0; i < this.population; i++) {
-            let gregarious = Math.floor(Math.random() * this.maxConnections);
+            let ageIndex = Math.floor(Math.random() * (this.population + 1));
+            let age = ageDistributions.ages[ageIndex];
             let risk = Math.random();
-            this.citizens.push(new Person(i, gregarious, risk));
+            this.citizens.push(new Person(i, age, risk));
         }
+        /*Parameters Below*/
         this.percentageInfected = 0;
+        this.transmissionRisk = 0.2;        //PARAMETER
+        this.bipartiteRatio = 0.18;         //PARAMETER Determining the ratio of in-group, out-group graph connections
+        this.maxGroupSize = 25;             //PARAMETER
+        this.densityFactor = 2;             //PARAMETER
+        this.maxConnectionsInGroup = 50;    //PARAMETER
     }
 
     generateGroups() {
@@ -48,7 +48,7 @@ class City {
                     done = true;
                 }
                 for (let k = 0; k < internalGroupConnections; k++) {
-                    let interactionChance = 0.9*Math.E ** (-3 * k);
+                    let interactionChance = this.interactionChanceFunction(k, groupSize);
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * groupSize) + group_ind;
                     if (person1 > this.population - 1) {
@@ -68,7 +68,7 @@ class City {
                     }
                 }
                 for (let l = 0; l < externalGroupConnections; l++) {
-                    let interactionChance = Math.E ** (-0.5 * l);
+                    let interactionChance = this.interactionChanceFunction(l, groupSize);
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * this.population);
                     if (person1 > this.population - 1) {
@@ -109,13 +109,12 @@ class City {
     }
 
     iteration() {
-        let transmissionRisk = 0.7;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
         this.personsInfected.forEach((function (person1) {  //for each infected person1 
             this.groups.get(person1).forEach((function (person2) {//for each person2 they are linked to
                 let chance = Math.random();
                 let interactionChance = person2[1];
                 person2 = person2[0];
-                if (chance < transmissionRisk * interactionChance && !person2.isInfected) {
+                if (chance < this.transmissionRisk * interactionChance && !person2.isInfected) {
                     this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration);
                     person2.isInfected = true;
                     this.personsInfected.push(person2);
@@ -125,7 +124,7 @@ class City {
             }).bind(this))
         }).bind(this))
         this.currentIteration++;
-        this.percentageInfected = 100*(this.numOfTransmissions/this.population);
+        this.percentageInfected = 100 * (this.numOfTransmissions / this.population);
     }
 
     iterate(i) {
@@ -158,19 +157,27 @@ class City {
         })
         return count;
     }
+
+    interactionChanceFunction(x, groupSize) { /*Previously 0.9*Math.E ** (-3 * k);*/
+        let a = 0.5; //PARAMETER Determining the falloff of interactionChances
+        let b = groupSize / 3;    //PARAMETER Determining the inflection point of interactions
+        let c = 0.5;  //PARAMETER Determining the inflection point multipier
+        return c * (1 / (1 + Math.E ** (a * (x - b))));  //Logisitc decay equation: https://en.wikipedia.org/wiki/Logistic_function
+    }
+
+    death() {
+
+    }
+
+
 }
-
-
 class Person {
-    constructor(id, gregarious, risk) {
+    constructor(id, age, risk) {
         this.id = id;
+        this.age = age;
         this.isInfected = false;
-        // this.isSusceptible = true; // Not using these yet
-        // this.gregarious = gregarious;
-        // this.risk = risk;
-        // this.isDead = false;
-        // this.isVaxed = false;
-        // this.addedToGroups = 0;
+        this.isDead = false;
+        this.risk = risk;
     }
 
 }
