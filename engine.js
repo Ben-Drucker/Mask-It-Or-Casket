@@ -3,12 +3,14 @@ class City {
     constructor(population) {
         this.population = population;
         this.personsInfected = [];
+        this.personsDead = [];
         this.sicknessLog = [];
         this.currentIteration = 0;
         this.numOfTransmissions = 0;
         this.citizens = [];
         this.groups = new Map();
         this.numInfected = 0;
+        this.numDead = 0;
         this.numOfConnections = 0;
         for (let i = 0; i < this.population; i++) {
             let ageIndex = Math.floor(Math.random() * (this.population + 1));
@@ -166,7 +168,39 @@ class City {
     }
 
     death() {
+        this.personsInfected.forEach((function (infectedPerson) {
+            if (infectedPerson.willDie == null){
+                infectedPerson.infectedDuringIteration = this.currentIteration;
+                let personDeathProb = deathProbability(infectedPerson.age);
+                let chance = Math.random();
+                if (chance < personDeathProb) {
+                    let daysTillDead = Math.floor(Math.random() * 9) + 5;
+                    infectedPerson.iterationDeathDay = this.currentIteration + daysTillDead;
+                    infectedPerson.willDie = true;
+                }
+                else {
+                    infectedPerson.willDie = false;
+                }
+            }
+            else if (infectedPerson.willDie) {
+                if( this.currentIteration == infectedPerson.iterationDeathDay){
+                    this.personsDead.push(infectedPerson);
+                    infectedPerson.isDead = true;
+                    this.numDead ++;
+                    //console.log("Death:", infectedPerson);
+                }
+            }
+            else{
+                ;
+            }
+        }).bind(this));
 
+
+        function deathProbability(age) {
+            let a = 0.04;
+            let b = 0.07;
+            return (b * (Math.E ** (a * age) - 1))/25;
+        }
     }
 
 
@@ -178,6 +212,8 @@ class Person {
         this.isInfected = false;
         this.isDead = false;
         this.risk = risk;
+        this.iterationDeathDay = null;
+        this.willDie = null;
     }
 
 }
