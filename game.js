@@ -3,39 +3,40 @@
 class Game {
 
     constructor(population, numberInjected) {
-        this.currentSubIteration;
         this.previousPercentage = 0;
-        this.population = population;
-        this.numSusceptible;
-        this.numInfected;
-        this.numRemoved;
-        this.numDead;
-        this.funds;
-        this.secondsLeft;
-        this.city = new City(this.population);
+        this.funds;         //TODO
+        this.secondsLeft;   //TODO
+        
+        /* Set up City */
+        this.city = new City(population);
         this.city.generateGroups();
         this.city.injectIllness(numberInjected);
     }
 
-    implementVax() {
-
+    /**
+     * Takes in an option string ("Vax", "Distance", "Lockdown", or "Masks")
+     */
+    implementPolicy(option){
+        
+        if(option == "Vax"){
+            ;
+        }
+        else if(option == "Distance"){
+            console.log("Turned on Distance");
+            this.city.distancingInProgress = true;
+        }
+        else if(option == "Lockdown"){
+            ;
+        }
+        else if(option == "Masks"){
+            console.log("Turned on Masks");
+            this.city.masksInProgress = true;
+        }
+        else{
+            throw "Error! Invalid implementPolicy option! Quitting implementPolicy.";
+        }
     }
 
-    implementDistance() {
-
-    }
-
-    implementLockdown() {
-
-    }
-
-    implementMasks() {
-
-    }
-
-    getCurrentRisk() {
-
-    }
 
     timedIteration(city, numberOfIterationsDesired, iterationTimer) {
         city.iteration();

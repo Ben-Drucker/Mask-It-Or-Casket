@@ -1,12 +1,16 @@
 class City {
 
     constructor(population) {
+        this.distancingInProgress = false;
+        this.masksInProgress = false;
+        this.lockDownInProgress = false;
         this.population = population;
         this.personsInfected = [];
         this.personsDead = [];
         this.sicknessLog = [];
         this.currentIteration = 0;
         this.numOfTransmissions = 0;
+        this.percentageInfected = 0;
         this.citizens = [];
         this.groups = new Map();
         this.numInfected = 0;
@@ -19,7 +23,12 @@ class City {
             this.citizens.push(new Person(i, age, risk));
         }
         /*Parameters Below*/
-        this.percentageInfected = 0;
+        this.fractionMaskEfficacy = 0.5;        //PARAMETER
+        this.fractionUsingMasks = 0.5;          //PARAMETER
+        this.fractionDistancing = 0.2;          //PARAMETER
+        this.fractionDistancingEfficacy = 0.2;  //PARAMETER
+
+
         this.transmissionRisk = 0.2;        //PARAMETER
         this.bipartiteRatio = 0.18;         //PARAMETER Determining the ratio of in-group, out-group graph connections
         this.maxGroupSize = 25;             //PARAMETER
@@ -113,15 +122,37 @@ class City {
     iteration() {
         this.personsInfected.forEach((function (person1) {  //for each infected person1 
             this.groups.get(person1).forEach((function (person2) {//for each person2 they are linked to
-                let chance = Math.random();
                 let interactionChance = person2[1];
                 person2 = person2[0];
-                if (chance < this.transmissionRisk * interactionChance && !person2.isInfected) {
-                    this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration);
-                    person2.isInfected = true;
-                    this.personsInfected.push(person2);
-                    this.numInfected++;
-                    this.numOfTransmissions++;
+                if (!person2.isInfected) {
+                    let chance = Math.random();
+                    let interactionTransmissionRisk = this.transmissionRisk * interactionChance;
+
+                    if (this.distancingInProgress) {
+                        if (person2.risk < this.fractionDistancing) {
+                            interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
+                        }
+                        if (person1.risk < this.fractionDistancing) {
+                            interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
+                        }
+                    }
+
+                    if (this.masksInProgress) {
+                        if (person2.risk < this.fractionUsingMasks) {
+                            interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
+                        }
+                        if (person1.risk < this.fractionUsingMasks) {
+                            interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
+                        }
+                    }
+
+                    if (chance < interactionTransmissionRisk) {
+                        this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration);
+                        person2.isInfected = true;
+                        this.personsInfected.push(person2);
+                        this.numInfected++;
+                        this.numOfTransmissions++;
+                    }
                 }
             }).bind(this))
         }).bind(this))
@@ -169,7 +200,7 @@ class City {
 
     death() {
         this.personsInfected.forEach((function (infectedPerson) {
-            if (infectedPerson.willDie == null){
+            if (infectedPerson.willDie == null) {
                 infectedPerson.infectedDuringIteration = this.currentIteration;
                 let personDeathProb = deathProbability(infectedPerson.age);
                 let chance = Math.random();
@@ -183,14 +214,14 @@ class City {
                 }
             }
             else if (infectedPerson.willDie) {
-                if( this.currentIteration == infectedPerson.iterationDeathDay){
+                if (this.currentIteration == infectedPerson.iterationDeathDay) {
                     this.personsDead.push(infectedPerson);
                     infectedPerson.isDead = true;
-                    this.numDead ++;
+                    this.numDead++;
                     //console.log("Death:", infectedPerson);
                 }
             }
-            else{
+            else {
                 ;
             }
         }).bind(this));
@@ -199,7 +230,7 @@ class City {
         function deathProbability(age) {
             let a = 0.04;
             let b = 0.07;
-            return (b * (Math.E ** (a * age) - 1))/25;
+            return (b * (Math.E ** (a * age) - 1)) / 25;
         }
     }
 
@@ -214,6 +245,7 @@ class Person {
         this.risk = risk;
         this.iterationDeathDay = null;
         this.willDie = null;
+        this.isVaxed = false;
     }
 
 }
