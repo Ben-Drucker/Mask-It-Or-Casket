@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="levelS.css">
     <title>Level 1</title>
 </head>
-
 <body>
 
     <img src="images/levelTitle.png" alt="Level 1" class="center">
@@ -17,6 +16,8 @@
     <script src = "../game.js"></script>
     <script src="timer.js"></script>
 
+    <progress max="100" value="5"></progress>
+
     <div class = "slidercontainer">
         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
     </div>
@@ -24,10 +25,10 @@
 
     <!--Trigger/Open Modal-->
     <div class="policies">
-        <input class="iButton" type="image" src="images/vaccine.png" alt="Vaccine" name="vaccine">
-        <input class="iButton" type="image" src="images/distance.png" alt="Distance" name="distance">
-        <input class="iButton" type="image" src="images/ShutDown.png"alt="Shut Down" name="shutDown">
-        <input class="iButton" type="image" src="images/mask.png"alt="Masks" name="mask">
+        <button onclick="document.getElementById('modal1').style.display='block'" id="modal-btn" class="iButton"><img src="images/vaccine.png" width="70px" alt="Vaccine"></button>
+        <button onclick="document.getElementById('modal2').style.display='block'" class="iButton"><img src="images/distance.png" width="70px" alt="Distance"></button>
+        <button onclick="document.getElementById('modal3').style.display='block'" class="iButton"><img src="images/ShutDown.png" width="70px" alt="Shut Down"></button>
+        <button onclick="document.getElementById('modal4').style.display='block'" class="iButton"><img src="images/mask.png" width="70px" alt="Masks"></button>
     </div>
 
     <script src="canvas.js"></script>
@@ -35,18 +36,41 @@
 
     <div class="clr"></div>
 
-    <!--Modal Section
-    <script src="popUp.js"></script>-->
-    <div class="bg-modal">
+    <!--Modal Section-->
+    <div id="modal1" class="modal">
         <div class="modal-content">
-            <h1>Policy</h1>
-            <p>Description</p>
-            <button type="button">Yes</button>
-            <button class = "close" type="button">No</button>
+            <h1>Vaccines</h1>
+            <p>It will require $$ and 0:00 to fully implement.</p>
+            <button>Yes</button>
+            <button onclick="document.getElementById('modal1').style.display='none'" class="close-btn">No</button>
         </div>
     </div>
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <h1>Would you like to implement a mandate to social distance?</h1>
+            <p>It will require $$ and 0:00 to fully implement.</p>
+            <button>Yes</button>
+            <button onclick="document.getElementById('modal2').style.display='none'" class="close-btn">No</button>
+        </div>
+    </div>
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <h1>Would you like to issue a statewide lockdown?</h1>
+            <p>It will require $$ and 0:00 to fully implement.</p>
+            <button>Yes</button>
+            <button onclick="document.getElementById('modal3').style.display='none'" class="close-btn">No</button>
+        </div>
+    </div>
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <h1>Would you like to issue a mask mandate?</h1>
+            <p>It will require $$ and 0:00 to fully implement.</p>
+            <button>Yes</button>
+            <button onclick="document.getElementById('modal4').style.display='none'" class="close-btn">No</button>
+        </div>
+    </div>
+    <!--End of Modal Section-->
 
 </body>
-
 </html>
 
