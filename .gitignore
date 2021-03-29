@@ -7,3 +7,9 @@
 #Mac folders
 *.DS_Store
 Level/.DS_Store
+
+
+
+
+#Other Files
+policyResults.txt

@@ -24,9 +24,17 @@ class City {
         }
         /*Parameters Below*/
         this.fractionMaskEfficacy = 0.5;        //PARAMETER
-        this.fractionUsingMasks = 0.5;          //PARAMETER
+        this.fractionUsingMasks = 0;          //PARAMETER
+        this.initialMaskDelay = 10;
+        this.maskImplementationDelay = 10;
+        this.maskStartIteration = null;
+
         this.fractionDistancing = 0.2;          //PARAMETER
-        this.fractionDistancingEfficacy = 0.2;  //PARAMETER
+        this.fractionDistancingEfficacy = 0.8;  //PARAMETER
+        this.initialDistancingDelay = 10;
+        this.distancingImplementationDelay = 10;
+        this.distancingStartIteration = null;
+
 
 
         this.transmissionRisk = 0.2;        //PARAMETER
@@ -127,17 +135,23 @@ class City {
                 if (!person2.isInfected) {
                     let chance = Math.random();
                     let interactionTransmissionRisk = this.transmissionRisk * interactionChance;
-
                     if (this.distancingInProgress) {
-                        if (person2.risk < this.fractionDistancing) {
-                            interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
-                        }
-                        if (person1.risk < this.fractionDistancing) {
-                            interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
+                        if (this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay >= 0) {  //if we are past the initial delay
+                            let delayComputation = (1- this.fractionMaskEfficacy) - ((1-this.fractionMaskEfficacy)/this.maskImplementationDelay)*(this.currentIteration-this.distancingStartIteration - this.initialDistancingDelay);
+                            var delayFactor = Math.max(delayComputation, 0);
+                            if (person2.risk < this.fractionDistancing) {
+                                interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
+                                var person2Masking = true;
+                            }
+                            if (person1.risk < this.fractionDistancing) {
+                                interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
+                                var person1Masking = true;
+                            }
                         }
                     }
 
                     if (this.masksInProgress) {
+                        //let delayFactor = ;
                         if (person2.risk < this.fractionUsingMasks) {
                             interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
                         }
@@ -147,7 +161,7 @@ class City {
                     }
 
                     if (chance < interactionTransmissionRisk) {
-                        this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration);
+                        this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration + " p1 risk "+person1.risk+" p2 risk "+ person2.risk+person1Masking+person2Masking+" "+interactionTransmissionRisk+" " +delayFactor);
                         person2.isInfected = true;
                         this.personsInfected.push(person2);
                         this.numInfected++;

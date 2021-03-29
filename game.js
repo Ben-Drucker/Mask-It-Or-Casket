@@ -6,7 +6,7 @@ class Game {
         this.previousPercentage = 0;
         this.funds;         //TODO
         this.secondsLeft;   //TODO
-        
+
         /* Set up City */
         this.city = new City(population);
         this.city.generateGroups();
@@ -16,23 +16,25 @@ class Game {
     /**
      * Takes in an option string ("Vax", "Distance", "Lockdown", or "Masks")
      */
-    implementPolicy(option){
-        
-        if(option == "Vax"){
+    implementPolicy(option) {
+
+        if (option == "Vax") {
             ;
         }
-        else if(option == "Distance"){
+        else if (option == "Distance") {
             console.log("Turned on Distance");
             this.city.distancingInProgress = true;
+            this.city.distancingStartIteration = this.city.currentIteration;
         }
-        else if(option == "Lockdown"){
+        else if (option == "Lockdown") {
             ;
         }
-        else if(option == "Masks"){
+        else if (option == "Masks") {
             console.log("Turned on Masks");
             this.city.masksInProgress = true;
+            this.city.maskStartIteration = this.city.currentIteration;
         }
-        else{
+        else {
             throw "Error! Invalid implementPolicy option! Quitting implementPolicy.";
         }
     }
@@ -41,12 +43,17 @@ class Game {
     timedIteration(city, numberOfIterationsDesired, iterationTimer) {
         city.iteration();
         city.death();
-        console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected out of", city.population, "(", city.percentageInfected.toFixed(2), "% infected ) %delta = ", (city.percentageInfected - this.previousPercentage).toFixed(2), "Dead:", city.numDead);
-        this.previousPercentage = city.percentageInfected;
+        console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected out of", city.population, "(", city.percentageInfected.toFixed(2), "% infected ) %delta = ", (city.percentageInfected - this.previousPercentage).toFixed(2), "Dead:", city.numDead); this.previousPercentage = city.percentageInfected;
+
+        if (this.currentSubIteration == 30) {//Purely Test Code
+            this.implementPolicy("Distance");
+            //theGame.implementPolicy("Masks");
+        }
+
         if (this.currentSubIteration >= numberOfIterationsDesired) {
             clearInterval(iterationTimer)
         }
-        this.currentSubIteration ++;
+        this.currentSubIteration++;
     }
 
     iterateByTime(city, delay, iterations) {
