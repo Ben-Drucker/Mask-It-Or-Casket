@@ -19,6 +19,12 @@ p{
     margin:0;
 }
 
+#container {
+    margin: 20px;
+    width: 400px;
+    height: 8px;
+  }
+
 .policies{
     float: left;
     border: none;
@@ -34,8 +40,8 @@ p{
     border: none;
 }
 
-canvas{
-    background-image: url('images/map.png');
+#canvas1{
+    /*background-image: url('images/map.png');*/
     width:750px;
 	height: 500px;
 	border: 1px solid black;
