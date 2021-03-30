@@ -1,7 +1,7 @@
 //import {Game} from "./game.js";
 window.onload = function () {
     let theGame = new Game(75000, 75);
-    let interIteratoryTime = 1 //time between iterations, in seconds.
+    let interIteratoryTime = 0.2 //time between iterations, in seconds.
     var min = 2;
     var sec = 59; //BUG Cannot be zero -> leads to bug
     theGame.iterateByTime(theGame.city, interIteratoryTime, (60*min + sec)/interIteratoryTime);

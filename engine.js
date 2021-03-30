@@ -23,14 +23,14 @@ class City {
             this.citizens.push(new Person(i, age, risk));
         }
         /*Parameters Below*/
-        this.fractionMaskEfficacy = 0.5;        //PARAMETER
-        this.fractionUsingMasks = 0;          //PARAMETER
+        this.fractionMaskEfficacy = 0.8;        //PARAMETER
+        this.fractionMasking = 0.8;          //PARAMETER
         this.initialMaskDelay = 10;
-        this.maskImplementationDelay = 10;
+        this.maskImplementationDelay = 50;
         this.maskStartIteration = null;
 
         this.fractionDistancing = 0.2;          //PARAMETER
-        this.fractionDistancingEfficacy = 0.8;  //PARAMETER
+        this.fractionDistancingEfficacy = 0.2;  //PARAMETER
         this.initialDistancingDelay = 10;
         this.distancingImplementationDelay = 10;
         this.distancingStartIteration = null;
@@ -128,8 +128,8 @@ class City {
     }
 
     iteration() {
-        this.personsInfected.forEach((function (person1) {  //for each infected person1 
-            this.groups.get(person1).forEach((function (person2) {//for each person2 they are linked to
+        this.personsInfected.forEach((person1) => {  //for each infected person1 
+            this.groups.get(person1).forEach((person2) => {//for each person2 they are linked to
                 let interactionChance = person2[1];
                 person2 = person2[0];
                 if (!person2.isInfected) {
@@ -137,39 +137,40 @@ class City {
                     let interactionTransmissionRisk = this.transmissionRisk * interactionChance;
                     if (this.distancingInProgress) {
                         if (this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay >= 0) {  //if we are past the initial delay
-                            let delayComputation = (1- this.fractionMaskEfficacy) - ((1-this.fractionMaskEfficacy)/this.maskImplementationDelay)*(this.currentIteration-this.distancingStartIteration - this.initialDistancingDelay);
+                            let delayComputation = (1 - this.fractionDistancing) - ((1 - this.fractionDistancingEfficacy) / this.distancingImplementationDelay) * (this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay);
                             var delayFactor = Math.max(delayComputation, 0);
                             if (person2.risk < this.fractionDistancing) {
                                 interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
-                                var person2Masking = true;
                             }
                             if (person1.risk < this.fractionDistancing) {
                                 interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
-                                var person1Masking = true;
                             }
                         }
                     }
 
                     if (this.masksInProgress) {
-                        //let delayFactor = ;
-                        if (person2.risk < this.fractionUsingMasks) {
-                            interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
-                        }
-                        if (person1.risk < this.fractionUsingMasks) {
-                            interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
+                        if (this.currentIteration - this.maskStartIteration - this.initialMaskDelay >= 0) {  //if we are past the initial delay
+                            let delayComputation = (1 - this.fractionMaskEfficacy) - ((1 - this.fractionMaskEfficacy) / this.maskImplementationDelay) * (this.currentIteration - this.maskStartIteration - this.initialMaskDelay);
+                            delayFactor = Math.max(delayComputation, 0);
+                            if (person2.risk < this.fractionMasking) {
+                                interactionTransmissionRisk *= ((1 - this.fractionMasking) + delayFactor);
+                            }
+                            if (person1.risk < this.fractionDistancing) {
+                                interactionTransmissionRisk *= ((1 - this.fractionMasking) + delayFactor);
+                            }
                         }
                     }
 
                     if (chance < interactionTransmissionRisk) {
-                        this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration + " p1 risk "+person1.risk+" p2 risk "+ person2.risk+person1Masking+person2Masking+" "+interactionTransmissionRisk+" " +delayFactor);
+                        this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration + " p1 risk " + person1.risk + " p2 risk " + person2.risk);
                         person2.isInfected = true;
                         this.personsInfected.push(person2);
                         this.numInfected++;
                         this.numOfTransmissions++;
                     }
                 }
-            }).bind(this))
-        }).bind(this))
+            })
+        })
         this.currentIteration++;
         this.percentageInfected = 100 * (this.numOfTransmissions / this.population);
     }

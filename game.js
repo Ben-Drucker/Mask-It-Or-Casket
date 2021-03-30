@@ -47,7 +47,7 @@ class Game {
 
         if (this.currentSubIteration == 30) {//Purely Test Code
             this.implementPolicy("Distance");
-            //theGame.implementPolicy("Masks");
+            this.implementPolicy("Masks");
         }
 
         if (this.currentSubIteration >= numberOfIterationsDesired) {
