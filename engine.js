@@ -4,7 +4,7 @@ class City {
         this.distancingInProgress = false;
         this.masksInProgress = false;
         this.lockDownInProgress = false;
-        //this.vaxInProgress = false;
+        this.vaxInProgress = false;
         this.population = population;
         this.personsInfected = [];
         this.personsDead = [];
@@ -38,8 +38,8 @@ class City {
 
         this.fractionVaxing = 0.85;                //PARAMETER
         this.fractionVaxingEfficacy = 0.9;      //PARAMETER
-        this.initialVaxDelay = 10;             //PARAMETER
-        this.vaxImplementationDelay = 10;       //PARAMETER
+        this.initialVaxDelay = 50;             //PARAMETER
+        this.vaxImplementationDelay = 50;       //PARAMETER
         this.vaxStartIteration = null;
 
 
@@ -264,26 +264,18 @@ class City {
         }
     }
 
-    // vaccinate() {
-    //     let vaccinesPerDay = Math.floor(this.population / this.vaxImplementationDelay) / this.fractionVaxing;
-    //     let chance = Math.random() * this.population;
-    //     this.citizens.forEach((person) => {
-    //         if (chance < vaccinesPerDay) {
-    //             if (!person.isVaxed && !person.isDead && person.risk < this.fractionVaxing) {
-    //                 person.isVaxed = true;
-    //             }
-    //         }
-    //     }
-    // }
-
     vaccinate() {
         let vaccinesPerDay = Math.floor(this.population / this.vaxImplementationDelay) / this.fractionVaxing;
+        let vaccinatedPeople = 0;
         for(let i = 0; i < vaccinesPerDay; i++){
-            let person = this.citizens[Math.random() * this.population];
+            let person = this.citizens[Math.floor(Math.random() * this.population)];
             if (!person.isVaxed && !person.isDead && person.risk < this.fractionVaxing) {
                 person.isVaxed = true;
+                vaccinatedPeople ++;
+
             }
         }
+        console.log("Vaccinated", vaccinatedPeople);
     }
 
 
