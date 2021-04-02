@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById('canvas1');
 const c = canvas.getContext('2d');
 
@@ -5,7 +6,6 @@ canvas.width = 750;
 canvas.height = 500;
 console.log(canvas);
 
-/*
 const player = {
     x:0,
     y:0,
@@ -16,7 +16,7 @@ const player = {
     speed:9,
     moving:false,
 };
-*/
+
 class Sprite {
     constructor(id, x, y, width, height, frameX, frameY, status) {
         this.id = id;
@@ -47,6 +47,7 @@ function animate(){
 }
 animate();
 
+/*
 var citySprites = [];
 const philly = new City(10);
 function setupPops(){
@@ -61,7 +62,7 @@ function setupPops(){
 setupPops();
 
 // assign values to dif status ex. infected = 1
-/*
+
 function changeStatus(){  
     for (var i = 0; i < philly.population; i++) {
         if (philly.citizens[i].isInfected = false) {
