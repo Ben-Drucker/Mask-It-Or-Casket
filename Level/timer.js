@@ -9,7 +9,7 @@ window.onload = function () {
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
         sec--;
-        if (sec == 00) { //TODO: Octal literals shouldn't be used.
+        if (sec == 0) { //TODO: Octal literals shouldn't be used.
             min--;
             sec = 59;
             if (min == 0) {

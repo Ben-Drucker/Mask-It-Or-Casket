@@ -50,11 +50,11 @@ class Game {
         }
         console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected out of", city.population, "(", city.percentageInfected.toFixed(2), "% infected ) %delta = ", (city.percentageInfected - this.previousPercentage).toFixed(2), "Dead:", city.numDead); this.previousPercentage = city.percentageInfected;
 
-        if (this.currentSubIteration == 30) {//Purely Test Code
-            this.implementPolicy("Distance");
-            this.implementPolicy("Masks");
-            this.implementPolicy("Vax");
-        }
+        // if (this.currentSubIteration == 30) {//Purely Test Code
+        //     this.implementPolicy("Distance");
+        //     this.implementPolicy("Masks");
+        //     this.implementPolicy("Vax");
+        // }
 
         if (this.currentSubIteration >= numberOfIterationsDesired) {
             clearInterval(iterationTimer)
