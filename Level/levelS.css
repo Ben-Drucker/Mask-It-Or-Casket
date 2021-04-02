@@ -111,6 +111,7 @@ Figure out how to do a color gradient
     transition: .2s;
     transition: opacity .2s;
     transform: rotate(-90deg);
+    right: 0;
 }
 
 /*
