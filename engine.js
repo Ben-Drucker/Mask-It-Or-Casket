@@ -1,28 +1,54 @@
 class City {
 
     constructor(population) {
-        
-        this.currentRiskLevel; //TODO: Implement risk levels
+        this.distancingInProgress = false;
+        this.masksInProgress = false;
+        this.lockDownInProgress = false;
+        this.vaxInProgress = false;
         this.population = population;
         this.personsInfected = [];
+        this.personsDead = [];
         this.sicknessLog = [];
         this.currentIteration = 0;
         this.numOfTransmissions = 0;
+        this.percentageInfected = 0;
         this.citizens = [];
         this.groups = new Map();
         this.numInfected = 0;
-        this.connectionDensity = 0.3;
-        this.bipartiteRatio = 0.5; //
-        this.maxGroupSize = 25;
-        this.densityFactor = 2;
-        this.maxConnectionsInGroup = 50;
+        this.numDead = 0;
         this.numOfConnections = 0;
         for (let i = 0; i < this.population; i++) {
-            let gregarious = Math.floor(Math.random() * this.maxConnections);
+            let ageIndex = Math.floor(Math.random() * (this.population + 1));
+            let age = ageDistributions.ages[ageIndex];
             let risk = Math.random();
-            this.citizens.push(new Person(i, gregarious, risk));
+            this.citizens.push(new Person(i, age, risk));
         }
-        this.percentageInfected = 0;
+        /*Parameters Below*/
+        this.fractionMaskEfficacy = 0.8;        //PARAMETER
+        this.fractionMasking = 0.8;             //PARAMETER
+        this.initialMaskDelay = 10;             //PARAMETER 
+        this.maskImplementationDelay = 50;      //PARAMETER
+        this.maskStartIteration = null;
+
+        this.fractionDistancing = 0.2;          //PARAMETER
+        this.fractionDistancingEfficacy = 0.2;  //PARAMETER
+        this.initialDistancingDelay = 10;       //PARAMETER
+        this.distancingImplementationDelay = 10;//PARAMETER
+        this.distancingStartIteration = null;
+
+        this.fractionVaxing = 0.85;                //PARAMETER
+        this.fractionVaxingEfficacy = 0.9;      //PARAMETER
+        this.initialVaxDelay = 50;             //PARAMETER
+        this.vaxImplementationDelay = 50;       //PARAMETER
+        this.vaxStartIteration = null;
+
+
+
+        this.transmissionRisk = 0.2;        //PARAMETER
+        this.bipartiteRatio = 0.18;         //PARAMETER Determining the ratio of in-group, out-group graph connections
+        this.maxGroupSize = 25;             //PARAMETER
+        this.densityFactor = 2;             //PARAMETER
+        this.maxConnectionsInGroup = 50;    //PARAMETER
     }
 
     generateGroups() {
@@ -48,7 +74,7 @@ class City {
                     done = true;
                 }
                 for (let k = 0; k < internalGroupConnections; k++) {
-                    let interactionChance = 0.9*Math.E ** (-3 * k);
+                    let interactionChance = this.interactionChanceFunction(k, groupSize);
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * groupSize) + group_ind;
                     if (person1 > this.population - 1) {
@@ -68,7 +94,7 @@ class City {
                     }
                 }
                 for (let l = 0; l < externalGroupConnections; l++) {
-                    let interactionChance = Math.E ** (-0.5 * l);
+                    let interactionChance = this.interactionChanceFunction(l, groupSize);
                     let person1 = Math.floor(Math.random() * groupSize) + group_ind;
                     let person2 = Math.floor(Math.random() * this.population);
                     if (person1 > this.population - 1) {
@@ -109,23 +135,59 @@ class City {
     }
 
     iteration() {
-        let transmissionRisk = 0.7;//TODO: SUBJECT TO CHANGE. IMPORTANT PARAMETER.
-        this.personsInfected.forEach((function (person1) {  //for each infected person1 
-            this.groups.get(person1).forEach((function (person2) {//for each person2 they are linked to
-                let chance = Math.random();
+        this.personsInfected.forEach((person1) => {  //for each infected person1 
+            this.groups.get(person1).forEach((person2) => {//for each person2 they are linked to
                 let interactionChance = person2[1];
                 person2 = person2[0];
-                if (chance < transmissionRisk * interactionChance && !person2.isInfected) {
-                    this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration);
-                    person2.isInfected = true;
-                    this.personsInfected.push(person2);
-                    this.numInfected++;
-                    this.numOfTransmissions++;
+                if (!person2.isInfected) {
+                    let chance = Math.random();
+                    let interactionTransmissionRisk = this.transmissionRisk * interactionChance;
+                    if (this.distancingInProgress) {
+                        if (this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay >= 0) {  //if we are past the initial delay
+                            let delayComputation = (1 - this.fractionDistancing) - ((1 - this.fractionDistancingEfficacy) / this.distancingImplementationDelay) * (this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay);
+                            var delayFactor = Math.max(delayComputation, 0);
+                            if (person2.risk < this.fractionDistancing) {
+                                interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
+                            }
+                            if (person1.risk < this.fractionDistancing) {
+                                interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
+                            }
+                        }
+                    }
+
+                    if (this.masksInProgress) {
+                        if (this.currentIteration - this.maskStartIteration - this.initialMaskDelay >= 0) {  //if we are past the initial delay
+                            let delayComputation = (1 - this.fractionMaskEfficacy) - ((1 - this.fractionMaskEfficacy) / this.maskImplementationDelay) * (this.currentIteration - this.maskStartIteration - this.initialMaskDelay);
+                            delayFactor = Math.max(delayComputation, 0);
+                            if (person2.risk < this.fractionMasking) {
+                                interactionTransmissionRisk *= ((1 - this.fractionMasking) + delayFactor);
+                            }
+                            if (person1.risk < this.fractionDistancing) {
+                                interactionTransmissionRisk *= ((1 - this.fractionMasking) + delayFactor);
+                            }
+                        }
+                    }
+
+                    if (person1.isVaxed) {
+                        interactionTransmissionRisk *= (1 - this.fractionVaxingEfficacy);
+                    }
+
+                    if (person2.isVaxed) {
+                        interactionTransmissionRisk *= (1 - this.fractionVaxingEfficacy);
+                    }
+
+                    if (chance < interactionTransmissionRisk) {
+                        this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration + " p1 risk " + person1.risk + " p2 risk " + person2.risk);
+                        person2.isInfected = true;
+                        this.personsInfected.push(person2);
+                        this.numInfected++;
+                        this.numOfTransmissions++;
+                    }
                 }
-            }).bind(this))
-        }).bind(this))
+            })
+        })
         this.currentIteration++;
-        this.percentageInfected = 100*(this.numOfTransmissions/this.population);
+        this.percentageInfected = 100 * (this.numOfTransmissions / this.population);
     }
 
     iterate(i) {
@@ -158,18 +220,52 @@ class City {
         })
         return count;
     }
-}
+
+    interactionChanceFunction(x, groupSize) { /*Previously 0.9*Math.E ** (-3 * k);*/
+        let a = 0.5; //PARAMETER Determining the falloff of interactionChances
+        let b = groupSize / 3;    //PARAMETER Determining the inflection point of interactions
+        let c = 0.5;  //PARAMETER Determining the inflection point multipier
+        return c * (1 / (1 + Math.E ** (a * (x - b))));  //Logisitc decay equation: https://en.wikipedia.org/wiki/Logistic_function
+    }
+
+    death() {
+        this.personsInfected.forEach((function (infectedPerson) {
+            if (infectedPerson.willDie == null) {
+                infectedPerson.infectedDuringIteration = this.currentIteration;
+                let personDeathProb = deathProbability(infectedPerson.age);
+                let chance = Math.random();
+                if (chance < personDeathProb) {
+                    let daysTillDead = Math.floor(Math.random() * 9) + 5;
+                    infectedPerson.iterationDeathDay = this.currentIteration + daysTillDead;
+                    infectedPerson.willDie = true;
+                }
+                else {
+                    infectedPerson.willDie = false;
+                }
+            }
+            else if (infectedPerson.willDie) {
+                if (this.currentIteration == infectedPerson.iterationDeathDay) {
+                    this.personsDead.push(infectedPerson);
+                    infectedPerson.isDead = true;
+                    this.numDead++;
+                    //console.log("Death:", infectedPerson);
+                }
+            }
+            else {
+                ;
+            }
+        }).bind(this));
 
 class Person {
-    constructor(id, gregarious, risk) {
+    constructor(id, age, risk) {
         this.id = id;
+        this.age = age;
         this.isInfected = false;
-        // this.isSusceptible = true; // Not using these yet
-        // this.gregarious = gregarious;
-        // this.risk = risk;
-        // this.isDead = false;
-        // this.isVaxed = false;
-        // this.addedToGroups = 0;
+        this.isDead = false;
+        this.risk = risk;
+        this.iterationDeathDay = null;
+        this.willDie = null;
+        this.isVaxed = false;
     }
 
 }

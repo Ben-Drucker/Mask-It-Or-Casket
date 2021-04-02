@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="levelS.css">
+    <link rel="stylesheet" href="levels.css">
     <title>Level 1</title>
 </head>
 <body>
@@ -11,13 +11,17 @@
 
     <h3>Funds: $3000</h3>
 
-    <div id="timer"></div>
+    <div id="timer"></div> 
+    <!--Import Brython-->
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
+
+    <script src = "../ageDistributions.js"></script>
     <script src = "../engine.js"></script>
     <script src = "../game.js"></script>
     <script src="timer.js"></script>
-    <script src="people.js"></script>
-
     <script src="modal.js"></script>
+    
     <div id="container"></div>
 
     <div class = "slidercontainer">
@@ -27,7 +31,7 @@
 
     <!--Trigger/Open Modal-->
     <div class="policies">
-        <button onclick="document.getElementById('modal1').style.display='block'" id="modal-btn" class="iButton"><img src="images/vaccine.png" width="70px" alt="Vaccine"></button>
+        <button onclick="document.getElementById('modal1').style.display='block'" class="iButton"><img src="images/vaccine.png" width="70px" alt="Vaccine"></button>
         <button onclick="document.getElementById('modal2').style.display='block'" class="iButton"><img src="images/distance.png" width="70px" alt="Distance"></button>
         <button onclick="document.getElementById('modal3').style.display='block'" class="iButton"><img src="images/ShutDown.png" width="70px" alt="Shut Down"></button>
         <button onclick="document.getElementById('modal4').style.display='block'" class="iButton"><img src="images/mask.png" width="70px" alt="Masks"></button>
@@ -43,7 +47,7 @@
         <div class="modal-content">
             <h1>Vaccines</h1>
             <p>It will require $$ and 0:00 to fully implement.</p>
-            <button>Yes</button>
+            <button onclick="clickedYes('Vax', 'modal1')" class="close-btn">Yes</button>
             <button onclick="document.getElementById('modal1').style.display='none'" class="close-btn">No</button>
         </div>
     </div>
@@ -51,7 +55,7 @@
         <div class="modal-content">
             <h1>Would you like to implement a mandate to social distance?</h1>
             <p>It will require $$ and 0:00 to fully implement.</p>
-            <button>Yes</button>
+            <button onclick="clickedYes('Distance', 'modal2')" class="close-btn">Yes</button>
             <button onclick="document.getElementById('modal2').style.display='none'" class="close-btn">No</button>
         </div>
     </div>
@@ -59,7 +63,7 @@
         <div class="modal-content">
             <h1>Would you like to issue a statewide lockdown?</h1>
             <p>It will require $$ and 0:00 to fully implement.</p>
-            <button>Yes</button>
+            <button onclick="clickedYes('Lockdown', 'modal3')" class="close-btn">Yes</button>
             <button onclick="document.getElementById('modal3').style.display='none'" class="close-btn">No</button>
         </div>
     </div>
@@ -67,7 +71,7 @@
         <div class="modal-content">
             <h1>Would you like to issue a mask mandate?</h1>
             <p>It will require $$ and 0:00 to fully implement.</p>
-            <button>Yes</button>
+            <button onclick="clickedYes('Masks', 'modal4')" class="close-btn">Yes</button>
             <button onclick="document.getElementById('modal4').style.display='none'" class="close-btn">No</button>
         </div>
     </div>

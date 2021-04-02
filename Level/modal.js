@@ -15,7 +15,11 @@ var bar = new ProgressBar.Line(container, {
   
   bar.animate(1.0);
 
-// get modal
+function clickedYes(option, modal) {
+  theGame.implementPolicy(option);
+  document.getElementById(modal).style.display='none';
+}
+  // get modal
 //var modal = document.getElementById("myModal");
 
 // get button to open
