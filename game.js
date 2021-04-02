@@ -19,7 +19,8 @@ class Game {
     implementPolicy(option) {
 
         if (option == "Vax") {
-            ;
+            console.log("Turned on Vaccination");
+            this.city.vaxStartIteration = this.city.currentIteration;
         }
         else if (option == "Distance") {
             console.log("Turned on Distance");
@@ -43,11 +44,16 @@ class Game {
     timedIteration(city, numberOfIterationsDesired, iterationTimer) {
         city.iteration();
         city.death();
+        if (this.currentSubIteration >= this.initialVaxDelay + this.vaxStartIteration) {
+            city.vaccinate();
+            console.log("Vaccinated some people.");
+        }
         console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected out of", city.population, "(", city.percentageInfected.toFixed(2), "% infected ) %delta = ", (city.percentageInfected - this.previousPercentage).toFixed(2), "Dead:", city.numDead); this.previousPercentage = city.percentageInfected;
 
         if (this.currentSubIteration == 30) {//Purely Test Code
             this.implementPolicy("Distance");
             this.implementPolicy("Masks");
+            this.implementPolicy("Vax");
         }
 
         if (this.currentSubIteration >= numberOfIterationsDesired) {

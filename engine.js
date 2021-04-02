@@ -4,6 +4,7 @@ class City {
         this.distancingInProgress = false;
         this.masksInProgress = false;
         this.lockDownInProgress = false;
+        //this.vaxInProgress = false;
         this.population = population;
         this.personsInfected = [];
         this.personsDead = [];
@@ -24,16 +25,22 @@ class City {
         }
         /*Parameters Below*/
         this.fractionMaskEfficacy = 0.8;        //PARAMETER
-        this.fractionMasking = 0.8;          //PARAMETER
-        this.initialMaskDelay = 10;
-        this.maskImplementationDelay = 50;
+        this.fractionMasking = 0.8;             //PARAMETER
+        this.initialMaskDelay = 10;             //PARAMETER 
+        this.maskImplementationDelay = 50;      //PARAMETER
         this.maskStartIteration = null;
 
         this.fractionDistancing = 0.2;          //PARAMETER
         this.fractionDistancingEfficacy = 0.2;  //PARAMETER
-        this.initialDistancingDelay = 10;
-        this.distancingImplementationDelay = 10;
+        this.initialDistancingDelay = 10;       //PARAMETER
+        this.distancingImplementationDelay = 10;//PARAMETER
         this.distancingStartIteration = null;
+
+        this.fractionVaxing = 0.85;                //PARAMETER
+        this.fractionVaxingEfficacy = 0.9;      //PARAMETER
+        this.initialVaxDelay = 10;             //PARAMETER
+        this.vaxImplementationDelay = 10;       //PARAMETER
+        this.vaxStartIteration = null;
 
 
 
@@ -161,6 +168,14 @@ class City {
                         }
                     }
 
+                    if (person1.isVaxed) {
+                        interactionTransmissionRisk *= (1 - this.fractionVaxingEfficacy);
+                    }
+
+                    if (person2.isVaxed) {
+                        interactionTransmissionRisk *= (1 - this.fractionVaxingEfficacy);
+                    }
+
                     if (chance < interactionTransmissionRisk) {
                         this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration + " p1 risk " + person1.risk + " p2 risk " + person2.risk);
                         person2.isInfected = true;
@@ -246,6 +261,28 @@ class City {
             let a = 0.04;
             let b = 0.07;
             return (b * (Math.E ** (a * age) - 1)) / 25;
+        }
+    }
+
+    // vaccinate() {
+    //     let vaccinesPerDay = Math.floor(this.population / this.vaxImplementationDelay) / this.fractionVaxing;
+    //     let chance = Math.random() * this.population;
+    //     this.citizens.forEach((person) => {
+    //         if (chance < vaccinesPerDay) {
+    //             if (!person.isVaxed && !person.isDead && person.risk < this.fractionVaxing) {
+    //                 person.isVaxed = true;
+    //             }
+    //         }
+    //     }
+    // }
+
+    vaccinate() {
+        let vaccinesPerDay = Math.floor(this.population / this.vaxImplementationDelay) / this.fractionVaxing;
+        for(let i = 0; i < vaccinesPerDay; i++){
+            let person = this.citizens[Math.random() * this.population];
+            if (!person.isVaxed && !person.isDead && person.risk < this.fractionVaxing) {
+                person.isVaxed = true;
+            }
         }
     }
 
