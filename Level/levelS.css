@@ -97,7 +97,7 @@ p{
     width: 100%; 
 }
 
-#slider {
+.slider {
     -webkit-appearance: none;
     -webkit-transform: rotate(-90deg);
     width: 100%;
@@ -118,7 +118,7 @@ p{
     opacity: 1;
 }
     
-.slider::-webkit-slider-thumb {
+.slider::-webkit-sslider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 40px;
