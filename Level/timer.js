@@ -1,6 +1,7 @@
 //import {Game} from "./game.js";
+var theGame = new Game(75000, 75);
+
 window.onload = function () {
-    let theGame = new Game(75000, 75);
     let interIteratoryTime = 0.2 //time between iterations, in seconds.
     var min = 2;
     var sec = 59; //BUG Cannot be zero -> leads to bug
@@ -8,7 +9,7 @@ window.onload = function () {
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
         sec--;
-        if (sec == 00) {
+        if (sec == 00) { //TODO: Octal literals shouldn't be used.
             min--;
             sec = 59;
             if (min == 0) {
