@@ -74,7 +74,7 @@ p{
 #timer {
     margin-top: 10px;
     margin-bottom: 10px;
-    /*text-align: center;*/
+    text-align: center;
     padding: 20px;
     width: 100px;
     height: 50px;
@@ -110,6 +110,7 @@ Figure out how to do a color gradient
     opacity: 1.0;
     transition: .2s;
     transition: opacity .2s;
+    transform: rotate(-90deg);
 }
 
 /*
