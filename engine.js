@@ -160,7 +160,6 @@ class City {
     }
 }
 
-
 class Person {
     constructor(id, gregarious, risk) {
         this.id = id;
