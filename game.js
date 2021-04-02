@@ -28,7 +28,7 @@ class Game {
             this.city.distancingStartIteration = this.city.currentIteration;
         }
         else if (option == "Lockdown") {
-            ;
+            console.log("Turned on Lockdown. Not yet implemented.");
         }
         else if (option == "Masks") {
             console.log("Turned on Masks");
