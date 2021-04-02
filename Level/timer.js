@@ -18,7 +18,7 @@ window.onload = function () {
         }
         /* 
         To make the timer countdown 10, 09, 08, 07, ..., 01, 00 seconds
-        This may not show 00 
+        This may not show 00 //BUG!
         */
         else if (sec < 10) {
             sec = "0" + sec;
