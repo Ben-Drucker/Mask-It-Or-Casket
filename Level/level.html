@@ -2,8 +2,11 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="levels.css">
     <title>Level 1</title>
+    <link rel="stylesheet" href="levels.css">
+    <!--Import Brython-->
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
 </head>
 <body>
 
@@ -11,23 +14,15 @@
 
     <h3>Funds: $3000</h3>
 
-    <div id="timer"></div> 
-    <!--Import Brython-->
-    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
+    <div id="timer"></div>
 
-    <script src = "../ageDistributions.js"></script>
-    <script src = "../engine.js"></script>
-    <script src = "../game.js"></script>
-    <script src="timer.js"></script>
-    <script src="modal.js"></script>
-    
     <div id="container"></div>
 
     <div class = "slidercontainer">
         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
     </div>
-    <script src = "slider.js"></script>
+
+    <div id="demo"></div>
 
     <!--Trigger/Open Modal-->
     <div class="policies">
@@ -38,7 +33,6 @@
     </div>
 
     <canvas id="canvas1"></canvas>
-    <script src="canvas.js"></script>
 
     <div class="clr"></div>
 
@@ -76,6 +70,14 @@
         </div>
     </div>
     <!--End of Modal Section-->
+
+    <!-- Load JavaScript Code -->
+    <script src="../ageDistributions.js"></script>
+    <script src="../engine.js"></script>
+    <script src="../game.js"></script>
+    <script src="timer.js"></script>
+    <script src="modal.js"></script>
+    <script src="slider.js"></script>
+    <script src="canvas.js"></script>
 </body>
 </html>
-
