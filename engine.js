@@ -26,7 +26,7 @@ class City {
         /*Parameters Below*/
         this.fractionMaskEfficacy = 0.8;        //PARAMETER
         this.fractionMasking = 0.8;             //PARAMETER
-        this.initialMaskDelay = 10;             //PARAMETER 
+        this.initialMaskDelay = 10;             //PARAMETER
         this.maskImplementationDelay = 50;      //PARAMETER
         this.maskStartIteration = null;
 
@@ -135,7 +135,7 @@ class City {
     }
 
     iteration() {
-        this.personsInfected.forEach((person1) => {  //for each infected person1 
+        this.personsInfected.forEach((person1) => {  //for each infected person1
             this.groups.get(person1).forEach((person2) => {//for each person2 they are linked to
                 let interactionChance = person2[1];
                 person2 = person2[0];
@@ -217,7 +217,7 @@ class City {
             if (group.size != 0) {
                 count++;
             }
-        })
+        });
         return count;
     }
 
@@ -228,11 +228,19 @@ class City {
         return c * (1 / (1 + Math.E ** (a * (x - b))));  //Logisitc decay equation: https://en.wikipedia.org/wiki/Logistic_function
     }
 
+    vaccinate() {
+      // TODO
+    }
+
+    deathProbability(age) {
+      return 0.10;
+    }
+
     death() {
         this.personsInfected.forEach((function (infectedPerson) {
             if (infectedPerson.willDie == null) {
                 infectedPerson.infectedDuringIteration = this.currentIteration;
-                let personDeathProb = deathProbability(infectedPerson.age);
+                let personDeathProb = this.deathProbability(infectedPerson.age);
                 let chance = Math.random();
                 if (chance < personDeathProb) {
                     let daysTillDead = Math.floor(Math.random() * 9) + 5;
@@ -252,9 +260,11 @@ class City {
                 }
             }
             else {
-                ;
+
             }
         }).bind(this));
+    }
+}
 
 class Person {
     constructor(id, age, risk) {
@@ -267,7 +277,6 @@ class Person {
         this.willDie = null;
         this.isVaxed = false;
     }
-
 }
 
 //export { City, Person };
