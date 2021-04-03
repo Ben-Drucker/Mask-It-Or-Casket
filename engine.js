@@ -42,6 +42,11 @@ class City {
         this.vaxImplementationDelay = 50;       //PARAMETER
         this.vaxStartIteration = null;
 
+        this.fractionLockDownEfficacy = 0.9;      //PARAMETER
+        this.initialLockDownDelay = 10;             //PARAMETER
+        this.lockDownImplementationDelay = 10; //PARAMETER
+        this.lockDownStartIteration = null;
+
 
 
         this.transmissionRisk = 0.2;        //PARAMETER
@@ -160,11 +165,19 @@ class City {
                             let delayComputation = (1 - this.fractionMaskEfficacy) - ((1 - this.fractionMaskEfficacy) / this.maskImplementationDelay) * (this.currentIteration - this.maskStartIteration - this.initialMaskDelay);
                             delayFactor = Math.max(delayComputation, 0);
                             if (person2.risk < this.fractionMasking) {
-                                interactionTransmissionRisk *= ((1 - this.fractionMasking) + delayFactor);
+                                interactionTransmissionRisk *= ((1 - this.fractionMaskingEfficacy) + delayFactor);
                             }
-                            if (person1.risk < this.fractionDistancing) {
-                                interactionTransmissionRisk *= ((1 - this.fractionMasking) + delayFactor);
+                            if (person1.risk < this.fractionMasking) {
+                                interactionTransmissionRisk *= ((1 - this.fractionMaskingEfficacy) + delayFactor);
                             }
+                        }
+                    }
+
+                    if (this.lockDownInProgress) {
+                        if (this.currentIteration - this.lockDownStartIteration - this.initialLockDownDelay >= 0) {  //if we are past the initial delay
+                            let delayComputation = (1 - this.fractionlockDownEfficacy) - ((1 - this.fractionlockDownEfficacy) / this.lockDownImplementationDelay) * (this.currentIteration - this.lockDownStartIteration - this.initialLockDownDelay);
+                            delayFactor = Math.max(delayComputation, 0);
+                            interactionTransmissionRisk *= ((1 - this.fractionlockDownEfficacy) + delayFactor);
                         }
                     }
 
