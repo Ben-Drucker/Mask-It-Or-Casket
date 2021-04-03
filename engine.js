@@ -242,11 +242,21 @@ class City {
     }
 
     vaccinate() {
-      // TODO
+        let vaccinesPerDay = Math.floor(this.population / this.vaxImplementationDelay) / this.fractionVaxing;
+        let vaccinatedPeople = 0;
+        for (let i = 0; i < vaccinesPerDay; i++) {
+            let person = this.citizens[Math.floor(Math.random() * this.population)];
+            if (!person.isVaxed && !person.isDead && person.risk < this.fractionVaxing) {
+                person.isVaxed = true;
+                vaccinatedPeople++;
+
+            }
+        }
+        console.log("Vaccinated", vaccinatedPeople);
     }
 
     deathProbability(age) {
-      return 0.10;
+        return 0.10;
     }
 
     death() {
