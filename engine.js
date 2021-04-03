@@ -241,22 +241,10 @@ class City {
         return c * (1 / (1 + Math.E ** (a * (x - b))));  //Logisitc decay equation: https://en.wikipedia.org/wiki/Logistic_function
     }
 
-    vaccinate() {
-        let vaccinesPerDay = Math.floor(this.population / this.vaxImplementationDelay) / this.fractionVaxing;
-        let vaccinatedPeople = 0;
-        for (let i = 0; i < vaccinesPerDay; i++) {
-            let person = this.citizens[Math.floor(Math.random() * this.population)];
-            if (!person.isVaxed && !person.isDead && person.risk < this.fractionVaxing) {
-                person.isVaxed = true;
-                vaccinatedPeople++;
-
-            }
-        }
-        console.log("Vaccinated", vaccinatedPeople);
-    }
-
     deathProbability(age) {
-        return 0.10;
+        let a = 0.04;
+        let b = 0.07;
+        return (b * (Math.E ** (a * age) - 1)) / 25;
     }
 
     death() {
@@ -286,6 +274,20 @@ class City {
 
             }
         }).bind(this));
+    }
+
+    vaccinate() {
+        let vaccinesPerDay = Math.floor(this.population / this.vaxImplementationDelay) / this.fractionVaxing;
+        let vaccinatedPeople = 0;
+        for (let i = 0; i < vaccinesPerDay; i++) {
+            let person = this.citizens[Math.floor(Math.random() * this.population)];
+            if (!person.isVaxed && !person.isDead && person.risk < this.fractionVaxing) {
+                person.isVaxed = true;
+                vaccinatedPeople++;
+
+            }
+        }
+        console.log("Vaccinated", vaccinatedPeople);
     }
 }
 
