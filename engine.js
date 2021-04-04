@@ -24,27 +24,27 @@ class City {
             this.citizens.push(new Person(i, age, risk));
         }
         /*Parameters Below*/
-        this.fractionMaskEfficacy = 0.8;        //PARAMETER
-        this.fractionMasking = 0.8;             //PARAMETER
-        this.initialMaskDelay = 10;             //PARAMETER
-        this.maskImplementationDelay = 50;      //PARAMETER
+        this.fractionMaskEfficacy = 0.5;        //PARAMETER
+        this.fractionMasking = 0.5;             //PARAMETER
+        this.initialMaskDelay = 20;             //PARAMETER
+        this.maskImplementationDelay = 35;      //PARAMETER
         this.maskStartIteration = null;
 
-        this.fractionDistancing = 0.2;          //PARAMETER
-        this.fractionDistancingEfficacy = 0.2;  //PARAMETER
-        this.initialDistancingDelay = 10;       //PARAMETER
-        this.distancingImplementationDelay = 10;//PARAMETER
+        this.fractionDistancing = 0.3;          //PARAMETER
+        this.fractionDistancingEfficacy = 0.5;  //PARAMETER
+        this.initialDistancingDelay = 20;       //PARAMETER
+        this.distancingImplementationDelay = 20;//PARAMETER
         this.distancingStartIteration = null;
 
         this.fractionVaxing = 0.85;                //PARAMETER
         this.fractionVaxingEfficacy = 0.9;      //PARAMETER
-        this.initialVaxDelay = 50;             //PARAMETER
+        this.initialVaxDelay = 100;             //PARAMETER
         this.vaxImplementationDelay = 50;       //PARAMETER
         this.vaxStartIteration = null;
 
-        this.fractionLockDownEfficacy = 0.9;      //PARAMETER
+        this.fractionLockDownEfficacy = 0.25;      //PARAMETER
         this.initialLockDownDelay = 10;             //PARAMETER
-        this.lockDownImplementationDelay = 10; //PARAMETER
+        this.lockDownImplementationDelay = 25; //PARAMETER
         this.lockDownStartIteration = null;
 
 
@@ -140,6 +140,9 @@ class City {
     }
 
     iteration() {
+        let distanceIntensity;
+        let maskIntensity;
+        let lockDownIntensity;
         this.personsInfected.forEach((person1) => {  //for each infected person1
             this.groups.get(person1).forEach((person2) => {//for each person2 they are linked to
                 let interactionChance = person2[1];
@@ -149,35 +152,38 @@ class City {
                     let interactionTransmissionRisk = this.transmissionRisk * interactionChance;
                     if (this.distancingInProgress) {
                         if (this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay >= 0) {  //if we are past the initial delay
-                            let delayComputation = (1 - this.fractionDistancing) - ((1 - this.fractionDistancingEfficacy) / this.distancingImplementationDelay) * (this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay);
+                            let delayComputation = this.fractionDistancing - (this.fractionDistancingEfficacy / this.distancingImplementationDelay) * (this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay);
                             var delayFactor = Math.max(delayComputation, 0);
                             if (person2.risk < this.fractionDistancing) {
                                 interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
                             }
                             if (person1.risk < this.fractionDistancing) {
                                 interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
+                                distanceIntensity = ((1 - this.fractionDistancingEfficacy) + delayFactor);
                             }
                         }
                     }
 
                     if (this.masksInProgress) {
                         if (this.currentIteration - this.maskStartIteration - this.initialMaskDelay >= 0) {  //if we are past the initial delay
-                            let delayComputation = (1 - this.fractionMaskEfficacy) - ((1 - this.fractionMaskEfficacy) / this.maskImplementationDelay) * (this.currentIteration - this.maskStartIteration - this.initialMaskDelay);
+                            let delayComputation = this.fractionMaskEfficacy - ((this.fractionMaskEfficacy / this.maskImplementationDelay) * (this.currentIteration - this.maskStartIteration - this.initialMaskDelay));
                             delayFactor = Math.max(delayComputation, 0);
                             if (person2.risk < this.fractionMasking) {
-                                interactionTransmissionRisk *= ((1 - this.fractionMaskingEfficacy) + delayFactor);
+                                interactionTransmissionRisk *= ((1 - this.fractionMaskEfficacy) + delayFactor);
                             }
                             if (person1.risk < this.fractionMasking) {
-                                interactionTransmissionRisk *= ((1 - this.fractionMaskingEfficacy) + delayFactor);
+                                interactionTransmissionRisk *= ((1 - this.fractionMaskEfficacy) + delayFactor);
+                                maskIntensity = ((1 - this.fractionMaskEfficacy) + delayFactor);
                             }
                         }
                     }
 
                     if (this.lockDownInProgress) {
                         if (this.currentIteration - this.lockDownStartIteration - this.initialLockDownDelay >= 0) {  //if we are past the initial delay
-                            let delayComputation = (1 - this.fractionlockDownEfficacy) - ((1 - this.fractionlockDownEfficacy) / this.lockDownImplementationDelay) * (this.currentIteration - this.lockDownStartIteration - this.initialLockDownDelay);
+                            let delayComputation = this.fractionLockDownEfficacy - (this.fractionLockDownEfficacy / this.lockDownImplementationDelay) * (this.currentIteration - this.lockDownStartIteration - this.initialLockDownDelay);
                             delayFactor = Math.max(delayComputation, 0);
-                            interactionTransmissionRisk *= ((1 - this.fractionlockDownEfficacy) + delayFactor);
+                            interactionTransmissionRisk *= ((1 - this.fractionLockDownEfficacy) + delayFactor);
+                            lockDownIntensity = ((1 - this.fractionLockDownEfficacy) + delayFactor);
                         }
                     }
 
@@ -201,6 +207,28 @@ class City {
         })
         this.currentIteration++;
         this.percentageInfected = 100 * (this.numOfTransmissions / this.population);
+        if (distanceIntensity == null) {
+            distanceIntensity = "--";
+        }
+        else {
+            distanceIntensity = 1 - distanceIntensity;
+            distanceIntensity = distanceIntensity.toFixed(2);
+        }
+        if (maskIntensity == null) {
+            maskIntensity = "--";
+        }
+        else {
+            maskIntensity = 1 - maskIntensity;
+            maskIntensity = maskIntensity.toFixed(2);
+        }
+        if (lockDownIntensity == null) {
+            lockDownIntensity = "--";
+        }
+        else {
+            lockDownIntensity = 1 - lockDownIntensity;
+            lockDownIntensity = lockDownIntensity.toFixed(2);
+        }
+        console.log("Distance intensity", distanceIntensity, "Mask Intensity", maskIntensity, "LockDown Intensity", lockDownIntensity);
     }
 
     iterate(i) {
