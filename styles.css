@@ -1,4 +1,13 @@
 html{
     text-align: center;
     font-family: Verdana;
+    
+}
+
+body {
+    background-color: #3b3963;
+    background-image: url("Images/index.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin: 0;
 }
