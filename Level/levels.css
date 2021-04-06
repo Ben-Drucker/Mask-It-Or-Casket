@@ -82,7 +82,15 @@ p{
     border: 1px solid black;
 }
 
-#policy_timer {
+#end {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+}
+
+#policy_progress {
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
