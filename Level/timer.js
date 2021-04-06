@@ -9,11 +9,11 @@ window.onload = function () {
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
         sec--;
-        if (sec == 1 && min == 0) {
+        if (sec == 0 && min == 0) {
             document.getElementById("end").innerHTML = "GAME OVER!";
             clearInterval(countDownTimer);
         }
-        else if (sec == 0) {
+        else if (sec == -1) {
             min--;
             sec = 59;
         }
