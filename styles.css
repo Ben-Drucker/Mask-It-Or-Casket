@@ -1,4 +1,69 @@
 html{
     text-align: center;
     font-family: Verdana;
+    
+}
+
+body {
+    background-color: #3b3963;
+    background-image: url("Images/index.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin: 0;
+}
+
+div {
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 650px;
+    height: 100px;
+    top: 50%;
+    margin-top: 5px;
+    left: 50%;
+    margin-left: -325px;
+
+}
+
+.start {
+    margin: 0px auto;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    background-image: url("Images/Start.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 389px;
+    height: 31px;
+    display: block;
+    
+}
+
+.start:hover {
+    background-image: url("Images/vacStart.png");
+}
+
+.start:focus {
+    background-image: url("Images/vacStartClick.png");
+}
+
+.leader {
+    margin: 0px auto;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    background-image: url("Images/Leader.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 616px;
+    height: 31px;
+    display: block;
+}
+
+.leader:active {
+    background-image: url("Images/vacLeader.png");
+}
+
+.leader:active {
+    background-image: url("Images/vacLeaderClick.png");
 }
