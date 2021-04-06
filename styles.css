@@ -26,7 +26,7 @@ div {
 }
 
 .start {
-    margin: 0;
+    margin: 0px auto;
     padding: 0;
     background-color: transparent;
     border: none;
@@ -43,8 +43,12 @@ div {
     background-image: url("Images/vacStart.png");
 }
 
+.start:focus {
+    background-image: url("Images/vacStartClick.png");
+}
+
 .leader {
-    margin: 0;
+    margin: 0px auto;
     padding: 0;
     background-color: transparent;
     border: none;
@@ -56,6 +60,10 @@ div {
     display: block;
 }
 
-.leader:hover {
+.leader:active {
     background-image: url("Images/vacLeader.png");
+}
+
+.leader:active {
+    background-image: url("Images/vacLeaderClick.png");
 }
