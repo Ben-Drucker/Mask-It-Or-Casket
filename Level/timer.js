@@ -9,13 +9,19 @@ window.onload = function () {
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
         sec--;
-        if (sec == 0) { //TODO: Octal literals shouldn't be used.
+        if (sec == 0 && min == 0) {
+            clearInterval(countDownTimer)
+            document.getElementById("end").innerHTML = "GAME OVER!";
+        }
+        else if (sec == 0) {
             min--;
             sec = 59;
+            /*
             if (min == 0) {
                 clearInterval(countDownTimer)
                 document.getElementById("end").innerHTML = "GAME OVER!";
             }
+            */
         }
         /* 
         To make the timer countdown 10, 09, 08, 07, ..., 01, 00 seconds
