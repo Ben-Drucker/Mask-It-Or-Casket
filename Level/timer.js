@@ -3,13 +3,13 @@ var theGame = new Game(75000, 75);
 
 window.onload = function () {
     let interIteratoryTime = 0.5 //time between iterations, in seconds.
-    var min = 0;
+    var min = 1;
     var sec = 10; //BUG Cannot be zero -> leads to bug
     theGame.iterateByTime(theGame.city, interIteratoryTime, (60*min + sec)/interIteratoryTime);
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
         sec--;
-        if (sec < 0 && min == 0) {
+        if (sec < 0 && min < 0) {
             clearInterval(countDownTimer)
             document.getElementById("end").innerHTML = "GAME OVER!";
         }
