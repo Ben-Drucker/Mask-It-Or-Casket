@@ -9,7 +9,7 @@ window.onload = function () {
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
         sec--;
-        if (sec < 0 && min < 0) {
+        if (sec == 0 && min < 0) {
             clearInterval(countDownTimer);
             document.getElementById("end").innerHTML = "GAME OVER!";
         }
