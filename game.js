@@ -19,21 +19,37 @@ class Game {
     implementPolicy(option) {
 
         if (option == "Vax") {
+            if (expense(1600) == false){
+                console.log("Not enough funds to implement policy");
+                return;
+            }
             console.log("Turned on Vaccination");
             this.city.vaxInProgress = true;
             this.city.vaxStartIteration = this.city.currentIteration;
         }
         else if (option == "Distance") {
+            if (expense(200) == false){
+                console.log("Not enough funds to implement policy");
+                return;
+            }
             console.log("Turned on Distance");
             this.city.distancingInProgress = true;
-            this.city.distancingStartIteration = this.city.currentIteration;
+            this.city.distancingStartIteration = this.city.currentIteration
         }
         else if (option == "Lockdown") {
+            if (expense(800) == false){
+                console.log("Not enough funds to implement policy");
+                return;
+            }
             console.log("Turned on Lockdown");
             this.city.lockDownInProgress = true;
             this.city.lockDownStartIteration = this.city.currentIteration;
         }
         else if (option == "Masks") {
+            if (expense(400) == false){
+                console.log("Not enough funds to implement policy");
+                return;
+            }
             console.log("Turned on Masks");
             this.city.masksInProgress = true;
             this.city.maskStartIteration = this.city.currentIteration;
@@ -42,7 +58,6 @@ class Game {
             throw "Error! Invalid implementPolicy option! Quitting implementPolicy.";
         }
     }
-
 
     timedIteration(city, numberOfIterationsDesired, iterationTimer) {
         city.iteration();

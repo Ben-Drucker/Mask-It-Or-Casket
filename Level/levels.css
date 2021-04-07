@@ -41,7 +41,7 @@ p{
 }
 
 #canvas1{
-    /*background-image: url('images/map.png');*/
+    background-image: url('images/map.png');
     width:750px;
 	height: 500px;
 	border: 1px solid black;
