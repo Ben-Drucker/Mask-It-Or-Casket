@@ -8,6 +8,7 @@ window.onload = function () {
     theGame.iterateByTime(theGame.city, interIteratoryTime, (60*min + sec)/interIteratoryTime);
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
+        console.log("Current Score:", computeScore(theGame.city.population, 60*sec+min, 3000, theGame.city.numDead, theGame.city.numInfected)); //the 3000 is a "funds" placeholders.
         sec--;
         if (sec == -1 && min == 0) {
             document.getElementById("end").innerHTML = "GAME OVER!";
@@ -23,5 +24,6 @@ window.onload = function () {
         else if (sec < 10) {
             sec = "0" + sec;
         }
+        
     }, 1000);
 }
