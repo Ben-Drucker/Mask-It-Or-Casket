@@ -87,7 +87,7 @@ function animate(){
 animate();
 
 var citySprites = [];
-//const philly = new City(10);
+const philly = new City(10);
 function setupPops(){
     var size = 50;
     for (var i = 0; i < population.length; i++) { //philly.population; i++) {
