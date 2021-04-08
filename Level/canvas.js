@@ -40,50 +40,46 @@ var population = 9000;
 newCity = new City(population);
 //create array
 var spritesA = [];
-console.log(spritesA);
 const gridSize = 30;
 var perSprite = Math.floor(population / (gridSize*gridSize));
     //fill with people
-for (var i=0; i<population; i+=perSprite) {
+for (let i=0; i<population; i+=perSprite) {
    spritesA.push(newCity.citizens[i]);
 };
-console.log(spritesA);
+console.log(spritesA[0].x);
+//for (let i=0; i<population; i+=perSprite) {
+ //   console.log(spritesA[i].x);
+ //};
 
-function drawCityPop(citySprites){
-    for (var i=0; i<citySprites.length; i++) {
+function drawCityPop(){
+    var z = 0;
+    var t = 0;
+    for (var i=0; i<spritesA.length; i++) {
         //if module(remainder == 0) go to next line (y axis)
-        drawSprite(playerSprite, //img
-            citySprites[i].x*citySprites[i].frameX, //sX
-            citySprites[i].y*citySprites[i].frameY, //sY
-            citySprites[i].width, //sW
-            citySprites[i].height, //sH
-            citySprites[i].x+ citySprites[i].width*i, //dX
-            citySprites[i].y*i, //dY
-            citySprites[i].width, //dW
-            citySprites[i].height); //dH
+        if (i%gridSize==0) {
+            /*
+            var y = spritesA[i].x+spritesA[i].width*i
+            spritesA[i].y = y;
+            console.log(spritesA[i].y);
+            */
+           z++;
+           t=0;
+        }
+        drawSprite(
+            playerSprite, //img
+            spritesA[i].x*spritesA[i].frameX, //sX
+            spritesA[i].y*spritesA[i].frameY, //sY
+            spritesA[i].width, //sW
+            spritesA[i].height, //sH
+            spritesA[i].x+spritesA[i].width*t, //dX ////
+            spritesA[i].y+spritesA[i].height*z,//*i, //dY                   ////
+            spritesA[i].width, //dW                    ////
+            spritesA[i].height); //dH                  ////
      };
+     t++;//
     requestAnimationFrame(drawCityPop);
 }
-drawCityPop(spritesA);
-
-/*
-//var citySprites = [];
-//newCity = new City(100);
-//function setupPops(){
-        //citySprites.push(new Sprite(i, i*iSize, 0, 0, 0, 0));
-        drawSprite(playerSprite, //img
-            citySprites[i].x*citySprites[i].frameX, //sX
-            citySprites[i].y*citySprites[i].frameY, //sY
-            citySprites[i].width, //sW
-            citySprites[i].height, //sH
-            citySprites[i].x+ citySprites[i].width*i, //dX
-            citySprites[i].y*i, //dY
-            citySprites[i].width, //dW
-            citySprites[i].height); //dH
-    }
-    requestAnimationFrame(setupPops); 
-}
-setupPops();
+drawCityPop();
 
 
 // assign values to dif status ex. infected = 1
