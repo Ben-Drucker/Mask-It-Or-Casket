@@ -60,6 +60,8 @@ class Game {
     }
 
     timedIteration(city, numberOfIterationsDesired, iterationTimer) {
+        drawCityPop();
+        changeStatus();
         city.iteration();
         city.death();
         if (city.vaxInProgress && this.currentSubIteration >= city.initialVaxDelay + city.vaxStartIteration) {
