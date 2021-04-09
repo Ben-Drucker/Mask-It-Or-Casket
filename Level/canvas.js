@@ -3,7 +3,7 @@ const canvas = document.getElementById('canvas1');
 const c = canvas.getContext('2d');
 canvas.width = 750;
 canvas.height = 750;
-console.log(canvas);
+//console.log(canvas);
 
 // Select images
 const playerSprite = new Image();
@@ -30,7 +30,7 @@ var perSprite = Math.floor(population / (gridSize*gridSize));
 for (let i=0; i<population; i+=perSprite) {
    spritesA.push(newCity.citizens[i]);
 };
-console.log(spritesA);
+//console.log(spritesA);
 
  for(let r= 0; r<gridSize; r++){
      for(let c=0; c<gridSize; c++){
