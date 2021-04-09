@@ -16,11 +16,11 @@ function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH){
     c.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
 }
 
-function animate(){
-    c.drawImage(background, 0, 0, canvas.width, canvas.height);
-    requestAnimationFrame(animate);
-}
-animate();
+// function animate(){
+//     c.drawImage(background, 0, 0, canvas.width, canvas.height);
+//     requestAnimationFrame(animate);
+// }
+// animate();
 
 newCity = theGame.city;
 var population = newCity.population;
@@ -52,7 +52,7 @@ function drawCityPop(){
             spritesA[i].width, //dW
             spritesA[i].height); //dH
      };
-    requestAnimationFrame(drawCityPop);
+    //requestAnimationFrame(drawCityPop);
 }
 
 function changeStatus(){

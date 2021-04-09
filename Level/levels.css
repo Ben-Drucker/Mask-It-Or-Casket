@@ -53,10 +53,7 @@ p{
 }
 
 #canvas1{
-<<<<<<< HEAD
     background-image: url('images/map.png');
-=======
->>>>>>> Grid
     width:750px;
 	height: 750px;
 	border: 5px solid white;
