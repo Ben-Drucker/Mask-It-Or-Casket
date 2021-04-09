@@ -93,10 +93,10 @@ p{
 }
 
 #timer {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 15px;
     text-align: center;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 10px;
     width: 100px;
     height: 50px;
     font-size: 30px;
@@ -109,41 +109,49 @@ p{
     margin-bottom: 10px;
     text-align: center;
     padding: 20px;
-    font-size: 30px;
+    font-size: 100px;
 }
 
-/*
-#policy_progress {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-    padding: 15px;
-    width: 75px;
-    height: 50px;
-    font-size: 20px;
-    border: 1px solid black;
+#progress_bar {
+    width: 30%;
+    background-color: lightgrey;
+    outline: 2px solid black;
+    float: left;
+    margin-left: 45px;
+    margin-top: 30px;
+    margin-right: 10px;
 }
-*/
+  
+#progress_track {
+    width: 0%;
+    height: 30px;
+    background-color: lightskyblue;
+    text-align: center;
+    font-size: 13px;
+    line-height: 30px;
+    color: black;
+    float: left;
+}
 
 #slidecontainer {
-    width: 100%; 
+    width: 30%; 
 }
 
 .slider {
     -webkit-appearance: none;
     -webkit-transform: rotate(-90deg);
-    width: 100%;
+    width: 30%;
     height: 30px;
     background: rgb(201,5,5);
     background: linear-gradient(90deg, rgba(201,5,5,1) 0%, rgba(221,112,12,1) 25%, rgba(236,244,4,1) 50%, rgba(197,231,4,1) 65%, rgba(97,199,25,1) 83%, rgba(12,128,5,1) 100%);
-    outline: 1px solid black;
+    outline: 2px solid black;
     opacity: 1.0;
     transition: .2s;
     transition: opacity .2s;
     transform: rotate(-90deg);
     position: absolute;
-    right: -40%;
-    top: 50%;
+    top: 515px;
+    left: 775px;
 }
     
 .slider:hover {
