@@ -26,10 +26,15 @@ p{
   }
 
 .policies{
+    /*
     float: left;
     border: none;
     width:70px;
     height:70px;
+    */
+    position: absolute;
+    top: 370px;
+    left: 25px;
 }
 
 .iButton{
@@ -45,8 +50,16 @@ p{
     width:750px;
 	height: 500px;
 	border: 1px solid black;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    top: 300px;
+    left: 175px;
+    /*
     position: fixed;
     left: 125px;
+    */
 }
 
 .modal {
@@ -96,7 +109,9 @@ p{
     background-color: lightgrey;
     outline: 2px solid black;
     float: left;
-    margin: 5px;
+    margin-left: 45px;
+    margin-top: 30px;
+    margin-right: 10px;
 }
   
 #progress_track {
@@ -111,13 +126,13 @@ p{
 }
 
 #slidercontainer {
-    width: 100%; 
+    width: 30%; 
 }
 
 .slider {
     -webkit-appearance: none;
     -webkit-transform: rotate(-90deg);
-    width: 90%;
+    width: 30%;
     height: 30px;
     background: rgb(201,5,5);
     background: linear-gradient(90deg, rgba(201,5,5,1) 0%, rgba(221,112,12,1) 25%, rgba(236,244,4,1) 50%, rgba(197,231,4,1) 65%, rgba(97,199,25,1) 83%, rgba(12,128,5,1) 100%);
@@ -127,9 +142,8 @@ p{
     transition: opacity .2s;
     transform: rotate(-90deg);
     position: relative;
-    left: 700px;
-    top: 20px;
-    bottom: 600px;
+    left: 125px;
+    top: 345px;
 }
     
 .slider:hover {
