@@ -179,3 +179,24 @@ p{
     outline: black;
     cursor: pointer;
 }
+
+.buttonIcon{
+    align-content: center;
+}
+
+#buttonVaccine{
+    width: 70px;
+    height: 70px;
+}
+#buttonDistance{
+    width: 70px;
+    height: 70px;
+}
+#buttonLockdown{
+    width: 70px;
+    height: 70px;
+}
+#buttonMask{
+    width: 70px;
+    height: 70px;
+}
