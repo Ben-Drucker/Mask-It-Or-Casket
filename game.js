@@ -13,6 +13,11 @@ class Game {
         this.city.injectIllness(numberInjected);
     }
 
+    /**
+     * Takes the cost of a policy implementation and checks if there are funds available
+     * Returns 'true' if there are enough funds.
+     * Returns 'false' if there are not enough funds.
+     */
     expense(cost) {
         if (this.funds >= cost) {
             this.funds = this.funds - cost;
@@ -30,6 +35,10 @@ class Game {
     implementPolicy(option) {
 
         if (option == "Vax") {
+            if (this.city.vaxInProgress){
+                console.log("Policy has already been implemented");
+                return;
+            }
             if (this.expense(1600) == false){
                 console.log("Not enough funds to implement policy");
                 return;
@@ -39,6 +48,10 @@ class Game {
             this.city.vaxStartIteration = this.city.currentIteration;
         }
         else if (option == "Distance") {
+            if (this.city.DistanceInProgress){
+                console.log("Policy has already been implemented");
+                return;
+            }
             if (this.expense(200) == false){
                 console.log("Not enough funds to implement policy");
                 return;
@@ -48,6 +61,10 @@ class Game {
             this.city.distancingStartIteration = this.city.currentIteration
         }
         else if (option == "Lockdown") {
+            if (this.city.lockDownInProgress){
+                console.log("Policy has already been implemented");
+                return;
+            }
             if (this.expense(800) == false){
                 console.log("Not enough funds to implement policy");
                 return;
@@ -57,6 +74,10 @@ class Game {
             this.city.lockDownStartIteration = this.city.currentIteration;
         }
         else if (option == "Masks") {
+            if (this.city.masksInProgress){
+                console.log("Policy has already been implemented");
+                return;
+            }
             if (this.expense(400) == false){
                 console.log("Not enough funds to implement policy");
                 return;
