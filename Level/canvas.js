@@ -1,29 +1,15 @@
+// Setup canvas
 const canvas = document.getElementById('canvas1');
 const c = canvas.getContext('2d');
 canvas.width = 750;
 canvas.height = 750;
 console.log(canvas);
 
-// select images
+// Select images
 const playerSprite = new Image();
 playerSprite.src = "images/People.png";
 const background = new Image();
 background.src = "images/map.png";
-
-/* create Sprite class
-class Sprite {
-    constructor(id, x, y, frameX, frameY, status) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.width = 50;
-        this.height = 50;
-        this.frameX = frameX;
-        this.frameY = 0;
-        this.status = status;
-    }
-}
-*/
 
 // s = source image; d = drawn image
 function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH){
@@ -36,56 +22,48 @@ function animate(){
 }
 animate();
 
-var population = 9000;
-newCity = new City(population);
-//create array
+newCity = theGame.city;
+var population = newCity.population;
 var spritesA = [];
 const gridSize = 30;
 var perSprite = Math.floor(population / (gridSize*gridSize));
-    //fill with people
 for (let i=0; i<population; i+=perSprite) {
    spritesA.push(newCity.citizens[i]);
 };
-console.log(spritesA[0].x);
-//for (let i=0; i<population; i+=perSprite) {
- //   console.log(spritesA[i].x);
- //};
+console.log(spritesA);
+
+ for(let r= 0; r<gridSize; r++){
+     for(let c=0; c<gridSize; c++){
+         spritesA[r*gridSize+c].x = c*spritesA[r*gridSize+c].width;
+         spritesA[r*gridSize+c].y = r*spritesA[r*gridSize+c].height;
+     }
+ }
 
 function drawCityPop(){
-    var z = 0;
-    var t = 0;
-    for (var i=0; i<spritesA.length; i++) {
-        //if module(remainder == 0) go to next line (y axis)
-        if (i%gridSize==0) {
-            /*
-            var y = spritesA[i].x+spritesA[i].width*i
-            spritesA[i].y = y;
-            console.log(spritesA[i].y);
-            */
-           z++;
-           t=0;
-        }
+    for (let i=0; i<spritesA.length; i++) {
         drawSprite(
             playerSprite, //img
-            spritesA[i].x*spritesA[i].frameX, //sX
-            spritesA[i].y*spritesA[i].frameY, //sY
+            spritesA[i].width*spritesA[i].frameX, //sX
+            spritesA[i].height*spritesA[i].frameY, //sY
             spritesA[i].width, //sW
             spritesA[i].height, //sH
-            spritesA[i].x+spritesA[i].width*t, //dX ////
-            spritesA[i].y+spritesA[i].height*z,//*i, //dY                   ////
-            spritesA[i].width, //dW                    ////
-            spritesA[i].height); //dH                  ////
+            spritesA[i].x, //dX
+            spritesA[i].y, //dY
+            spritesA[i].width, //dW
+            spritesA[i].height); //dH
      };
-     t++;//
     requestAnimationFrame(drawCityPop);
 }
 drawCityPop();
 
+function changeStatus(){
+    for (let i = 0; i < population.length; i++) {
 
-// assign values to dif status ex. infected = 1
-/*
-function changeStatus(){  
-    for (var i = 0; i < population.length; i++) {
+
+
+
+
+
         if (philly.citizens[i].isInfected = false) {
             citySprites[i].frameX = 0;
         }
@@ -106,4 +84,3 @@ function changeStatus(){
         }
     }
 }
-*/
