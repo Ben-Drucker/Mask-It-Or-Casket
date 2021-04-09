@@ -54,33 +54,20 @@ function drawCityPop(){
      };
     requestAnimationFrame(drawCityPop);
 }
-drawCityPop();
 
 function changeStatus(){
-    for (let i = 0; i < population.length; i++) {
-
-
-
-
-
-
-        if (philly.citizens[i].isInfected = false) {
-            citySprites[i].frameX = 0;
+    for (let i = 0; i < spritesA.length; i++) {
+        if (spritesA[i].isDead) {
+            spritesA[i].frameX = 0;
         }
-        if (philly.citizens[i].isInfected = true) {
-            citySprites[i].frameX = 1;
+        else if (spritesA[i].isVaxed) {
+            spritesA[i].frameX = 2;
         }
-        if (philly.citizens[i].isDead = false) {
-            citySprites[i].frameX = 2;
+        else if (spritesA[i].isInfected) {
+            spritesA[i].frameX = 1;
         }
-        if (philly.citizens[i].isDead = true) {
-            citySprites[i].frameX = 3;
-        }
-        if (philly.citizens[i].isVaxed = false) {
-            citySprites[i].frameX = 4;
-        }
-        if (philly.citizens[i].isVaxed = true) {
-            citySprites[i].frameX = 5;
+        else {
+            spritesA[i].frameX = 3;
         }
     }
 }
