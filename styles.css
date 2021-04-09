@@ -60,7 +60,7 @@ div {
     display: block;
 }
 
-.leader:active {
+.leader:hover {
     background-image: url("Images/vacLeader.png");
 }
 

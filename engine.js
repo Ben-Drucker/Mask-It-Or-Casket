@@ -1,10 +1,13 @@
 class City {
 
     constructor(population) {
+        //Policy Progress
         this.distancingInProgress = false;
         this.masksInProgress = false;
         this.lockDownInProgress = false;
         this.vaxInProgress = false;
+
+        //SIR
         this.population = population;
         this.personsInfected = [];
         this.personsDead = [];
@@ -23,32 +26,36 @@ class City {
             let risk = Math.random();
             this.citizens.push(new Person(i, age, risk));
         }
-        /*Parameters Below*/
+        
+        /*PARAMETERS*/
+        //MASKING
         this.fractionMaskEfficacy = 0.5;        //PARAMETER
         this.fractionMasking = 0.5;             //PARAMETER
         this.initialMaskDelay = 20;             //PARAMETER
         this.maskImplementationDelay = 35;      //PARAMETER
         this.maskStartIteration = null;
 
+        //DISTANCING
         this.fractionDistancing = 0.3;          //PARAMETER
         this.fractionDistancingEfficacy = 0.5;  //PARAMETER
         this.initialDistancingDelay = 20;       //PARAMETER
         this.distancingImplementationDelay = 20;//PARAMETER
         this.distancingStartIteration = null;
 
+        //VAX
         this.fractionVaxing = 0.85;                //PARAMETER
         this.fractionVaxingEfficacy = 0.9;      //PARAMETER
         this.initialVaxDelay = 100;             //PARAMETER
         this.vaxImplementationDelay = 50;       //PARAMETER
         this.vaxStartIteration = null;
 
+        //LOCKDOWN
         this.fractionLockDownEfficacy = 0.25;      //PARAMETER
         this.initialLockDownDelay = 10;             //PARAMETER
         this.lockDownImplementationDelay = 25; //PARAMETER
         this.lockDownStartIteration = null;
 
-
-
+        //DISTRIBUTE
         this.transmissionRisk = 0.2;        //PARAMETER
         this.bipartiteRatio = 0.18;         //PARAMETER Determining the ratio of in-group, out-group graph connections
         this.maxGroupSize = 25;             //PARAMETER
@@ -329,6 +336,13 @@ class Person {
         this.iterationDeathDay = null;
         this.willDie = null;
         this.isVaxed = false;
+ 
+        this.x = 0;
+        this.y = 0;
+        this.width = 25;
+        this.height = 25;
+        this.frameX = 0;
+        this.frameY = 0;
     }
 }
 

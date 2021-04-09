@@ -1,3 +1,11 @@
+body {
+    background-color: #3b3963;
+    background-image: url("images/Background.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin: 0;
+}
+
 .clr{
 	clear:both;
 }
@@ -26,6 +34,10 @@ p{
   }
 
 .policies{
+    background-color: white;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 150px 15px;
     float: left;
     border: none;
     width:70px;
@@ -35,16 +47,16 @@ p{
 .iButton{
     display: block;
     background-color: white;
-    padding: 10px 25px;
+    padding: 0;
     width: 100%;
     border: none;
 }
 
 #canvas1{
-    /*background-image: url('images/map.png');*/
+    background-image: url('images/map.png');
     width:750px;
-	height: 500px;
-	border: 1px solid black;
+	height: 750px;
+	border: 5px solid white;
     position: fixed;
     left: 125px;
 }
