@@ -18,6 +18,18 @@
 function clickedYes(option, modal) {
   theGame.implementPolicy(option);
   document.getElementById(modal).style.display='none';
+  if (option == "Vax"){
+    document.getElementById("buttonVaccine").style.background="orange";
+  }
+  else if (option == "Distance"){
+    document.getElementById("buttonDistance").style.background="orange";
+  }
+  else if (option == "Lockdown"){
+    document.getElementById("buttonLockdown").style.background="orange";
+  }
+  else if (option == "Masks"){
+    document.getElementById("buttonMask").style.background="orange";
+  }
 }
   // get modal
 //var modal = document.getElementById("myModal");

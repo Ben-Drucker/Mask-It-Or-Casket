@@ -37,11 +37,9 @@ p{
     background-color: white;
     margin-left: 15px;
     margin-right: 15px;
-    padding: 150px 15px;
+    padding: 15px 15px;
     float: left;
     border: none;
-    width:70px;
-    height:70px;
 }
 
 .iButton{
@@ -57,7 +55,7 @@ p{
     width:750px;
 	height: 750px;
 	border: 5px solid white;
-    position: fixed;
+    position: relative;
     left: 125px;
 }
 
@@ -148,4 +146,25 @@ p{
     background: black;
     outline: black;
     cursor: pointer;
+}
+
+.buttonIcon{
+    align-content: center;
+}
+
+#buttonVaccine{
+    width: 70px;
+    height: 70px;
+}
+#buttonDistance{
+    width: 70px;
+    height: 70px;
+}
+#buttonLockdown{
+    width: 70px;
+    height: 70px;
+}
+#buttonMask{
+    width: 70px;
+    height: 70px;
 }

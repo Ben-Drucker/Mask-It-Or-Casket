@@ -31,10 +31,10 @@
 
     <!--Trigger/Open Modal-->
     <div class="policies">
-        <button onclick="document.getElementById('modal1').style.display='block'" class="iButton"><img src="images/vaccine.png" width="70px" alt="Vaccine"></button>
-        <button onclick="document.getElementById('modal2').style.display='block'" class="iButton"><img src="images/distance.png" width="70px" alt="Distance"></button>
-        <button onclick="document.getElementById('modal3').style.display='block'" class="iButton"><img src="images/ShutDown.png" width="70px" alt="Shut Down"></button>
-        <button onclick="document.getElementById('modal4').style.display='block'" class="iButton"><img src="images/mask.png" width="70px" alt="Masks"></button>
+        <button id="buttonVaccine" onclick="document.getElementById('modal1').style.display='block'" class="iButton"><img src="images/vaccine.png" width="50px" alt="Vaccine" class='buttonIcon'></button>
+        <button id="buttonDistance" onclick="document.getElementById('modal2').style.display='block'" class="iButton"><img src="images/distance.png" width="50px" alt="Distance" class='buttonIcon'></button>
+        <button id="buttonLockdown" onclick="document.getElementById('modal3').style.display='block'" class="iButton"><img src="images/ShutDown.png" width="50px" alt="Shut Down" class='buttonIcon'></button>
+        <button id="buttonMask" onclick="document.getElementById('modal4').style.display='block'" class="iButton"><img src="images/mask.png" width="50px" alt="Masks" class='buttonIcon'></button>
     </div>
 
     <canvas id="canvas1"></canvas>
@@ -44,8 +44,8 @@
     <!--Modal Section-->
     <div id="modal1" class="modal">
         <div class="modal-content">
-            <h1>Vaccines</h1>
-            <p>It will require $1600 and 1:40 to fully implement.</p>
+            <h1>Would you like to implement a Vaccines program </h1>
+            <p>It will require $1600 and 0:50 to fully implement.</p>
             <button onclick="clickedYes('Vax', 'modal1')" class="close-btn">Yes</button>
             <button onclick="document.getElementById('modal1').style.display='none'" class="close-btn">No</button>
         </div>
@@ -53,15 +53,15 @@
     <div id="modal2" class="modal">
         <div class="modal-content">
             <h1>Would you like to implement a mandate to social distance?</h1>
-            <p>It will require $200 and 0:20 to fully implement.</p>
+            <p>It will require $200 and 0:10 to fully implement.</p>
             <button onclick="clickedYes('Distance', 'modal2')" class="close-btn">Yes</button>
             <button onclick="document.getElementById('modal2').style.display='none'" class="close-btn">No</button>
         </div>
     </div>
     <div id="modal3" class="modal">
         <div class="modal-content">
-            <h1>Would you like to issue a statewide lockdown?</h1>
-            <p>It will require $800 and 0:00 to fully implement.</p>
+            <h1>Would you like to issue a citywide lockdown?</h1>
+            <p>It will require $800 and 0:05 to fully implement.</p>
             <button onclick="clickedYes('Lockdown', 'modal3')" class="close-btn">Yes</button>
             <button onclick="document.getElementById('modal3').style.display='none'" class="close-btn">No</button>
         </div>
@@ -69,7 +69,7 @@
     <div id="modal4" class="modal">
         <div class="modal-content">
             <h1>Would you like to issue a mask mandate?</h1>
-            <p>It will require $400 and 1:00 to fully implement.</p>
+            <p>It will require $400 and 0:10 to fully implement.</p>
             <button onclick="clickedYes('Masks', 'modal4')" class="close-btn">Yes</button>
             <button onclick="document.getElementById('modal4').style.display='none'" class="close-btn">No</button>
         </div>

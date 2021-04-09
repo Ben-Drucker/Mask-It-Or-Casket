@@ -98,6 +98,8 @@ class Game {
         city.death();
         if (city.vaxInProgress && this.currentSubIteration >= city.initialVaxDelay + city.vaxStartIteration) {
             city.vaccinate();
+            //TEMP:
+            document.getElementById("buttonVaccine").style.background="green";
         }
         console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected out of", city.population, "(", city.percentageInfected.toFixed(2), "% infected ) %delta = ", (city.percentageInfected - this.previousPercentage).toFixed(2), "Dead:", city.numDead); this.previousPercentage = city.percentageInfected;
 

@@ -168,6 +168,7 @@ class City {
                                 interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
                                 distanceIntensity = ((1 - this.fractionDistancingEfficacy) + delayFactor);
                             }
+                            document.getElementById("buttonDistance").style.background="green";
                         }
                     }
 
@@ -182,6 +183,8 @@ class City {
                                 interactionTransmissionRisk *= ((1 - this.fractionMaskEfficacy) + delayFactor);
                                 maskIntensity = ((1 - this.fractionMaskEfficacy) + delayFactor);
                             }
+                            //TEMP:
+                            document.getElementById("buttonMask").style.background="green";
                         }
                     }
 
@@ -191,6 +194,8 @@ class City {
                             delayFactor = Math.max(delayComputation, 0);
                             interactionTransmissionRisk *= ((1 - this.fractionLockDownEfficacy) + delayFactor);
                             lockDownIntensity = ((1 - this.fractionLockDownEfficacy) + delayFactor);
+                            //TEMP:
+                            document.getElementById("buttonLockdown").style.background="green";
                         }
                     }
 
