@@ -34,7 +34,7 @@ p{
   }
 
 .policies{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     margin-left: 15px;
     margin-right: 15px;
     padding: 150px 15px;
@@ -42,18 +42,14 @@ p{
     border: none;
     width:70px;
     height:70px;
-    position: absolute;
-    top: 370px;
-    left: 25px;
 }
 
 .iButton{
     display: block;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     padding: 0;
     width: 100%;
-    border: black 5px;
-    margin-bottom: 10px;
+    border: none;
 }
 
 #done_implementing {
@@ -68,17 +64,8 @@ p{
 #canvas1{
     background-image: url('images/map.png');
     width:750px;
-	height: 500px;
-	border: 1px solid black;
-    /*
-    position: relative;
-    top: 10px;
-    left: 10px;
-    */
-    position: absolute;
-    top: 275px;
-    left: 175px;
-    /*
+	height: 750px;
+	border: 5px solid white;
     position: fixed;
     left: 125px;
 }
@@ -106,12 +93,11 @@ p{
 }
 
 #timer {
-    float: left;
-    margin: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     text-align: center;
-    padding-top: 20px;
-    padding-bottom: 10px;
-    width: 120px;
+    padding: 20px;
+    width: 100px;
     height: 50px;
     font-size: 30px;
     background-color: white;
@@ -123,59 +109,51 @@ p{
     margin-bottom: 10px;
     text-align: center;
     padding: 20px;
-    font-size: 100px;
+    font-size: 30px;
 }
 
-#progress_bar {
-    width: 30%;
-    background-color: lightgrey;
-    outline: 2px solid black;
-    float: left;
-    margin-left: 45px;
-    margin-top: 30px;
-    margin-right: 10px;
-}
-  
-#progress_track {
-    width: 0%;
-    height: 30px;
-    background-color: lightskyblue;
+/*
+#policy_progress {
+    margin-top: 10px;
+    margin-bottom: 10px;
     text-align: center;
-    font-size: 13px;
-    line-height: 30px;
-    color: black;
-    float: left;
+    padding: 15px;
+    width: 75px;
+    height: 50px;
+    font-size: 20px;
+    border: 1px solid black;
 }
+*/
 
-#slidercontainer {
-    width: 30%; 
+#slidecontainer {
+    width: 100%; 
 }
 
 .slider {
     -webkit-appearance: none;
     -webkit-transform: rotate(-90deg);
-    width: 30%;
+    width: 100%;
     height: 30px;
     background: rgb(201,5,5);
     background: linear-gradient(90deg, rgba(201,5,5,1) 0%, rgba(221,112,12,1) 25%, rgba(236,244,4,1) 50%, rgba(197,231,4,1) 65%, rgba(97,199,25,1) 83%, rgba(12,128,5,1) 100%);
-    outline: 2px solid black;
+    outline: 1px solid black;
     opacity: 1.0;
     transition: .2s;
     transition: opacity .2s;
     transform: rotate(-90deg);
     position: absolute;
-    top: 515px;
-    left: 775px;
+    right: -40%;
+    top: 50%;
 }
     
 .slider:hover {
     opacity: 1;
 }
     
-.slider::-webkit-slider-thumb {
+.slider::-webkit-sslider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 30px;
+    width: 40px;
     height: 40px;
     background: black;
     outline: black;
