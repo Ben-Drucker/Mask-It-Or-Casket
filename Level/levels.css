@@ -1,12 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+@font-face {
+    font-family:"Karmatic Arcade";
+    src: url("Fonts/ka1.ttf") format("truetype");
+}
+
 body {
     background-color: #3b3963;
     background-image: url("images/Background.png");
     background-repeat: no-repeat;
     background-size: 100%;
     margin: 0;
-    font-family: 'VT323', monospace;
+    /* font-family: 'VT323', monospace; */
+    font-family: "Karmatic Arcade";
 }
 
 #funds{
