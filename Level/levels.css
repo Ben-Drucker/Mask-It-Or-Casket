@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 body {
     background-color: #3b3963;
     background-image: url("images/Background.png");
     background-repeat: no-repeat;
     background-size: 100%;
     margin: 0;
+    font-family: 'VT323', monospace;
 }
 
 #funds{
