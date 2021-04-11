@@ -2,7 +2,7 @@
 
 @font-face {
     font-family:"Karmatic Arcade";
-    src: url("fonts/Benmatic\ Arcade2.otf") format("truetype");
+    src: url("fonts/Benmatic\ Arcade2.otf") format("opentype");
 }
 
 body {
@@ -130,7 +130,7 @@ p{
     margin-bottom: 10px;
     text-align: center;
     padding: 20px;
-    font-size: 100px;
+    font-size: 80px;
 }
 
 #progress_bar {
