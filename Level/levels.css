@@ -146,7 +146,7 @@ p{
 }
 
 #slidercontainer {
-    width: 30%; 
+    width: 30%;
 }
 
 .slider {
@@ -155,7 +155,8 @@ p{
     width: 30%;
     height: 30px;
     background: rgb(201,5,5);
-    background: linear-gradient(90deg, rgba(201,5,5,1) 0%, rgba(221,112,12,1) 25%, rgba(236,244,4,1) 50%, rgba(197,231,4,1) 65%, rgba(97,199,25,1) 83%, rgba(12,128,5,1) 100%);
+    /* background: linear-gradient(90deg, rgba(201,5,5,1) 0%, rgba(221,112,12,1) 25%, rgba(236,244,4,1) 50%, rgba(197,231,4,1) 65%, rgba(97,199,25,1) 83%, rgba(12,128,5,1) 100%); */
+    background: linear-gradient(90deg, rgba(0,117,0,1) 10%, rgba(255,255,0,1) 50%, rgba(159,0,0,1) 95%);
     outline: 2px solid black;
     opacity: 1.0;
     transition: .2s;
@@ -177,7 +178,7 @@ p{
     height: 40px;
     background: black;
     outline: black;
-    cursor: pointer;
+    cursor: default;
 }
 
 .buttonIcon{

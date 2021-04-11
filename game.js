@@ -96,6 +96,7 @@ class Game {
         changeStatus();
         city.iteration();
         city.death();
+        this.updateSlider(city);
         if (city.vaxInProgress && this.currentSubIteration >= city.initialVaxDelay + city.vaxStartIteration) {
             city.vaccinate();
             //TEMP:
@@ -125,6 +126,30 @@ class Game {
                 this.timedIteration(city, numberOfIterationsDesired, timedIntervals);
             }).bind(this), intervalSeconds * 1000);
         }
+    }
+
+    updateSlider(city){
+        if(this.currentSubIteration < 1){
+            return;
+        }
+        let delta = city.percentageInfected - this.previousPercentage;
+        let value = Math.min(110000, delta*100000);
+        let slider = document.getElementById("myRange");
+        let fps = 100;
+        let mills = 100;
+        let diff = value-slider.value;
+        let numKeyFrames = Math.floor(mills*fps/1000);
+        let change = diff/numKeyFrames;
+        let iters = 0;
+        let animation = setInterval(() => {
+            if(iters > numKeyFrames){
+                clearInterval(animation);
+            }
+            let newValue = parseInt(slider.value) + change;
+            slider.value = Math.floor(newValue);
+            iters++;
+        }, Math.floor(1000/fps))
+        console.log("SliderVal", slider.value);
     }
 
 }
