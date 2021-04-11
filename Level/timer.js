@@ -7,7 +7,7 @@ window.onload = function () {
     var sec = "00"; 
     theGame.iterateByTime(theGame.city, interIteratoryTime, (60*min + parseInt(sec))/interIteratoryTime);
     var countDownTimer = setInterval(function () {
-        document.getElementById("timer").innerHTML = min + " : " + sec;
+        document.getElementById("timer").innerHTML = min + " :" + sec;
         console.log("Current Score:", computeScore(theGame.city.population, 60*min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected));
         sec--;
         if (sec == -1 && min == 0) {
