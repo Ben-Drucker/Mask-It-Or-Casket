@@ -8,74 +8,103 @@
     <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
 </head>
+
 <body>
 
     <img src="images/levelTitle.png" alt="Level 1" class="center">
+    <div class="centralGrid">
+        <div class="centralGridItem">
+            <div id="funds">Funds: 2000</div>
+            <div id="timer"></div>
+        </div>
+        <div class="centralGridItem">
+            <div id="end"></div>
+        </div>
+        <div class="centralGridItem">
+            <div id="statistics">
+                <span id="numInfected" class="statisticsDynamic"></span>
+                <span class="statisticsStatic">Are infected out of </span>
+                <span id="population" class="statisticsDynamic"></span>
+                <span class="nowrap">
+                    <span class="statisticsStatic">&#40;</span>
+                    <span id="infectedPct" class="statisticsDynamic"></span>
+                    <span class="statisticsStatic">&percnt;&#41;</span>
+                </span>
+                <br>
+                <br>
+                <span id="numDead" class="statisticsDynamic"></span>
+                <span class="statisticsStatic"> are dead</span>
+                <span class="nowrap">
+                    <span class="statisticsStatic">&#40;</span>
+                    <span id="deadPct" class="statisticsDynamic"></span>
+                    <span class="statisticsStatic">&percnt;&#41;</span>
+                </span>
+            </div>
+        </div>
+        <!-- <div class = "slidercontainer"> -->
 
-    <div id="funds">Funds: $3000</div>
 
-    <div id="timer"></div>
-    <div id="end"></div>
-    <div id="progress_bar"><div id="progress_track">0%</div></div>
-    
-    
+
+        <!--Trigger/Open Modal-->
+        <div class="centralGridItem">
+            <div class="policies">
+                <button id="buttonVaccine" onclick="document.getElementById('modal1').style.display='block'" class="iButton"><img
+                        src="images/vaccine.png" width="50px" alt="Vaccine" class='buttonIcon'></button>
+                <button id="buttonDistance" onclick="document.getElementById('modal2').style.display='block'" class="iButton"><img
+                        src="images/distance.png" width="50px" alt="Distance" class='buttonIcon'></button>
+                <button id="buttonLockdown" onclick="document.getElementById('modal3').style.display='block'" class="iButton"><img
+                        src="images/ShutDown.png" width="50px" alt="Shut Down" class='buttonIcon'></button>
+                <button id="buttonMask" onclick="document.getElementById('modal4').style.display='block'" class="iButton"><img src="images/mask.png"
+                        width="50px" alt="Masks" class='buttonIcon'></button>
+            </div>
+        </div>
+        <div class="centralGridItem">
+            <canvas id="canvas1"></canvas>
+        </div>
+        <div class="centralGridItem" id="sliderGridItem">
+            <div id="slidercontainer">
+                <input type="range" min="0" max="110000" class="slider" id="myRange" disabled="true" value="0">
+            </div>
+        </div>
+        <div class="clr"></div>
+
+        <!--Modal Section-->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h1>Would you like to implement a Vaccines program </h1>
+                <p>It will require $1600 and 0:50 to fully implement.</p>
+                <button onclick="clickedYes('Vax', 'modal1')" class="close-btn">Yes</button>
+                <button onclick="document.getElementById('modal1').style.display='none'" class="close-btn">No</button>
+            </div>
+        </div>
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <h1>Would you like to implement a mandate to social distance?</h1>
+                <p>It will require $200 and 0:10 to fully implement.</p>
+                <button onclick="clickedYes('Distance', 'modal2')" class="close-btn">Yes</button>
+                <button onclick="document.getElementById('modal2').style.display='none'" class="close-btn">No</button>
+            </div>
+        </div>
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <h1>Would you like to issue a citywide lockdown?</h1>
+                <p>It will require $800 and 0:05 to fully implement.</p>
+                <button onclick="clickedYes('Lockdown', 'modal3')" class="close-btn">Yes</button>
+                <button onclick="document.getElementById('modal3').style.display='none'" class="close-btn">No</button>
+            </div>
+        </div>
+        <div id="modal4" class="modal">
+            <div class="modal-content">
+                <h1>Would you like to issue a mask mandate?</h1>
+                <p>It will require $400 and 0:10 to fully implement.</p>
+                <button onclick="clickedYes('Masks', 'modal4')" class="close-btn">Yes</button>
+                <button onclick="document.getElementById('modal4').style.display='none'" class="close-btn">No</button>
+            </div>
+        </div>
+        <!--End of Modal Section-->
+    </div>
+    <div class="clr"></div>
     <br>
-    <button onclick="progress_move()">Policy 1</button> 
-
-    <!-- <div class = "slidercontainer"> -->
-        <div id = "slidercontainer"></div>
-            <input type="range" min="1" max="100" class="slider" id="myRange">
-        </div>
-   
-
-    <!--Trigger/Open Modal-->
-    <div class="policies">
-        <button id="buttonVaccine" onclick="document.getElementById('modal1').style.display='block'" class="iButton"><img src="images/vaccine.png" width="50px" alt="Vaccine" class='buttonIcon'></button>
-        <button id="buttonDistance" onclick="document.getElementById('modal2').style.display='block'" class="iButton"><img src="images/distance.png" width="50px" alt="Distance" class='buttonIcon'></button>
-        <button id="buttonLockdown" onclick="document.getElementById('modal3').style.display='block'" class="iButton"><img src="images/ShutDown.png" width="50px" alt="Shut Down" class='buttonIcon'></button>
-        <button id="buttonMask" onclick="document.getElementById('modal4').style.display='block'" class="iButton"><img src="images/mask.png" width="50px" alt="Masks" class='buttonIcon'></button>
-    </div>
-
-    <canvas id="canvas1"></canvas>
-
-    <div class="clr"></div>
-
-    <!--Modal Section-->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <h1>Would you like to implement a Vaccines program </h1>
-            <p>It will require $1600 and 0:50 to fully implement.</p>
-            <button onclick="clickedYes('Vax', 'modal1')" class="close-btn">Yes</button>
-            <button onclick="document.getElementById('modal1').style.display='none'" class="close-btn">No</button>
-        </div>
-    </div>
-    <div id="modal2" class="modal">
-        <div class="modal-content">
-            <h1>Would you like to implement a mandate to social distance?</h1>
-            <p>It will require $200 and 0:10 to fully implement.</p>
-            <button onclick="clickedYes('Distance', 'modal2')" class="close-btn">Yes</button>
-            <button onclick="document.getElementById('modal2').style.display='none'" class="close-btn">No</button>
-        </div>
-    </div>
-    <div id="modal3" class="modal">
-        <div class="modal-content">
-            <h1>Would you like to issue a citywide lockdown?</h1>
-            <p>It will require $800 and 0:05 to fully implement.</p>
-            <button onclick="clickedYes('Lockdown', 'modal3')" class="close-btn">Yes</button>
-            <button onclick="document.getElementById('modal3').style.display='none'" class="close-btn">No</button>
-        </div>
-    </div>
-    <div id="modal4" class="modal">
-        <div class="modal-content">
-            <h1>Would you like to issue a mask mandate?</h1>
-            <p>It will require $400 and 0:10 to fully implement.</p>
-            <button onclick="clickedYes('Masks', 'modal4')" class="close-btn">Yes</button>
-            <button onclick="document.getElementById('modal4').style.display='none'" class="close-btn">No</button>
-        </div>
-    </div>
-    <!--End of Modal Section-->
-
-    <div class="clr"></div>
 
     <!-- Load JavaScript Code -->
     <script src="../ageDistributions.js"></script>
@@ -83,9 +112,10 @@
     <script src="../game.js"></script>
     <script src="../scores.js"></script>
     <script src="timer.js"></script>
-    <script src = "policy_progress.js"></script> 
+    <script src="policy_progress.js"></script>
     <script src="modal.js"></script>
     <script src="slider.js"></script>
     <script src="canvas.js"></script>
 </body>
+
 </html>

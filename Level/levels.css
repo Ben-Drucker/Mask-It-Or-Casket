@@ -1,9 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+@font-face {
+    font-family:"Karmatic Arcade";
+    src: url("fonts/BenMaticArcade4.otf") format("opentype");
+}
+
 body {
     background-color: #3b3963;
     background-image: url("images/Background.png");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     margin: 0;
+    /* font-family: 'VT323', monospace; */
+    font-family: "Karmatic Arcade";
 }
 
 #funds{
@@ -16,10 +25,14 @@ body {
 	clear:both;
 }
 
-.center{
+/* .center{
     display: block;
     margin-left: auto;
     margin-right: auto;
+} */
+
+.nowrap{
+    white-space: nowrap ; 
 }
 
 p{
@@ -41,20 +54,24 @@ p{
 
 .policies{
     background-color: rgba(255, 255, 255, 0);
-    float: left;
+    /* float: left; */
     border: none;
-    width:70px;
-    height:70px;
+    /* width:70px;
+    height:70px; */
+    align-items: center;
+    vertical-align: middle;
     position: absolute;
-    top: 370px;
-    left: 25px;
+    display: flex;  /*From stack overflow https://stackoverflow.com/questions/19791120/center-vertically-a-unknown-height-text-in-a-unknown-height-div*/
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .iButton{
     display: block;
     background-color: rgba(255, 255, 255, 0);
     /* padding: 10px 25px; */
-    width: 100%;
+    /* width: 100%; */
     border: black 5px;
     margin-bottom: 10px;
 }
@@ -70,20 +87,17 @@ p{
 
 #canvas1{
     background-image: url('images/map.png');
-    width:750px;
-	height: 750px;
+    background-size: cover;
+    width: min(60vh, 50vw);
+	height: min(60vh, 50vw);
 	border: 5px solid white;
-    position: absolute;
-    top: 275px;
-    left: 175px;
-    position: fixed;
-    left: 125px;
-    margin: 20px;
+    position: relative;
+    align-items: center; /* From stack overflow https://stackoverflow.com/questions/15588091/how-to-have-css-background-image-scale-with-window-size-and-device*/
 }
 
 .modal {
     display: none;
-    position: fixed;
+    /* position: fixed; */
     padding-top: 50px;
     left: 0;
     top: 0;
@@ -99,7 +113,7 @@ p{
     height: 300px;
     background-color: white;
     border-radius: 4px;
-    text-align: center;
+    /* text-align: center; */
     padding: 20px;
 }
 
@@ -107,11 +121,12 @@ p{
     float: left;
     margin: 15px;
     text-align: center;
+    vertical-align: middle;
     padding-top: 20px;
     padding-bottom: 10px;
     width: 120px;
     height: 50px;
-    font-size: 30px;
+    font-size: 20px;
     background-color: white;
     border: 10px solid black;
 }
@@ -121,11 +136,11 @@ p{
     margin-bottom: 10px;
     text-align: center;
     padding: 20px;
-    font-size: 100px;
+    font-size: 80px;
 }
 
 #progress_bar {
-    width: 30%;
+    width: 60vh;
     background-color: lightgrey;
     outline: 2px solid black;
     float: left;
@@ -146,24 +161,47 @@ p{
 }
 
 #slidercontainer {
-    width: 30%; 
+    text-align: center;
+    height: 45vh;
+    width: 3vw;
+    align-items: center;
+    position: relative;
+    display: inline-block;
+}
+
+.centralGrid{
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.centralGridItem{
+    text-align:center;
+    display: flex;      /*From stack overflow */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .slider {
     -webkit-appearance: none;
     -webkit-transform: rotate(-90deg);
-    width: 30%;
-    height: 30px;
+    transform: rotate(-90deg);
+    width: 45vh;
+    height: 2.2vw;
     background: rgb(201,5,5);
-    background: linear-gradient(90deg, rgba(201,5,5,1) 0%, rgba(221,112,12,1) 25%, rgba(236,244,4,1) 50%, rgba(197,231,4,1) 65%, rgba(97,199,25,1) 83%, rgba(12,128,5,1) 100%);
+    /* background: linear-gradient(90deg, rgba(201,5,5,1) 0%, rgba(221,112,12,1) 25%, rgba(236,244,4,1) 50%, rgba(197,231,4,1) 65%, rgba(97,199,25,1) 83%, rgba(12,128,5,1) 100%); */
+    background: linear-gradient(90deg, rgba(0,117,0,1) 10%, rgba(255,255,0,1) 50%, rgba(159,0,0,1) 95%);
     outline: 2px solid black;
     opacity: 1.0;
     transition: .2s;
     transition: opacity .2s;
-    transform: rotate(-90deg);
     position: absolute;
-    top: 515px;
-    left: 775px;
+    top: 0;
+    bottom: 0;
+    margin-top: 22.5vh;
+    margin-left: -22.5vh;
+    margin-right: -22.5vh;
+    margin-bottom: 22.5vh;
 }
     
 .slider:hover {
@@ -173,15 +211,17 @@ p{
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 30px;
-    height: 40px;
+    width: 2vw;
+    height: 3vw;
     background: black;
     outline: black;
-    cursor: pointer;
+    cursor: default;
 }
 
 .buttonIcon{
     align-content: center;
+    height: 6vh;
+    width: 6vh;
 }
 
 #buttonVaccine{
@@ -199,4 +239,12 @@ p{
 #buttonMask{
     width: 70px;
     height: 70px;
+}
+
+.statisticsDynamic{
+    color:white;
+}
+
+.statisticsStatic{
+    color:lightblue;
 }

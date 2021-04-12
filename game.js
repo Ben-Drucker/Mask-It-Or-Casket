@@ -21,7 +21,7 @@ class Game {
     expense(cost) {
         if (this.funds >= cost) {
             this.funds = this.funds - cost;
-            document.getElementById("funds").innerHTML = "Funds:" + this.funds;
+            document.getElementById("funds").innerHTML = "Funds: " + this.funds;
             return true;
         } else {
             console.log("You ran out of money");
@@ -35,11 +35,11 @@ class Game {
     implementPolicy(option) {
 
         if (option == "Vax") {
-            if (this.city.vaxInProgress){
+            if (this.city.vaxInProgress) {
                 console.log("Policy has already been implemented");
                 return;
             }
-            if (this.expense(1600) == false){
+            if (this.expense(1600) == false) {
                 console.log("Not enough funds to implement policy");
                 return;
             }
@@ -48,11 +48,11 @@ class Game {
             this.city.vaxStartIteration = this.city.currentIteration;
         }
         else if (option == "Distance") {
-            if (this.city.DistanceInProgress){
+            if (this.city.DistanceInProgress) {
                 console.log("Policy has already been implemented");
                 return;
             }
-            if (this.expense(200) == false){
+            if (this.expense(200) == false) {
                 console.log("Not enough funds to implement policy");
                 return;
             }
@@ -61,11 +61,11 @@ class Game {
             this.city.distancingStartIteration = this.city.currentIteration
         }
         else if (option == "Lockdown") {
-            if (this.city.lockDownInProgress){
+            if (this.city.lockDownInProgress) {
                 console.log("Policy has already been implemented");
                 return;
             }
-            if (this.expense(800) == false){
+            if (this.expense(800) == false) {
                 console.log("Not enough funds to implement policy");
                 return;
             }
@@ -74,11 +74,11 @@ class Game {
             this.city.lockDownStartIteration = this.city.currentIteration;
         }
         else if (option == "Masks") {
-            if (this.city.masksInProgress){
+            if (this.city.masksInProgress) {
                 console.log("Policy has already been implemented");
                 return;
             }
-            if (this.expense(400) == false){
+            if (this.expense(400) == false) {
                 console.log("Not enough funds to implement policy");
                 return;
             }
@@ -96,18 +96,14 @@ class Game {
         changeStatus();
         city.iteration();
         city.death();
+        this.updateSlider(city);
+        this.updateStatistics(city);
         if (city.vaxInProgress && this.currentSubIteration >= city.initialVaxDelay + city.vaxStartIteration) {
             city.vaccinate();
             //TEMP:
-            document.getElementById("buttonVaccine").style.background="green";
+            document.getElementById("buttonVaccine").style.background = "green";
         }
         console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected out of", city.population, "(", city.percentageInfected.toFixed(2), "% infected ) %delta = ", (city.percentageInfected - this.previousPercentage).toFixed(2), "Dead:", city.numDead); this.previousPercentage = city.percentageInfected;
-
-        // if (this.currentSubIteration == 30) {//Purely Test Code
-        //     this.implementPolicy("Distance");
-        //     this.implementPolicy("Masks");
-        //     this.implementPolicy("Vax");
-        // }
 
         if (this.currentSubIteration >= numberOfIterationsDesired) {
             clearInterval(iterationTimer)
@@ -125,6 +121,38 @@ class Game {
                 this.timedIteration(city, numberOfIterationsDesired, timedIntervals);
             }).bind(this), intervalSeconds * 1000);
         }
+    }
+
+    updateSlider(city) {
+        if (this.currentSubIteration < 1) {
+            return;
+        }
+        let delta = city.percentageInfected - this.previousPercentage;
+        let value = Math.min(110000, delta * 100000);
+        let slider = document.getElementById("myRange");
+        let fps = 100;
+        let mills = 100;
+        let diff = value - slider.value;
+        let numKeyFrames = Math.floor(mills * fps / 1000);
+        let change = diff / numKeyFrames;
+        let iters = 0;
+        let animation = setInterval(() => {
+            if (iters > numKeyFrames) {
+                clearInterval(animation);
+            }
+            let newValue = parseInt(slider.value) + change;
+            slider.value = Math.floor(newValue);
+            iters++;
+        }, Math.floor(1000 / fps))
+        console.log("SliderVal", slider.value);
+    }
+
+    updateStatistics(city) {
+        document.getElementById("numInfected").innerHTML = city.numOfTransmissions;
+        document.getElementById("infectedPct").innerHTML = city.percentageInfected.toFixed(2);
+        document.getElementById("population").innerHTML = city.population;
+        document.getElementById("numDead").innerHTML = city.numDead
+        document.getElementById("deadPct").innerHTML = ((city.numDead/city.population)*100).toFixed(3);
     }
 
 }
