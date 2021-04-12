@@ -21,7 +21,7 @@ class Game {
     expense(cost) {
         if (this.funds >= cost) {
             this.funds = this.funds - cost;
-            document.getElementById("funds").innerHTML = "Funds:" + this.funds;
+            document.getElementById("funds").innerHTML = "Funds: " + this.funds;
             return true;
         } else {
             console.log("You ran out of money");
@@ -103,12 +103,6 @@ class Game {
             document.getElementById("buttonVaccine").style.background="green";
         }
         console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected out of", city.population, "(", city.percentageInfected.toFixed(2), "% infected ) %delta = ", (city.percentageInfected - this.previousPercentage).toFixed(2), "Dead:", city.numDead); this.previousPercentage = city.percentageInfected;
-
-        // if (this.currentSubIteration == 30) {//Purely Test Code
-        //     this.implementPolicy("Distance");
-        //     this.implementPolicy("Masks");
-        //     this.implementPolicy("Vax");
-        // }
 
         if (this.currentSubIteration >= numberOfIterationsDesired) {
             clearInterval(iterationTimer)
