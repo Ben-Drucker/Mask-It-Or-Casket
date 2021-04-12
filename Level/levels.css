@@ -2,14 +2,14 @@
 
 @font-face {
     font-family:"Karmatic Arcade";
-    src: url("fonts/BenMaticArcadeSpacesColons.ttf") format("truetype");
+    src: url("fonts/BenMaticArcade4.otf") format("opentype");
 }
 
 body {
     background-color: #3b3963;
     background-image: url("images/Background.png");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     margin: 0;
     /* font-family: 'VT323', monospace; */
     font-family: "Karmatic Arcade";
@@ -30,6 +30,10 @@ body {
     margin-left: auto;
     margin-right: auto;
 } */
+
+.nowrap{
+    white-space: nowrap ; 
+}
 
 p{
     background-color: white;
@@ -117,6 +121,7 @@ p{
     float: left;
     margin: 15px;
     text-align: center;
+    vertical-align: middle;
     padding-top: 20px;
     padding-bottom: 10px;
     width: 120px;
@@ -156,7 +161,6 @@ p{
 }
 
 #slidercontainer {
-
     text-align: center;
     height: 45vh;
     width: 3vw;
@@ -171,23 +175,12 @@ p{
 }
 
 .centralGridItem{
-    color: black;
-    text-align: center;
-    display: inline-block;
-    vertical-align: middle;
-    position: relative;
+    text-align:center;
     display: flex;      /*From stack overflow */
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
-/* #sliderGridItem{
-    position: relative;
-    text-align: center;
-    height: 45vh;
-} */
-
 
 .slider {
     -webkit-appearance: none;
@@ -246,4 +239,12 @@ p{
 #buttonMask{
     width: 70px;
     height: 70px;
+}
+
+.statisticsDynamic{
+    color:white;
+}
+
+.statisticsStatic{
+    color:lightblue;
 }

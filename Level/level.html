@@ -12,20 +12,35 @@
 <body>
 
     <img src="images/levelTitle.png" alt="Level 1" class="center">
-
-    <div id="funds">Funds: 2000</div>
-
-    <div id="timer"></div>
-    <div id="end"></div>
-
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <div class="centralGrid">
+        <div class="centralGridItem">
+            <div id="funds">Funds: 2000</div>
+            <div id="timer"></div>
+        </div>
+        <div class="centralGridItem">
+            <div id="end"></div>
+        </div>
+        <div class="centralGridItem">
+            <div id="statistics">
+                <span id="numInfected" class="statisticsDynamic"></span>
+                <span class="statisticsStatic">Are infected out of </span>
+                <span id="population" class="statisticsDynamic"></span>
+                <span class="nowrap">
+                    <span class="statisticsStatic">&#40;</span>
+                    <span id="infectedPct" class="statisticsDynamic"></span>
+                    <span class="statisticsStatic">&percnt;&#41;</span>
+                </span>
+                <br>
+                <br>
+                <span id="numDead" class="statisticsDynamic"></span>
+                <span class="statisticsStatic"> are dead</span>
+                <span class="nowrap">
+                    <span class="statisticsStatic">&#40;</span>
+                    <span id="deadPct" class="statisticsDynamic"></span>
+                    <span class="statisticsStatic">&percnt;&#41;</span>
+                </span>
+            </div>
+        </div>
         <!-- <div class = "slidercontainer"> -->
 
 
@@ -46,7 +61,7 @@
         <div class="centralGridItem">
             <canvas id="canvas1"></canvas>
         </div>
-        <div class="centralGridItem" id = "sliderGridItem">
+        <div class="centralGridItem" id="sliderGridItem">
             <div id="slidercontainer">
                 <input type="range" min="0" max="110000" class="slider" id="myRange" disabled="true" value="0">
             </div>
