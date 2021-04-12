@@ -57,7 +57,7 @@ p{
     align-items: center;
     vertical-align: middle;
     position: absolute;
-    display: flex;
+    display: flex;  /*From stack overflow https://stackoverflow.com/questions/19791120/center-vertically-a-unknown-height-text-in-a-unknown-height-div*/
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -88,7 +88,7 @@ p{
 	height: min(60vh, 50vw);
 	border: 5px solid white;
     position: relative;
-    align-items: center;
+    align-items: center; /* From stack overflow https://stackoverflow.com/questions/15588091/how-to-have-css-background-image-scale-with-window-size-and-device*/
 }
 
 .modal {
@@ -176,7 +176,7 @@ p{
     display: inline-block;
     vertical-align: middle;
     position: relative;
-    display: flex;
+    display: flex;      /*From stack overflow */
     flex-direction: column;
     align-items: center;
     justify-content: center;
