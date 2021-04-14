@@ -15,6 +15,19 @@ body {
     font-family: "Karmatic Arcade";
 }
 
+.centralGrid{
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.centralGridItem{
+    text-align:center;
+    display: flex;      /*From stack overflow */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 #funds{
     font-size: 20px;
     color:white;
@@ -25,18 +38,12 @@ body {
 	clear:both;
 }
 
-/* .center{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-} */
-
 .nowrap{
     white-space: nowrap ; 
 }
 
 p{
-    background-color: white;
+    /* background-color: white; */
     display: block;
     align-items: center;
     justify-content: center;
@@ -97,24 +104,18 @@ p{
 
 .modal {
     display: none;
-    /* position: fixed; */
-    padding-top: 50px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color:rgba(0,0,0,0.7);
-}
-
-.modal-content {
-    position: relative; 
-    margin: auto; 
+    position: absolute; 
+    margin: auto;
     width: 500px;
     height: 300px;
-    background-color: white;
-    border-radius: 4px;
-    /* text-align: center; */
+    background-color: rgba(255,255,255,0.75);
+    border-radius: 10px;
     padding: 20px;
+    border: 5px solid black;
+}
+
+#LevelTitle {
+    width: 80%;
 }
 
 #timer {
@@ -123,20 +124,22 @@ p{
     text-align: center;
     vertical-align: middle;
     padding-top: 20px;
-    padding-bottom: 10px;
     width: 120px;
     height: 50px;
     font-size: 20px;
+    border-radius: 10px;
     background-color: white;
-    border: 10px solid black;
+    border: 5px solid black;
 }
 
 #end {
-    margin-top: 10px;
+    position: absolute;
+    margin-top: 40px;
     margin-bottom: 10px;
     text-align: center;
     padding: 20px;
-    font-size: 80px;
+    font-size: 50px;
+    color: white;
 }
 
 #progress_bar {
@@ -167,19 +170,6 @@ p{
     align-items: center;
     position: relative;
     display: inline-block;
-}
-
-.centralGrid{
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
-}
-
-.centralGridItem{
-    text-align:center;
-    display: flex;      /*From stack overflow */
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .slider {
