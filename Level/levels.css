@@ -92,7 +92,8 @@ p{
 }
 
 #canvas1{
-    background-image: url('images/map.png');
+    /*background-image: url('images/map.png');*/
+    background-color: #232222;
     background-size: cover;
     width: min(60vh, 50vw);
 	height: min(60vh, 50vw);
