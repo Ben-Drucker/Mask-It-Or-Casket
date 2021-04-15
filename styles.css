@@ -36,6 +36,7 @@ div {
     width: 389px;
     height: 31px;
     display: block;
+    cursor: pointer;
     
 }
 
@@ -58,18 +59,31 @@ div {
     width: 616px;
     height: 31px;
     display: block;
+    cursor: pointer;
 }
 
 .leader:hover {
     background-image: url("Images/vacLeader.png");
-    cursor: pointer;
 }
 
 .leader:active {
     background-image: url("Images/vacLeaderClick.png");
-    cursor: pointer;
+}
+
+.help {
+    margin: 0px auto;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    /*background-image: url("Images/Leader.png");*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 616px;
+    height: 31px;
+    display: block;
+    cursor: help;
 }
 
 .help:hover {
-    cursor: help;
+    color: white;
 }
