@@ -22,3 +22,15 @@ h1 {
 button {
     margin-left: 50%;
 }
+
+div {
+    background-color: white;
+    color: black;
+    margin: 10px 50px;
+    padding: 10px;
+}
+
+p {
+    padding: 0px;
+    margin: 0px;
+}
