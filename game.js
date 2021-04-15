@@ -5,7 +5,7 @@ class Game {
     constructor(population, numberInjected) {
         this.previousPercentage = 0;
         this.funds = 3000;
-        this.secondsLeft;   //TODO
+        //this.secondsLeft;   //TODO
 
         /* Set up City */
         this.city = new City(population);
