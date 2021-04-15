@@ -62,8 +62,14 @@ div {
 
 .leader:hover {
     background-image: url("Images/vacLeader.png");
+    cursor: pointer;
 }
 
 .leader:active {
     background-image: url("Images/vacLeaderClick.png");
+    cursor: pointer;
+}
+
+.help:hover {
+    cursor: help;
 }
