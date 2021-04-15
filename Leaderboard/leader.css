@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+@font-face {
+    font-family:"Karmatic Arcade";
+    src: url("fonts/BenMaticArcade4.otf") format("opentype");
+}
+
+body {
+    background-color: #3b3963;
+    background-image: url("../Level/images/Background.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: white;
+    margin: 0;
+    font-family: "Karmatic Arcade";
+}
+
+h1 {
+    margin-left: 50%;
+}
+
+button {
+    margin-left: 50%;
+}
+
+.grid-container {
+    display: grid;
+    grid-row-gap: 20px;
+    grid-template-columns: auto auto;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    margin: 30px;
+  }
