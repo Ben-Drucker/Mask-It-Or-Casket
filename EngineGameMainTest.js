@@ -11,7 +11,7 @@ function main() {
 
 function timedIteration(city, numberOfIterationsDesired, iterationTimer) {
     city.iteration();
-    console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected /", city.countEligible(), " could have been infected/", "out of", city.population, "(", city.percentageInfected,"% infected ) %Δ = ",city.percentageInfected - lastPctg);
+    //console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected /", city.countEligible(), " could have been infected/", "out of", city.population, "(", city.percentageInfected,"% infected ) %Δ = ",city.percentageInfected - lastPctg);
     lastPctg = city.percentageInfected;
     if (city.currentIteration >= numberOfIterationsDesired) {
         clearInterval(iterationTimer)

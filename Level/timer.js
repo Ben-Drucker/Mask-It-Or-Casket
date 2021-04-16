@@ -1,5 +1,6 @@
 //import {Game} from "./game.js";
 var theGame = new Game(75000, 75);
+var score;
 
 window.onload = function () {
     theGame.interIteratoryTime = 0.5; //time between iterations, in seconds.
@@ -14,12 +15,7 @@ window.onload = function () {
         sec--;
         theGame.secondsRemaining--;
         if (sec == -1 && min == 0 || theGame.hasEnded) {
-            if (!theGame.won) {
-                document.getElementById("end").innerHTML = "GAME OVER!";
-            }
-            if (theGame.won) {
-                document.getElementById("end").innerHTML = "YOU WIN!<br><span class = scoreMsg> YOUR SCORE: "+computeScore(theGame.city.population, 60 * min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected, theGame.city.numVaxed)+"</span>";
-            }
+            gameOver();
             clearInterval(countDownTimer);
         }
         else if (sec == -1) {

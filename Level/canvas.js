@@ -1,6 +1,6 @@
 // Setup canvas
 const canvas = document.getElementById('canvas1');
-const c = canvas.getContext('2d');
+const context = canvas.getContext('2d');
 canvas.width = 750;
 canvas.height = 750;
 //console.log(canvas);
@@ -13,7 +13,7 @@ background.src = "images/map.png";
 
 // s = source image; d = drawn image
 function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH){
-    c.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
+    context.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
 }
 
 // function animate(){
@@ -22,14 +22,14 @@ function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH){
 // }
 // animate();
 
-newCity = theGame.city;
+let newCity = theGame.city;
 var population = newCity.population;
 var spritesA = [];
 const gridSize = 30;
 var perSprite = Math.floor(population / (gridSize*gridSize));
 for (let i=0; i<population; i+=perSprite) {
    spritesA.push(newCity.citizens[i]);
-};
+}
 //console.log(spritesA);
 
  for(let r= 0; r<gridSize; r++){
@@ -51,7 +51,7 @@ function drawCityPop(){
             spritesA[i].y, //dY
             spritesA[i].width, //dW
             spritesA[i].height); //dH
-     };
+     }
     //requestAnimationFrame(drawCityPop);
 }
 
