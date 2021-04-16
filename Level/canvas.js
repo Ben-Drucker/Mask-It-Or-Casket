@@ -61,10 +61,10 @@ function changeStatus(){
             spritesA[i].frameX = 0;
         }
         else if (spritesA[i].isVaxed) {
-            spritesA[i].frameX = 2;
+            spritesA[i].frameX = 1;
         }
         else if (spritesA[i].isInfected) {
-            spritesA[i].frameX = 1;
+            spritesA[i].frameX = 2;
         }
         else {
             spritesA[i].frameX = 3;

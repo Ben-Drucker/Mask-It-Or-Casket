@@ -59,7 +59,7 @@ div {
     padding: 0;
     background-color: transparent;
     border: none;
-    background-image: url("Images/Leader.png");
+    background-image: url("Images/leader.svg");
     background-size: cover;
     background-repeat: no-repeat;
     width: 616px;
@@ -69,11 +69,11 @@ div {
 }
 
 .leader:hover {
-    background-image: url("Images/vacLeader.png");
+    background-image: url("Images/leaderVac.svg");
 }
 
 .leader:active {
-    background-image: url("Images/vacLeaderClick.png");
+    background-image: url("Images/leaderVacClick.svg");
 }
 
 .help {
