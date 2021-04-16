@@ -82,6 +82,20 @@ p{
     margin-bottom: 10px;
 }
 
+.close-button {
+    cursor: pointer;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    padding: 5px 10px;
+    background-color: rgb(194, 51, 51, 40%);
+    border: none;
+}
+
+.close-button:hover {
+    background: rgb(194, 51, 51);
+}
+
 #done_implementing {
     display: block;
     background-color: green;
@@ -241,6 +255,16 @@ p{
 #buttonMask{
     width: 70px;
     height: 70px;
+}
+
+.policyBtn{
+    width: inherit;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .statisticsDynamic{
