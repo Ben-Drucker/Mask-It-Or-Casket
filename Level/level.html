@@ -17,6 +17,18 @@
         </div>
         <div class="centralGridItem">
             <img id="LevelTitle" src="images/levelTitle.png" alt="Level 1">
+            <br>
+            <br>
+            <span class="nowrap">
+            <span id="GreenPoints" class="statisticsDynamic"></span>
+            <span class="statisticsStatic"> green points to win!</span>
+            </span>
+            <span>
+            <span id="RedPoints" class="statisticsDynamic"></span>
+            <span class="statisticsStatic"> red points to lose!</span>
+            </span>
+            <br>
+            <br>
         </div>
         <div class="centralGridItem">
             <div id="statistics">
@@ -47,13 +59,13 @@
         <!--Trigger/Open Modal-->
         <div class="centralGridItem">
             <div class="policies">
-                <button id="buttonVaccine" onclick="document.getElementById('modal1').style.display='block'" class="iButton"><img
+                <button id="buttonVaccine" onclick="closeOthers('modal1')" class="iButton"><img
                         src="images/vaccine.png" width="50px" alt="Vaccine" class='buttonIcon'></button>
-                <button id="buttonDistance" onclick="document.getElementById('modal2').style.display='block'" class="iButton"><img
+                <button id="buttonDistance" onclick="closeOthers('modal2')" class="iButton"><img
                         src="images/distance.png" width="50px" alt="Distance" class='buttonIcon'></button>
-                <button id="buttonLockdown" onclick="document.getElementById('modal3').style.display='block'" class="iButton"><img
+                <button id="buttonLockdown" onclick="closeOthers('modal3')" class="iButton"><img
                         src="images/ShutDown.png" width="50px" alt="Shut Down" class='buttonIcon'></button>
-                <button id="buttonMask" onclick="document.getElementById('modal4').style.display='block'" class="iButton"><img src="images/mask.png"
+                <button id="buttonMask" onclick="closeOthers('modal4')" class="iButton"><img src="images/mask.png"
                         width="50px" alt="Masks" class='buttonIcon'></button>
             </div>
         </div>
@@ -61,27 +73,27 @@
             <canvas id="canvas1"></canvas>
             <!--Modal Section-->
             <div id="modal1" class="modal">
-                    <h1>Vaccines Program </h1>
-                    <button id="vax1" class="policyBtn" onclick="clickedYes('Vax', 'modal1')">Vaccine awareness campaign</button><br>
-                    <button id="vax2" class="policyBtn" onclick="clickedYes('Vax', 'modal1')">10000 dosages: </button><br>
-                    <button id="vax3" class="policyBtn" onclick="clickedYes('Vax', 'modal1')">20000 dosages: </button><br>
-                    <button id="vax4" class="policyBtn" onclick="clickedYes('Vax', 'modal1')">50000 dosages: </button><br>
+                    <h1>Vaccines Program</h1>
+                    <button id="vax1" class="policyBtn" onclick="clickedYes('Vax', 'modal1')">Vaccine awareness campaign: $300 0:30</button><br>
+                    <button id="vax2" class="policyBtn" onclick="clickedYes('Vax', 'modal1')">10000 dosages: $1000 1:0</button><br>
+                    <button id="vax3" class="policyBtn" onclick="clickedYes('Vax', 'modal1')">20000 dosages: $2000 1:30</button><br>
+                    <button id="vax4" class="policyBtn" onclick="clickedYes('Vax', 'modal1')">50000 dosages: $5000 2:00</button><br>
                     <button class="close-button" onclick="document.getElementById('modal1').style.display='none'"><b>X</b></button>
             </div>
             <div id="modal2" class="modal">
                     <h1>Social Distancing Program</h1>
-                    <button id="distance1" class="policyBtn" onclick="clickedYes('Distance', 'modal2')">Social distancing campaign</button><br>
-                    <button id="distance2" class="policyBtn" onclick="clickedYes('Distance', 'modal2')">Fines: $ </button><br>
-                    <button id="distance3" class="policyBtn" onclick="clickedYes('Distance', 'modal2')">Fines: $ </button><br>
-                    <button id="distance4" class="policyBtn" onclick="clickedYes('Distance', 'modal2')">Fines: $ </button><br>
+                    <button id="distance1" class="policyBtn" onclick="clickedYes('Distance', 'modal2')">Social distancing campaign 1: $200 0:10</button><br>
+                    <button id="distance2" class="policyBtn" onclick="clickedYes('Distance', 'modal2')">Social distancing campaign 2: $400 0:15</button><br>
+                    <button id="distance3" class="policyBtn" onclick="clickedYes('Distance', 'modal2')">Social distancing campaign 3: $800 0:20</button><br>
+                    <button id="distance4" class="policyBtn" onclick="clickedYes('Distance', 'modal2')">Social distancing campaign 4: $1600 0:25</button><br>
                     <button class="close-button" onclick="document.getElementById('modal2').style.display='none'"><b>X</b></button>
             </div>
             <div id="modal3" class="modal">
                     <h1>Lockdown Program</h1>
-                    <button id="lockdown1" class="policyBtn" onclick="clickedYes('Lockdown', 'modal3')">Stay at home order:</button><br>
-                    <button id="lockdown2" class="policyBtn" onclick="clickedYes('Lockdown', 'modal3')">Public Places Lockdown:</button><br>
-                    <button id="lockdown3" class="policyBtn" onclick="clickedYes('Lockdown', 'modal3')">Stimulus Basic:</button><br>
-                    <button id="lockdown4" class="policyBtn" onclick="clickedYes('Lockdown', 'modal3')">Stimulus Pro Premium:</button><br>
+                    <button id="lockdown1" class="policyBtn" onclick="clickedYes('Lockdown', 'modal3')">Stay at home order: $100 0:05</button><br>
+                    <button id="lockdown2" class="policyBtn" onclick="clickedYes('Lockdown', 'modal3')">Public Places Lockdown: $500 0:10</button><br>
+                    <button id="lockdown3" class="policyBtn" onclick="clickedYes('Lockdown', 'modal3')">Stimulus Basic: $1000 0:20</button><br>
+                    <button id="lockdown4" class="policyBtn" onclick="clickedYes('Lockdown', 'modal3')">Stimulus Pro Premium: $2000 0:20</button><br>
                     <button class="close-button" onclick="document.getElementById('modal3').style.display='none'"><b>X</b></button>
             </div>
             <div id="modal4" class="modal">
@@ -90,9 +102,16 @@
                     <button id="mask2" class="policyBtn" onclick="clickedYes('Masks', 'modal4')">25,000 masks: $500 0:30</button><br>
                     <button id="mask3" class="policyBtn" onclick="clickedYes('Masks', 'modal4')">50,000 masks: $1000 1:00</button><br>
                     <button id="mask4" class="policyBtn" onclick="clickedYes('Masks', 'modal4')">75,000 masks: $1500 1:30</button><br>
-                    <button id="mask5" class="policyBtn" onclick="clickedYes('Masks', 'modal4')">100,000 masks: $2000 2:00</button><br>
+                    <button id="mask5" class="policyBtn" onclick="clickedYes('Masks', 'modal4')">100,000 masks: $2000 1:45</button><br>
                     <button class="close-button" onclick="document.getElementById('modal4').style.display='none'"><b>X</b></button>
             </div>
+            <!-- <div id="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div> 
+            <div id="load"></div>  -->
             <!--End of Modal Section-->
             <!-- endModal Game Over Section -->
             <div id="endModal">

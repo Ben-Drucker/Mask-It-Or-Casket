@@ -31,6 +31,23 @@ function clickedYes(option, modal) {
     document.getElementById("buttonMask").style.background="orange";
   }
 }
+
+function closeOthers(modalNum){
+  if (modalNum != 'modal1') {
+    document.getElementById('modal1').style.display='none';
+  }
+  if (modalNum != 'modal2') {
+    document.getElementById('modal2').style.display='none';
+  }
+  if (modalNum != 'modal3'){
+    document.getElementById('modal3').style.display='none';
+  }
+  if (modalNum != 'modal4'){
+    document.getElementById('modal4').style.display='none';
+  }
+  document.getElementById(modalNum).style.display='block';
+}
+
   // get modal
 //var modal = document.getElementById("myModal");
 

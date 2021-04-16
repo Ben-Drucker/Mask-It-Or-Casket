@@ -14,8 +14,8 @@ class Game {
         this.fractionMaxDead = 0.002; //maximum number of dead people, as a fraction of the total population
         this.maxRiskPoints = 25; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
         this.maxPercentageInfected = 20;
-        this.requiredProPoints = 20; //originally 65
-        this.fractionRiskPenaltyThreashold = 0.2;
+        this.requiredProPoints = 50; //originally 65
+        this.fractionRiskPenaltyThreashold = 0.1;
 
         this.numRiskPoints = 0;
         this.numProPoints = 0;
@@ -224,6 +224,8 @@ class Game {
         document.getElementById("numDead").innerHTML = city.numDead
         document.getElementById("deadPct").innerHTML = ((city.numDead/city.population)*100).toFixed(3);
         document.getElementById("numRecovered").innerHTML = city.numRecovered;
+        document.getElementById("GreenPoints").innerHTML = this.numProPoints + " of "+this.requiredProPoints;
+        document.getElementById("RedPoints").innerHTML = Math.floor(this.numRiskPoints) + " of "+this.maxRiskPoints;
     }
 
 }
