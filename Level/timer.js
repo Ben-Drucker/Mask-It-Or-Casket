@@ -2,16 +2,24 @@
 var theGame = new Game(75000, 75);
 
 window.onload = function () {
-    let interIteratoryTime = 0.5 //time between iterations, in seconds.
+    theGame.interIteratoryTime = 0.5; //time between iterations, in seconds.
     var min = 3;
-    var sec = "00"; 
-    theGame.iterateByTime(theGame.city, interIteratoryTime, (60*min + parseInt(sec))/interIteratoryTime);
+    var sec = "00";
+    theGame.secs = 60 * min + parseInt(sec);
+    theGame.secondsRemaining = theGame.secs;
+    theGame.iterateByTime(theGame.city, theGame.interIteratoryTime, (theGame.secs) / theGame.interIteratoryTime);
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
-        console.log("Current Score:", computeScore(theGame.city.population, 60*min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected));
+        console.log("Current Score:", computeScore(theGame.city.population, 60 * min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected, theGame.city.numVaxed));
         sec--;
-        if (sec == -1 && min == 0) {
-            document.getElementById("end").innerHTML = "GAME OVER!";
+        theGame.secondsRemaining--;
+        if (sec == -1 && min == 0 || theGame.hasEnded) {
+            if (!theGame.won) {
+                document.getElementById("end").innerHTML = "GAME OVER!";
+            }
+            if (theGame.won) {
+                document.getElementById("end").innerHTML = "YOU WIN!<br><span class = scoreMsg> YOUR SCORE: "+computeScore(theGame.city.population, 60 * min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected, theGame.city.numVaxed)+"</span>";
+            }
             clearInterval(countDownTimer);
         }
         else if (sec == -1) {
@@ -24,6 +32,6 @@ window.onload = function () {
         else if (sec < 10) {
             sec = "0" + sec;
         }
-        
+
     }, 1000);
 }

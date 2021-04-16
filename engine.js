@@ -8,8 +8,9 @@ class City {
         this.vaxInProgress = false;
 
         //SIR
+        this.immunityRate = 0.5; //PARAMETER
         this.population = population;
-        this.personsInfected = [];
+        this.personsInfected = new Set();
         this.personsDead = [];
         this.sicknessLog = [];
         this.currentIteration = 0;
@@ -19,6 +20,8 @@ class City {
         this.groups = new Map();
         this.numInfected = 0;
         this.numDead = 0;
+        this.numRecovered = 0;
+        this.numVaxed = 0;
         this.numOfConnections = 0;
         for (let i = 0; i < this.population; i++) {
             let ageIndex = Math.floor(Math.random() * (this.population + 1));
@@ -26,7 +29,7 @@ class City {
             let risk = Math.random();
             this.citizens.push(new Person(i, age, risk));
         }
-        
+
         /*PARAMETERS*/
         //MASKING
         this.fractionMaskEfficacy = 0.5;        //PARAMETER
@@ -139,7 +142,7 @@ class City {
             }
             else {
                 injectee.isInfected = true;
-                this.personsInfected.push(injectee);
+                this.personsInfected.add(injectee);
                 this.numOfTransmissions++;
                 this.sicknessLog.push(injectee.id.toString() + " injected.");
             }
@@ -168,7 +171,7 @@ class City {
                                 interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
                                 distanceIntensity = ((1 - this.fractionDistancingEfficacy) + delayFactor);
                             }
-                            document.getElementById("buttonDistance").style.background="green";
+                            document.getElementById("buttonDistance").style.background = "green";
                         }
                     }
 
@@ -184,7 +187,7 @@ class City {
                                 maskIntensity = ((1 - this.fractionMaskEfficacy) + delayFactor);
                             }
                             //TEMP:
-                            document.getElementById("buttonMask").style.background="green";
+                            document.getElementById("buttonMask").style.background = "green";
                         }
                     }
 
@@ -195,7 +198,7 @@ class City {
                             interactionTransmissionRisk *= ((1 - this.fractionLockDownEfficacy) + delayFactor);
                             lockDownIntensity = ((1 - this.fractionLockDownEfficacy) + delayFactor);
                             //TEMP:
-                            document.getElementById("buttonLockdown").style.background="green";
+                            document.getElementById("buttonLockdown").style.background = "green";
                         }
                     }
 
@@ -207,10 +210,14 @@ class City {
                         interactionTransmissionRisk *= (1 - this.fractionVaxingEfficacy);
                     }
 
+                    if(person2.hasImmunity){
+                        interactionTransmissionRisk *= (1-this.immunityRate);
+                    }
+
                     if (chance < interactionTransmissionRisk) {
                         this.sicknessLog.push(person1.id + " gave it to " + person2.id + " in iteration " + this.currentIteration + " p1 risk " + person1.risk + " p2 risk " + person2.risk);
                         person2.isInfected = true;
-                        this.personsInfected.push(person2);
+                        this.personsInfected.add(person2);
                         this.numInfected++;
                         this.numOfTransmissions++;
                     }
@@ -218,7 +225,7 @@ class City {
             })
         })
         this.currentIteration++;
-        this.percentageInfected = 100 * (this.numOfTransmissions / this.population);
+        this.percentageInfected = 100 * (this.numInfected / this.population);
         if (distanceIntensity == null) {
             distanceIntensity = "--";
         }
@@ -240,7 +247,7 @@ class City {
             lockDownIntensity = 1 - lockDownIntensity;
             lockDownIntensity = lockDownIntensity.toFixed(2);
         }
-        console.log("Distance intensity", distanceIntensity, "Mask Intensity", maskIntensity, "LockDown Intensity", lockDownIntensity);
+        //console.log("Distance intensity", distanceIntensity, "Mask Intensity", maskIntensity, "LockDown Intensity", lockDownIntensity);
     }
 
     iterate(i) {
@@ -288,8 +295,11 @@ class City {
     }
 
     death() {
-        this.personsInfected.forEach((function (infectedPerson) {
+        this.personsInfected.forEach( (infectedPerson) => {
             if (infectedPerson.willDie == null) {
+                if(infectedPerson.hasRecovered){
+                    infectedPerson.hasRecovered = false;
+                }
                 infectedPerson.infectedDuringIteration = this.currentIteration;
                 let personDeathProb = this.deathProbability(infectedPerson.age);
                 let chance = Math.random();
@@ -300,6 +310,11 @@ class City {
                 }
                 else {
                     infectedPerson.willDie = false;
+                    let minRecoveryTime = 14; //PARAMETER
+                    let maxRecoveryTime = 42;
+                    let recoveryTime = minRecoveryTime + Math.floor((maxRecoveryTime - minRecoveryTime) * (1-chance));
+                    infectedPerson.iterationRecoveryDay = this.currentIteration + recoveryTime;
+                    infectedPerson.recoveryTime = recoveryTime;
                 }
             }
             else if (infectedPerson.willDie) {
@@ -307,13 +322,22 @@ class City {
                     this.personsDead.push(infectedPerson);
                     infectedPerson.isDead = true;
                     this.numDead++;
+                    this.numInfected--;
+                    this.personsInfected.delete(infectedPerson);
                     //console.log("Death:", infectedPerson);
                 }
             }
-            else {
-
+            else if (infectedPerson.isInfected && !infectedPerson.willDie){
+                if(this.currentIteration == infectedPerson.iterationRecoveryDay){
+                    infectedPerson.isInfected = false;
+                    infectedPerson.hasImmunity = true;
+                    this.numRecovered++;
+                    this.numInfected--;
+                    this.personsInfected.delete(infectedPerson);
+                    infectedPerson.hasRecovered = true;
+                }
             }
-        }).bind(this));
+        });
     }
 
     vaccinate() {
@@ -324,10 +348,11 @@ class City {
             if (!person.isVaxed && !person.isDead && person.risk < this.fractionVaxing) {
                 person.isVaxed = true;
                 vaccinatedPeople++;
+                this.numVaxed ++;
 
             }
         }
-        console.log("Vaccinated", vaccinatedPeople);
+        //console.log("Vaccinated", vaccinatedPeople);
     }
 }
 
@@ -338,10 +363,14 @@ class Person {
         this.isInfected = false;
         this.isDead = false;
         this.risk = risk;
+        this.recoveryTime;
         this.iterationDeathDay = null;
+        this.iterationRecoveryDay = null;
         this.willDie = null;
         this.isVaxed = false;
- 
+        this.hasImmunity = false;
+        this.hasRecovered = false;
+
         this.x = 0;
         this.y = 0;
         this.width = 25;
@@ -350,5 +379,3 @@ class Person {
         this.frameY = 0;
     }
 }
-
-//export { City, Person };

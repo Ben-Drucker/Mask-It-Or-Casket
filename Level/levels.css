@@ -248,3 +248,7 @@ p{
 .statisticsStatic{
     color:lightblue;
 }
+
+.scoreMsg{
+    font-size: 40px;
+}
