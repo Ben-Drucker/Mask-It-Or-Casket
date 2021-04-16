@@ -2,7 +2,7 @@
 
 @font-face {
     font-family:"Karmatic Arcade";
-    src: url("fonts/BenMaticArcade4.otf") format("opentype");
+    src: url("../Level/fonts/BenMaticArcade4.otf") format("opentype");
 }
 
 body {
@@ -20,15 +20,25 @@ h1 {
 }
 
 button {
-    margin-left: 50%;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    background-size: cover;
+    cursor: pointer;
 }
 
 .grid-container {
     display: grid;
     grid-row-gap: 20px;
     grid-template-columns: auto auto;
-    background-color: white;
-    color: black;
+    /*background-color: white;
+    color: black;*/
     padding: 10px;
     margin: 30px;
   }
+
+.home {
+    background-image: url("../Images/home.png");
+}

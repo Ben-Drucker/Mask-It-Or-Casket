@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+@font-face {
+    font-family:"Karmatic Arcade";
+    src: url("Level/fonts/BenMaticArcade4.otf") format("opentype");
+}
+
 html{
     text-align: center;
-    font-family: Verdana;
-    
+    font-family: "Karmatic Arcade";
 }
 
 body {
@@ -75,15 +81,19 @@ div {
     padding: 0;
     background-color: transparent;
     border: none;
-    /*background-image: url("Images/Leader.png");*/
+    background-image: url("Images/Help.png");
     background-size: cover;
     background-repeat: no-repeat;
-    width: 616px;
-    height: 31px;
+    width: 481px;
+    height: 39px;
     display: block;
     cursor: help;
 }
 
 .help:hover {
-    color: white;
+    background-image: url("Images/vacHelp.png");
+}
+
+.help:active {
+    background-image: url("Images/vacHelpClick.png");
 }
