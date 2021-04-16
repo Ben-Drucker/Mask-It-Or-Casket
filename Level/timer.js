@@ -4,19 +4,18 @@ var score;
 
 window.onload = function () {
     theGame.interIteratoryTime = 0.5; //time between iterations, in seconds.
-    var min = 3;
+    var min = 1;
     var sec = "00";
     theGame.secs = 60 * min + parseInt(sec);
     theGame.secondsRemaining = theGame.secs;
     theGame.iterateByTime(theGame.city, theGame.interIteratoryTime, (theGame.secs) / theGame.interIteratoryTime);
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
-        score = computeScore(theGame.city.population, 60 * min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected, theGame.city.numVaxed));
+        score = computeScore(theGame.city.population, 60 * min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected, theGame.city.numVaxed);
         console.log("Current Score: " + score);
         sec--;
         theGame.secondsRemaining--;
         if (sec == -1 && min == 0 || theGame.hasEnded) {
-            console.log("Current Score:"
             gameOver();
             clearInterval(countDownTimer);
         }

@@ -14,8 +14,8 @@ class Game {
         this.fractionMaxDead = 0.002; //maximum number of dead people, as a fraction of the total population
         this.maxRiskPoints = 25; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
         this.maxPercentageInfected = 20;
-        this.requiredProPoints = 80;
-        this.fractionRiskPenaltyThreashold = 0.08;
+        this.requiredProPoints = 20; //originally 65
+        this.fractionRiskPenaltyThreashold = 0.2;
 
         this.numRiskPoints = 0;
         this.numProPoints = 0;
