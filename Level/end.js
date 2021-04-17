@@ -32,5 +32,5 @@ function submitScore() {
     };
     xhttp.open("POST", "https://www.cs.swarthmore.edu/~cgalo1/071/leaderboard.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("name="+username+"&score="+score);
-  }
+    xhttp.send("name="+username+"&score="+score+"&type=insert");
+}
