@@ -6,7 +6,7 @@ class Game {
         this.won = false;
         this.hasEnded = false;
         this.previousPercentage = 0;
-        this.funds = 2000;
+        this.funds = 1500;
         this.secs = null;
         this.secondsRemaining = null;
         this.interIteratoryTime = null;
@@ -16,6 +16,8 @@ class Game {
         this.maxPercentageInfected = 20;
         this.requiredProPoints = 50; //originally 65
         this.fractionRiskPenaltyThreashold = 0.1;
+        this.fundingIterations = 40;
+        this.fundingIterationAmount = 100;
 
         this.numRiskPoints = 0;
         this.numProPoints = 0;
@@ -104,43 +106,50 @@ class Game {
         }
     }
 
-    updateGameStatus(city){
+    updateGameStatus(city) {
         let slider = document.getElementById("myRange");
         let sliderMax = slider.max;
-        let relPos = slider.value/sliderMax;
-        if(city.numDead > this.fractionMaxDead * city.population){
+        let relPos = slider.value / sliderMax;
+        if (city.numDead > this.fractionMaxDead * city.population) {
             console.log("GAME OVER! TOO MANY DEAD!");
             this.hasEnded = true;
             return;
         }
-        if(city.percentageInfected > this.maxPercentageInfected){
+        if (city.percentageInfected > this.maxPercentageInfected) {
             console.log("GAME OVER! TOO MANY INFECTED!");
             this.hasEnded = true;
             return;
         }
-        if(this.numRiskPoints > this.maxRiskPoints){
+        if (this.numRiskPoints > this.maxRiskPoints) {
             console.log("GAME OVER! ACCUMULATED TOO MANY RISK POINTS!");
             this.hasEnded = true;
             return;
         }
-        if(this.numProPoints >= this.requiredProPoints){
+        if (this.numProPoints >= this.requiredProPoints) {
             this.hasEnded = true;
             this.won = true;
             return;
         }
-        if(relPos > this.fractionRiskPenaltyThreashold){
-            let riskAboveThreashHold = (slider.value - this.fractionRiskPenaltyThreashold*sliderMax);
-            let maxAboveThreashHold = (sliderMax - this.fractionRiskPenaltyThreashold*sliderMax)
-            let addlRiskPoints = riskAboveThreashHold/maxAboveThreashHold;
+        if (relPos > this.fractionRiskPenaltyThreashold) {
+            let riskAboveThreashHold = (slider.value - this.fractionRiskPenaltyThreashold * sliderMax);
+            let maxAboveThreashHold = (sliderMax - this.fractionRiskPenaltyThreashold * sliderMax)
+            let addlRiskPoints = riskAboveThreashHold / maxAboveThreashHold;
             this.numRiskPoints += addlRiskPoints;
         }
-        if((city.currentIteration * this.interIteratoryTime/this.secs) > this.fractionMinGameLength && relPos <= this.fractionRiskPenaltyThreashold){
-                this.numProPoints ++;
+        if ((city.currentIteration * this.interIteratoryTime / this.secs) > this.fractionMinGameLength && relPos <= this.fractionRiskPenaltyThreashold) {
+            this.numProPoints++;
         }
         console.log("RiskPnts", this.numRiskPoints, "ProPnts", this.numProPoints);
     }
 
-    iterationItems(city){
+    updateFunds() {
+        if (this.currentSubIteration % this.fundingIterations == 2 && this.currentSubIteration != 2) {
+            this.funds += this.fundingIterationAmount;
+            document.getElementById("funds").innerHTML = "Money: " + this.funds;
+        }
+    }
+
+    iterationItems(city) {
         drawCityPop();
         changeStatus();
         city.iteration();
@@ -148,6 +157,7 @@ class Game {
         this.updateSlider(city);
         this.updateStatistics(city);
         this.updateGameStatus(city);
+        this.updateFunds();
     }
 
     timedIteration(city, numberOfIterationsDesired, iterationTimer) {
@@ -160,7 +170,7 @@ class Game {
         //console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected out of", city.population, "(", city.percentageInfected.toFixed(2), "% infected ) %delta = ", (city.percentageInfected - this.previousPercentage).toFixed(2), "Dead:", city.numDead); 
         this.previousPercentage = city.percentageInfected;
 
-        if (this.currentSubIteration >= numberOfIterationsDesired ||this.hasEnded) {
+        if (this.currentSubIteration >= numberOfIterationsDesired || this.hasEnded) {
             clearInterval(iterationTimer)
         }
         this.currentSubIteration++;
@@ -186,19 +196,19 @@ class Game {
         let resolution = 10000;
         let delta = city.percentageInfected - this.previousPercentage;
         let sampleInfected = 0;
-        spritesA.forEach((sprite) =>{
-            if(sprite.isInfected){
+        spritesA.forEach((sprite) => {
+            if (sprite.isInfected) {
                 sampleInfected++;
-                if(sprite.isVaxed){
+                if (sprite.isVaxed) {
                     sampleInfected -= city.fractionVaxingEfficacy;
                 }
             }
         })
-        let testResults = sampleInfected/spritesA.length;
-        let deltaContribution = Math.floor(delta*resolution);
-        let testsContribution = Math.floor(testResults*resolution);
+        let testResults = sampleInfected / spritesA.length;
+        let deltaContribution = Math.floor(delta * resolution);
+        let testsContribution = Math.floor(testResults * resolution);
         let value = Math.max(deltaContribution, testsContribution);
-        value = Math.min(value, maxRisk*resolution);
+        value = Math.min(value, maxRisk * resolution);
         let slider = document.getElementById("myRange");
         let fps = 60;
         let mills = 1000;
@@ -222,10 +232,10 @@ class Game {
         document.getElementById("infectedPct").innerHTML = city.percentageInfected.toFixed(2);
         document.getElementById("population").innerHTML = city.population;
         document.getElementById("numDead").innerHTML = city.numDead
-        document.getElementById("deadPct").innerHTML = ((city.numDead/city.population)*100).toFixed(3);
+        document.getElementById("deadPct").innerHTML = ((city.numDead / city.population) * 100).toFixed(3);
         document.getElementById("numRecovered").innerHTML = city.numRecovered;
-        document.getElementById("GreenPoints").innerHTML = this.numProPoints + " of "+this.requiredProPoints;
-        document.getElementById("RedPoints").innerHTML = Math.floor(this.numRiskPoints) + " of "+this.maxRiskPoints;
+        document.getElementById("GreenPoints").innerHTML = this.numProPoints + " of " + this.requiredProPoints;
+        document.getElementById("RedPoints").innerHTML = Math.floor(this.numRiskPoints) + " of " + this.maxRiskPoints;
     }
 
 }
