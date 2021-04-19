@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-    <title>Level 1</title>
+    <title>Level</title>
     <link rel="stylesheet" href="levels.css">
     <!--Import Brython-->
     <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
@@ -16,7 +16,7 @@
             <div id="timer"></div>
         </div>
         <div class="centralGridItem">
-            <img id="LevelTitle" src="images/levelTitle.png" alt="Level 1">
+            <img id="LevelTitle" src="images/levelTitle.png" alt="Mask-It Or Casket">
             <br>
             <br>
             <span class="nowrap">
@@ -105,13 +105,12 @@
                     <button id="mask5" class="policyBtn" onclick="clickedYes('Masks', 'modal4')">100,000 masks: $2000 1:45</button><br>
                     <button class="close-button" onclick="document.getElementById('modal4').style.display='none'"><b>X</b></button>
             </div>
-            <!-- <div id="loader">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div> 
-            <div id="load"></div>  -->
+            <div id="modal5" class="modal" >
+                <h3>Would you like to return to the home screen? <br>Your progress will not be saved.</h3>
+                <a href="../index.html"><button id="yes" class="policyBtn">Yes </button></a><br>
+                <button id="no" class="policyBtn" onclick="document.getElementById('modal5').style.display='none'">No</button><br>
+                <button class="close-button" onclick="document.getElementById('modal5').style.display='none'"><b>X</b></button>
+            </div>
             <!--End of Modal Section-->
             <!-- endModal Game Over Section -->
             <div id="endModal">
@@ -125,7 +124,9 @@
         <div class="clr"></div>
 
     </div>
+    <br>
     <div class="clr"></div>
+    <button id="home" class= "ibutton" alt="Home" onclick="closeOthers('modal5')"></button>
     <br>
 
     <!-- Load JavaScript Code -->

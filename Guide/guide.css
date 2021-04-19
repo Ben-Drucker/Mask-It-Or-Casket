@@ -19,25 +19,41 @@ h1 {
     margin-left: 50%;
 }
 
-button {
+p {
+    padding: 0px;
+    margin: 0px;
+    padding-top: 10px;
+}
+
+.main {
+    margin: auto;
+    padding: 20px;
+    width: 90%;
+    height: 500px;
+    background-color: rgba(255,255,255,0.75);
+    border: 5px solid black;
+    color: black;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding:20px;
+    grid-gap: 20px;
+}
+
+.next {
+    float: right;
+}
+
+#home {
     width: 50px;
     height: 50px;
+    margin-left: 10px;
     padding: 0;
     background-color: transparent;
     border: none;
     background-size: cover;
     cursor: pointer;
     background-image: url("../Images/home.png");
-}
-
-div {
-    background-color: white;
-    color: black;
-    margin: 10px 50px;
-    padding: 10px;
-}
-
-p {
-    padding: 0px;
-    margin: 0px;
 }

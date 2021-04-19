@@ -142,6 +142,7 @@ class Game {
 
     iterationItems(city){
         drawCityPop();
+        //canvas.clearRect(0,0,750.750);
         changeStatus();
         city.iteration();
         city.death();

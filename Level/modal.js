@@ -45,6 +45,9 @@ function closeOthers(modalNum){
   if (modalNum != 'modal4'){
     document.getElementById('modal4').style.display='none';
   }
+  if (modalNum != 'modal5'){
+    document.getElementById('modal5').style.display='none';
+  }
   document.getElementById(modalNum).style.display='block';
 }
 

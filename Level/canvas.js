@@ -58,7 +58,7 @@ function drawCityPop(){
 function changeStatus(){
     for (let i = 0; i < spritesA.length; i++) {
         if (spritesA[i].isDead) {
-            spritesA[i].frameX = 0;
+            spritesA[i].frameX = 3;
         }
         else if (spritesA[i].isVaxed) {
             spritesA[i].frameX = 1;
@@ -67,7 +67,7 @@ function changeStatus(){
             spritesA[i].frameX = 2;
         }
         else {
-            spritesA[i].frameX = 3;
+            spritesA[i].frameX = 0;
         }
     }
 }
