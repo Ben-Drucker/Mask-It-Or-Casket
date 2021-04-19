@@ -5,14 +5,15 @@ function computeScore(population, secondsRemaining, fundsRemaining, numDead, num
     let deadExponent = -2;
     let infectedExponent = -1.5;
     let populationExponent = -1 * (deadExponent + infectedExponent);
-    let scaleFactor = 1 / 20000000;        //PARAMETER
+    let scaleFactor = 1 / 500000000;        //PARAMETER
     let magnitudeFactor = 1000;
     secondsRemaining **= secondExponent;
     fundsRemaining **= fundsExponent;
     numDead **= deadExponent;
     numInfected **= infectedExponent;
     population **= populationExponent;
-    return magnitudeFactor * Math.floor(scaleFactor * (secondsRemaining + fundsRemaining) * population * numDead * numInfected);
+    numVaxed **= numVaxedExponent
+    return magnitudeFactor * Math.floor(scaleFactor * (secondsRemaining + fundsRemaining + numVaxed) * population * numDead * numInfected);
 }
 
 /* For testing purposes only

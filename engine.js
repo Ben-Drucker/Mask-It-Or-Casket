@@ -32,28 +32,32 @@ class City {
 
         /*PARAMETERS*/
         //MASKING
+        this.maxFractionMasking = 0.9;
         this.fractionMaskEfficacy = 0.5;        //PARAMETER
-        this.fractionMasking = 0.5;             //PARAMETER
+        this.fractionMasking = 0;             //PARAMETER
         this.initialMaskDelay = 20;             //PARAMETER
         this.maskImplementationDelay = 35;      //PARAMETER
         this.maskStartIteration = null;
 
         //DISTANCING
-        this.fractionDistancing = 0.3;          //PARAMETER
+        this.maxFractionDistancing = 0.8;
+        this.fractionDistancing = 0;          //PARAMETER
         this.fractionDistancingEfficacy = 0.5;  //PARAMETER
         this.initialDistancingDelay = 20;       //PARAMETER
         this.distancingImplementationDelay = 20;//PARAMETER
         this.distancingStartIteration = null;
 
         //VAX
-        this.fractionVaxing = 0.85;                //PARAMETER
+        this.maxFractionVaxing = 0.95;
+        this.fractionVaxing = 0;                //PARAMETER
         this.fractionVaxingEfficacy = 0.9;      //PARAMETER
         this.initialVaxDelay = 100;             //PARAMETER
         this.vaxImplementationDelay = 50;       //PARAMETER
         this.vaxStartIteration = null;
 
         //LOCKDOWN
-        this.fractionLockDownEfficacy = 0.25;      //PARAMETER
+        this.fractionMaxLockDownEfficacy = 0.75;
+        this.fractionLockDownEfficacy = 0;      //PARAMETER
         this.initialLockDownDelay = 10;             //PARAMETER
         this.lockDownImplementationDelay = 25; //PARAMETER
         this.lockDownStartIteration = null;
@@ -247,7 +251,7 @@ class City {
             lockDownIntensity = 1 - lockDownIntensity;
             lockDownIntensity = lockDownIntensity.toFixed(2);
         }
-        //console.log("Distance intensity", distanceIntensity, "Mask Intensity", maskIntensity, "LockDown Intensity", lockDownIntensity);
+        console.log("Distance intensity", distanceIntensity, "Mask Intensity", maskIntensity, "LockDown Intensity", lockDownIntensity);
     }
 
     iterate(i) {

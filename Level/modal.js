@@ -15,19 +15,20 @@
 //
 // bar.animate(1.0);
 
-function clickedYes(option, modal) {
-  theGame.implementPolicy(option);
+function clickedYes(option, modal, cost, maxCost) {
+  let intensity = cost/maxCost;
+  theGame.implementPolicy(option, cost, intensity);
   document.getElementById(modal).style.display='none';
-  if (option == "Vax"){
+  if (option == "Vax" && theGame.city.vaxInProgress){
     document.getElementById("buttonVaccine").style.background="orange";
   }
-  else if (option == "Distance"){
+  else if (option == "Distance" && theGame.city.distancingInProgress){
     document.getElementById("buttonDistance").style.background="orange";
   }
-  else if (option == "Lockdown"){
+  else if (option == "Lockdown" && theGame.city.lockDownInProgress){
     document.getElementById("buttonLockdown").style.background="orange";
   }
-  else if (option == "Masks"){
+  else if (option == "Masks" && theGame.city.masksInProgress){
     document.getElementById("buttonMask").style.background="orange";
   }
 }
@@ -44,6 +45,9 @@ function closeOthers(modalNum){
   }
   if (modalNum != 'modal4'){
     document.getElementById('modal4').style.display='none';
+  }
+  if (modalNum != 'modal5'){
+    document.getElementById('modal5').style.display='none';
   }
   document.getElementById(modalNum).style.display='block';
 }

@@ -36,22 +36,22 @@ div {
     padding: 0;
     background-color: transparent;
     border: none;
-    background-image: url("Images/Start.png");
+    background-image: url("Images/start.png");
     background-size: cover;
     background-repeat: no-repeat;
-    width: 389px;
-    height: 31px;
+    width: 613px;
+    height: 30px;
     display: block;
     cursor: pointer;
     
 }
 
 .start:hover {
-    background-image: url("Images/vacStart.png");
+    background-image: url("Images/startVac.png");
 }
 
 .start:focus {
-    background-image: url("Images/vacStartClick.png");
+    background-image: url("Images/startVacClick.png");
 }
 
 .leader {
@@ -59,21 +59,21 @@ div {
     padding: 0;
     background-color: transparent;
     border: none;
-    background-image: url("Images/leader.svg");
+    background-image: url("Images/leader.png");
     background-size: cover;
     background-repeat: no-repeat;
-    width: 616px;
-    height: 31px;
+    width: 613px;
+    height: 30px;
     display: block;
     cursor: pointer;
 }
 
 .leader:hover {
-    background-image: url("Images/leaderVac.svg");
+    background-image: url("Images/leaderVac.png");
 }
 
 .leader:active {
-    background-image: url("Images/leaderVacClick.svg");
+    background-image: url("Images/leaderVacClick.png");
 }
 
 .help {
@@ -81,19 +81,19 @@ div {
     padding: 0;
     background-color: transparent;
     border: none;
-    background-image: url("Images/Help.png");
+    background-image: url("Images/help.png");
     background-size: cover;
     background-repeat: no-repeat;
-    width: 481px;
-    height: 39px;
+    width: 613px;
+    height: 30px;
     display: block;
-    cursor: help;
+    cursor: pointer;
 }
 
 .help:hover {
-    background-image: url("Images/vacHelp.png");
+    background-image: url("Images/helpVac.png");
 }
 
 .help:active {
-    background-image: url("Images/vacHelpClick.png");
+    background-image: url("Images/helpVacClick.png");
 }
