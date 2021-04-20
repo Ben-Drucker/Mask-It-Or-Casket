@@ -58,6 +58,40 @@
 
         <!--Trigger/Open Modal-->
         <div class="centralGridItem">
+            <!-- <div class="policies">
+                <div class="loader">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <button id="buttonVaccine" onclick="closeOthers('modal1')" class="iButton"><img
+                            src="images/vaccine.png" width="50px" alt="Vaccine" class='buttonIcon'></button>
+                </div>
+                <div id="loader_container">
+                    <span></span>
+                    <span></span>
+                    <span></span> 
+                    <span></span>
+                    <button id="buttonDistance" onclick="closeOthers('modal2')" class="iButton"><img
+                        src="images/distance.png" width="50px" alt="Distance" class='buttonIcon'></button>
+                </div>
+                <div id="loader">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <button id="buttonLockdown" onclick="closeOthers('modal3')" class="iButton"><img
+                        src="images/ShutDown.png" width="50px" alt="Shut Down" class='buttonIcon'></button>
+                </div>
+                <div id="loader">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <button id="buttonMask" onclick="closeOthers('modal4')" class="iButton"><img src="images/mask.png"
+                        width="50px" alt="Masks" class='buttonIcon'></button>
+                    </div> 
+            </div> -->
             <div class="policies">
                 <button id="buttonVaccine" onclick="closeOthers('modal1')" class="iButton"><img
                         src="images/vaccine.png" width="50px" alt="Vaccine" class='buttonIcon'></button>
@@ -74,10 +108,11 @@
             <!--Modal Section-->
             <div id="modal1" class="modal">
                     <h1>Vaccines Program</h1>
-                    <button id="vax1" class="policyBtn" onclick="clickedYes('Vax', 'modal1', 300, 5000)">Vaccine awareness campaign: $300 0:30</button><br>
-                    <button id="vax2" class="policyBtn" onclick="clickedYes('Vax', 'modal1', 1000, 5000)">10000 dosages: $1000 1:0</button><br>
-                    <button id="vax3" class="policyBtn" onclick="clickedYes('Vax', 'modal1', 2000, 5000)">20000 dosages: $2000 1:30</button><br>
-                    <button id="vax4" class="policyBtn" onclick="clickedYes('Vax', 'modal1', 5000, 5000)">50000 dosages: $5000 2:00</button><br>
+                    <button id="vax1" class="policyBtn" onclick="clickedYesTest('Vax', 'modal1', 300, 5000)">Develop vaccines $3000 1:00</button><br>
+                    <button id="vax2" class="policyBtn" onclick="clickedYes('Vax', 'modal1', 300, 5000)">Vaccine awareness campaign: $300 0:30</button><br>
+                    <button id="vax3" class="policyBtn" onclick="clickedYes('Vax', 'modal1', 1000, 5000)">10000 dosages: $1000 1:00</button><br>
+                    <button id="vax4" class="policyBtn" onclick="clickedYes('Vax', 'modal1', 2000, 5000)">20000 dosages: $2000 1:30</button><br>
+                    <button id="vax5" class="policyBtn" onclick="clickedYes('Vax', 'modal1', 5000, 5000)">50000 dosages: $5000 2:00</button><br>
                     <button class="close-button" onclick="document.getElementById('modal1').style.display='none'"><b>X</b></button>
             </div>
             <div id="modal2" class="modal">
@@ -126,7 +161,11 @@
     </div>
     <br>
     <div class="clr"></div>
-    <button id="home" class= "ibutton" alt="Home" onclick="closeOthers('modal5')"></button>
+    <button class= "ibutton" onclick="closeOthers('modal5')">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+        </svg>
+    </button>
     <br>
 
     <!-- Load JavaScript Code -->
