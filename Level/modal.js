@@ -15,9 +15,9 @@
 //
 // bar.animate(1.0);
 
-function clickedYes(option, modal, cost, maxCost) {
+function clickedYes(option, modal, cost, maxCost, time) {
   let intensity = cost/maxCost;
-  theGame.implementPolicy(option, cost, intensity);
+  theGame.implementPolicy(option, cost, intensity, time);
   document.getElementById(modal).style.display='none';
   if (option == "Vax" && theGame.city.vaxInProgress){
     document.getElementById("buttonVaccine").style.background="orange";

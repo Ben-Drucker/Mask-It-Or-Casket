@@ -12,10 +12,10 @@ class Game {
         this.interIteratoryTime = null;
         this.fractionMinGameLength = 0.2; //minimum length of game, as a fraction of the total game length
         this.fractionMaxDead = 0.0015; //maximum number of dead people, as a fraction of the total population
-        this.maxRiskPoints = 8; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
+        this.maxRiskPoints = 20; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
         this.maxPercentageInfected = 18;
         this.requiredProPoints = 50; //originally 65
-        this.fractionRiskPenaltyThreashold = 0.1;
+        this.fractionRiskPenaltyThreashold = 0.2;
         this.fundingIterations = 20;
         this.fundingIterationAmount = 150;
 
@@ -45,7 +45,7 @@ class Game {
     /**
      * Takes in an option string ("Vax", "Distance", "Lockdown", or "Masks")
      */
-    implementPolicy(option, cost, intensity) {
+    implementPolicy(option, cost, intensity, time) {
         if (option == "Vax") {
             if (this.city.vaxInProgress) {
                 console.log("Policy has already been implemented");
@@ -57,6 +57,7 @@ class Game {
             }
             console.log("Turned on Vaccination");
             theGame.updateFundsDisplay(cost, false);
+            this.city.initialVaxDelay = time / this.interIteratoryTime;
             this.city.fractionVaxing = intensity * this.city.maxFractionVaxing;
             this.city.vaxInProgress = true;
             this.city.vaxStartIteration = this.city.currentIteration;
@@ -72,6 +73,7 @@ class Game {
             }
             console.log("Turned on Distance");
             theGame.updateFundsDisplay(cost, false);
+            this.city.initialDistancingDelay = time / this.interIteratoryTime;
             this.city.fractionDistancing = intensity * this.city.maxFractionDistancing;
             this.city.distancingInProgress = true;
             this.city.distancingStartIteration = this.city.currentIteration
@@ -87,7 +89,8 @@ class Game {
             }
             console.log("Turned on Lockdown");
             theGame.updateFundsDisplay(cost, false);
-            this.city.fractionLockDownEfficacy = intensity * this.city.fractionMaxLockDownEfficacy;
+            this.city.initialLockDownDelay = time / this.interIteratoryTime;
+            this.city.targetFractionLockDownEfficacy = intensity * this.city.fractionMaxLockDownEfficacy;
             this.city.lockDownInProgress = true;
             this.city.lockDownStartIteration = this.city.currentIteration;
         }
@@ -102,7 +105,8 @@ class Game {
             }
             console.log("Turned on Masks");
             theGame.updateFundsDisplay(cost, false);
-            this.city.fractionMasking = intensity * this.city.maxFractionMasking;
+            this.city.initialMaskDelay = time / this.interIteratoryTime;
+            this.city.targetFractionMasking = intensity * this.city.maxFractionMasking;
             this.city.masksInProgress = true;
             this.city.maskStartIteration = this.city.currentIteration;
         }

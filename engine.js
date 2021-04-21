@@ -32,7 +32,9 @@ class City {
 
         /*PARAMETERS*/
         //MASKING
+        this.masksFullyImplemented = false;
         this.maxFractionMasking = 0.9;
+        this.targetFractionMasking = 0;
         this.fractionMaskEfficacy = 0.5;        //PARAMETER
         this.fractionMasking = 0;             //PARAMETER
         this.initialMaskDelay = 20;             //PARAMETER
@@ -40,6 +42,7 @@ class City {
         this.maskStartIteration = null;
 
         //DISTANCING
+        this.targetFractionDistancing = 0;
         this.maxFractionDistancing = 0.8;
         this.fractionDistancing = 0;          //PARAMETER
         this.fractionDistancingEfficacy = 0.5;  //PARAMETER
@@ -58,6 +61,7 @@ class City {
         //LOCKDOWN
         this.fractionMaxLockDownEfficacy = 0.75;
         this.fractionLockDownEfficacy = 0;      //PARAMETER
+        this.targetFractionLockDownEfficacy = 0;
         this.initialLockDownDelay = 10;             //PARAMETER
         this.lockDownImplementationDelay = 25; //PARAMETER
         this.lockDownStartIteration = null;
@@ -164,44 +168,44 @@ class City {
                 if (!person2.isInfected) {
                     let chance = Math.random();
                     let interactionTransmissionRisk = this.transmissionRisk * interactionChance;
+
                     if (this.distancingInProgress) {
-                        if (this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay >= 0) {  //if we are past the initial delay
-                            let delayComputation = this.fractionDistancing - (this.fractionDistancingEfficacy / this.distancingImplementationDelay) * (this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay);
-                            var delayFactor = Math.max(delayComputation, 0);
+                        let progress = this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay
+                        if (progress >= 0) {  //if we are past the initial delay
+                            this.fractionDistancing = Math.min(this.targetFractionDistancing, progress * this.targetFractionDistancing / this.distancingImplementationDelay);
                             if (person2.risk < this.fractionDistancing) {
-                                interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
+                                interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
                             }
                             if (person1.risk < this.fractionDistancing) {
-                                interactionTransmissionRisk *= ((1 - this.fractionDistancingEfficacy) + delayFactor);
-                                distanceIntensity = ((1 - this.fractionDistancingEfficacy) + delayFactor);
+                                interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
+                                document.getElementById("buttonDistance").style.background = "green";
+                                distanceIntensity = this.fractionDistancing;
                             }
-                            document.getElementById("buttonDistance").style.background = "green";
                         }
                     }
 
                     if (this.masksInProgress) {
-                        if (this.currentIteration - this.maskStartIteration - this.initialMaskDelay >= 0) {  //if we are past the initial delay
-                            let delayComputation = this.fractionMaskEfficacy - ((this.fractionMaskEfficacy / this.maskImplementationDelay) * (this.currentIteration - this.maskStartIteration - this.initialMaskDelay));
-                            delayFactor = Math.max(delayComputation, 0);
+                        let progress = this.currentIteration - this.maskStartIteration - this.initialMaskDelay;
+                        if (progress >= 0) {  //if we are past the initial delay
+                            this.fractionMasking = Math.min(this.targetFractionMasking, progress * this.targetFractionMasking / this.maskImplementationDelay);
                             if (person2.risk < this.fractionMasking) {
-                                interactionTransmissionRisk *= ((1 - this.fractionMaskEfficacy) + delayFactor);
+                                interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
                             }
                             if (person1.risk < this.fractionMasking) {
-                                interactionTransmissionRisk *= ((1 - this.fractionMaskEfficacy) + delayFactor);
-                                maskIntensity = ((1 - this.fractionMaskEfficacy) + delayFactor);
+                                interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
                             }
-                            //TEMP:
                             document.getElementById("buttonMask").style.background = "green";
+                            maskIntensity = this.fractionMasking;
                         }
+
                     }
 
                     if (this.lockDownInProgress) {
-                        if (this.currentIteration - this.lockDownStartIteration - this.initialLockDownDelay >= 0) {  //if we are past the initial delay
-                            let delayComputation = this.fractionLockDownEfficacy - (this.fractionLockDownEfficacy / this.lockDownImplementationDelay) * (this.currentIteration - this.lockDownStartIteration - this.initialLockDownDelay);
-                            delayFactor = Math.max(delayComputation, 0);
-                            interactionTransmissionRisk *= ((1 - this.fractionLockDownEfficacy) + delayFactor);
-                            lockDownIntensity = ((1 - this.fractionLockDownEfficacy) + delayFactor);
-                            //TEMP:
+                        let progress = this.currentIteration - this.lockDownStartIteration - this.initialLockDownDelay;
+                        if (progress >= 0) {  //if we are past the initial delay
+                            this.fractionLockDownEfficacy = Math.min(this.targetFractionLockDownEfficacy, progress * this.targetFractionLockDownEfficacy / this.lockDownImplementationDelay);
+                            interactionTransmissionRisk *= (1 - this.fractionLockDownEfficacy);
+                            lockDownIntensity = this.fractionLockDownEfficacy;
                             document.getElementById("buttonLockdown").style.background = "green";
                         }
                     }
@@ -214,8 +218,8 @@ class City {
                         interactionTransmissionRisk *= (1 - this.fractionVaxingEfficacy);
                     }
 
-                    if(person2.hasImmunity){
-                        interactionTransmissionRisk *= (1-this.immunityRate);
+                    if (person2.hasImmunity) {
+                        interactionTransmissionRisk *= (1 - this.immunityRate);
                     }
 
                     if (chance < interactionTransmissionRisk) {
@@ -241,14 +245,12 @@ class City {
             maskIntensity = "--";
         }
         else {
-            maskIntensity = 1 - maskIntensity;
             maskIntensity = maskIntensity.toFixed(2);
         }
         if (lockDownIntensity == null) {
             lockDownIntensity = "--";
         }
         else {
-            lockDownIntensity = 1 - lockDownIntensity;
             lockDownIntensity = lockDownIntensity.toFixed(2);
         }
         console.log("Distance intensity", distanceIntensity, "Mask Intensity", maskIntensity, "LockDown Intensity", lockDownIntensity);
@@ -299,9 +301,9 @@ class City {
     }
 
     death() {
-        this.personsInfected.forEach( (infectedPerson) => {
+        this.personsInfected.forEach((infectedPerson) => {
             if (infectedPerson.willDie == null) {
-                if(infectedPerson.hasRecovered){
+                if (infectedPerson.hasRecovered) {
                     infectedPerson.hasRecovered = false;
                 }
                 infectedPerson.infectedDuringIteration = this.currentIteration;
@@ -316,7 +318,7 @@ class City {
                     infectedPerson.willDie = false;
                     let minRecoveryTime = 14; //PARAMETER
                     let maxRecoveryTime = 42;
-                    let recoveryTime = minRecoveryTime + Math.floor((maxRecoveryTime - minRecoveryTime) * (1-chance));
+                    let recoveryTime = minRecoveryTime + Math.floor((maxRecoveryTime - minRecoveryTime) * (1 - chance));
                     infectedPerson.iterationRecoveryDay = this.currentIteration + recoveryTime;
                     infectedPerson.recoveryTime = recoveryTime;
                 }
@@ -331,8 +333,8 @@ class City {
                     //console.log("Death:", infectedPerson);
                 }
             }
-            else if (infectedPerson.isInfected && !infectedPerson.willDie){
-                if(this.currentIteration == infectedPerson.iterationRecoveryDay){
+            else if (infectedPerson.isInfected && !infectedPerson.willDie) {
+                if (this.currentIteration == infectedPerson.iterationRecoveryDay) {
                     infectedPerson.isInfected = false;
                     infectedPerson.hasImmunity = true;
                     this.numRecovered++;
@@ -352,7 +354,7 @@ class City {
             if (!person.isVaxed && !person.isDead && person.risk < this.fractionVaxing) {
                 person.isVaxed = true;
                 vaccinatedPeople++;
-                this.numVaxed ++;
+                this.numVaxed++;
 
             }
         }
