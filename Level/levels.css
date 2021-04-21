@@ -134,6 +134,7 @@ p{
     /* border-radius: 10px; */
     padding: 20px;
     border: 5px solid black;
+    backdrop-filter: blur(5px);
 }
 
 #LevelTitle {
@@ -151,7 +152,8 @@ p{
     font-size: 20px;
     border-radius: 10px;
     background-color: white;
-    border: 5px solid black;
+    border: 5px solid #8279ff;
+
 }
 
 #progress_bar {
@@ -182,6 +184,7 @@ p{
     align-items: center;
     position: relative;
     display: inline-block;
+    padding: 20px;
 }
 
 .slider {
@@ -192,8 +195,9 @@ p{
     height: 2.2vw;
     background: rgb(201,5,5);
     /* background: linear-gradient(90deg, rgba(201,5,5,1) 0%, rgba(221,112,12,1) 25%, rgba(236,244,4,1) 50%, rgba(197,231,4,1) 65%, rgba(97,199,25,1) 83%, rgba(12,128,5,1) 100%); */
-    background: linear-gradient(90deg, rgba(0,117,0,1) 10%, rgba(255,255,0,1) 50%, rgba(159,0,0,1) 95%);
-    outline: 2px solid black;
+    /* background: linear-gradient(90deg, #636db8 10%, #e2e79c 50%, rgb(107, 55, 82) 95%); #95c6d0 */
+    background: linear-gradient(90deg, #518997 10%, #ffffff 50%, #646465 95%);
+    border: 2px solid black;
     opacity: 1.0;
     transition: .2s;
     transition: opacity .2s;
@@ -213,7 +217,7 @@ p{
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 2vw;
+    width: 0.5vw;
     height: 3vw;
     background: black;
     outline: black;
@@ -252,7 +256,7 @@ p{
     border: none;
     background-size: cover;
     cursor: pointer;
-    background-image: url("../Images/home.png");
+    /* background-image: url("../Images/home.png"); */
 }
 
 .policyBtn{
@@ -273,7 +277,21 @@ a {
     margin:0;
 }
 
-#loader
+/* #loader_container
+{   
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+    display:block ;
+    position:absolute;
+    top:90%;
+    left:50%;
+    height:70px; 
+    width:70px;
+    margin:auto;
+} */
+
+.loader
 {
     display:block ;
     position:absolute;
@@ -282,10 +300,9 @@ a {
     height:70px; 
     width:70px;
     margin:auto;
-    animation:rotate 8s linear infinite;
 }
 
-#loader > span
+.loader > span
 {
     display:block ;
     position:absolute ;
@@ -296,7 +313,7 @@ a {
     overflow:hidden;
 }
 
-#loader > span:before {
+.loader > span:before {
     content:"";
     display:block ;
     position:absolute ;
@@ -304,7 +321,7 @@ a {
     top:0;  left:0;
     border:none;
     border-top:10px solid lightblue;
-    animation:animate 2s linear infinite;
+    animation:animate 4s linear infinite;
 }
 
 @keyframes animate {
@@ -313,29 +330,29 @@ a {
     50%,100% {left:100%;}
 }
 
-#loader > span:nth-child(2)
+.loader > span:nth-child(2)
 {
     transform:rotate(90deg);
 }
-#loader > span:nth-child(3)
+.loader > span:nth-child(3)
 {
     transform:rotate(180deg);
 }
-#loader > span:nth-child(4)
+.loader > span:nth-child(4)
 {
     transform:rotate(270deg);
 }
-#loader > span:nth-child(2):before
-{
-    animation-delay:.5s;
-}
-#loader > span:nth-child(3):before
+.loader > span:nth-child(2):before
 {
     animation-delay:1s;
 }
-#loader > span:nth-child(4):before
+.loader > span:nth-child(3):before
 {
-    animation-delay:1.5s;
+    animation-delay:2s;
+}
+.loader > span:nth-child(4):before
+{
+    animation-delay:3s;
 }
 
 .statisticsDynamic{
