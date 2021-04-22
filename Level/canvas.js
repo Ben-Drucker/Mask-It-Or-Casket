@@ -1,27 +1,21 @@
-// Setup canvas
+//Setup canvas
 const canvas = document.getElementById('canvas1');
 const context = canvas.getContext('2d');
 canvas.width = 750;
 canvas.height = 750;
-//console.log(canvas);
 
-// Select images
+//Select images
 const playerSprite = new Image();
 playerSprite.src = "images/People.png";
 const background = new Image();
 background.src = "images/map.png";
 
-// s = source image; d = drawn image
-function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
+//Function to draw sprites
+function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) { //s = source image; d = drawn image
     context.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
 }
 
-// function animate(){
-//     c.drawImage(background, 0, 0, canvas.width, canvas.height);
-//     requestAnimationFrame(animate);
-// }
-// animate();
-
+//Preparing information to draw sprites on grid
 let newCity = theGame.city;
 var population = newCity.population;
 var spritesA = [];
@@ -30,7 +24,6 @@ var perSprite = Math.floor(population / (gridSize * gridSize));
 for (let i = 0; i < population; i += perSprite) {
     spritesA.push(newCity.citizens[i]);
 }
-//console.log(spritesA);
 
 for (let r = 0; r < gridSize; r++) {
     for (let c = 0; c < gridSize; c++) {
@@ -39,6 +32,7 @@ for (let r = 0; r < gridSize; r++) {
     }
 }
 
+//Draw sprites on a 30x30 grid
 function drawCityPop() {
     for (let i = 0; i < spritesA.length; i++) {
         drawSprite(
@@ -52,9 +46,9 @@ function drawCityPop() {
             spritesA[i].width, //dW
             spritesA[i].height); //dH
     }
-    //requestAnimationFrame(drawCityPop);
 }
 
+//Change sprites displayed on canvas
 function changeStatus() {
     for (let i = 0; i < spritesA.length; i++) {
         if (spritesA[i].risk < theGame.city.fractionMasking) {
@@ -83,26 +77,3 @@ function changeStatus() {
         }
     }
 }
-        
-        /*
-        if (spritesA[i].isDead) {
-            spritesA[i].frameX = 3;
-        }
-        else if (spritesA[i].isVaxed) {
-            spritesA[i].frameX = 4;
-        }
-        else if (spritesA[i].isInfected) {
-            spritesA[i].frameX = 2;
-        }
-        else if (spritesA[i].hasRecovered) {
-            spritesA[i].frameX = 5;
-        }
-        else if (spritesA[i].risk < theGame.city.fractionMasking) { ////////
-            spritesA[i].frameX = 1;                                 ///////
-        }
-        else { //Normal
-            spritesA[i].frameX = 0;
-        }
-    }
-}
-*/
