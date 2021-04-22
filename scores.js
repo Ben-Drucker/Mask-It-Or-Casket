@@ -5,7 +5,7 @@ function computeScore(population, secondsRemaining, fundsRemaining, numDead, num
     let deadExponent = -2;
     let infectedExponent = -1.5;
     let populationExponent = -1 * (deadExponent + infectedExponent);
-    let scaleFactor = 1 / 500000000;        //PARAMETER
+    let scaleFactor = 1 / 5000000;        //PARAMETER
     let magnitudeFactor = 1000;
     secondsRemaining **= secondExponent;
     fundsRemaining **= fundsExponent;

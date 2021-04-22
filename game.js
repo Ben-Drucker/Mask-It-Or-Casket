@@ -7,16 +7,16 @@ class Game {
         this.won = false;
         this.hasEnded = false;
         this.previousPercentage = 0;
-        this.funds = 1000;
+        this.funds = 2000;
         this.secs = null;
         this.secondsRemaining = null;
         this.interIteratoryTime = null;
         this.fractionMinGameLength = 0.2; //minimum length of game, as a fraction of the total game length
-        this.fractionMaxDead = 0.005; //maximum number of dead people, as a fraction of the total population
+        this.fractionMaxDead = 0.01; //maximum number of dead people, as a fraction of the total population
         this.maxRiskPoints = 25; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
         this.maxPercentageInfected = 50;
         this.requiredProPoints = 50; //originally 65
-        this.fractionRiskPenaltyThreashold = 0.25;
+        this.fractionRiskPenaltyThreashold = 0.33;
         this.fundingIterations = 20;
         this.fundingIterationAmount = 150;
 
@@ -43,23 +43,37 @@ class Game {
         }
     }
 
+    displayMessage(message, length) {
+        let box = document.getElementById("msgBox");
+        box.innerHTML = message;
+        let interval = setInterval(() => {
+            if (box.innerHTML == "") {
+                clearInterval(interval);
+            }
+            else {
+                box.innerHTML = "";
+            }
+        }, length)
+    }
+
     /**
      * Takes in an option string ("Vax", "Distance", "Lockdown", or "Masks")
      */
     implementPolicy(option, cost, intensity, time) {
         if (option == "Vax") {
             if (this.city.vaxInProgress) {
-                console.log("Policy has already been implemented");
+                this.displayMessage("Vaccines already implemented!",3000);
                 return;
             }
             if (this.expense(cost) == false) {
                 console.log("Not enough funds to implement policy");
                 return;
             }
+            document.getElementById("buttonVaccine").style.background = "orange";
             console.log("Turned on Vaccination");
             theGame.updateFundsDisplay(cost, false);
             this.city.initialVaxDelay = time / this.interIteratoryTime;
-            this.city.fractionVaxing = intensity * this.city.maxFractionVaxing;
+            this.city.fractionVaxingEfficacy = intensity * this.city.maxFractionVaxEfficacy;
             this.city.vaxInProgress = true;
             this.city.vaxStartIteration = this.city.currentIteration;
         }
@@ -72,10 +86,11 @@ class Game {
                 console.log("Not enough funds to implement policy");
                 return;
             }
+            document.getElementById("buttonDistance").style.background = "orange";
             console.log("Turned on Distance");
             theGame.updateFundsDisplay(cost, false);
             this.city.initialDistancingDelay = time / this.interIteratoryTime;
-            this.city.fractionDistancing = intensity * this.city.maxFractionDistancing;
+            this.city.targetFractionDistancing = intensity * this.city.maxFractionDistancing;
             this.city.distancingInProgress = true;
             this.city.distancingStartIteration = this.city.currentIteration
         }
@@ -90,11 +105,12 @@ class Game {
             }
             console.log("Turned on Lockdown");
             theGame.updateFundsDisplay(cost, false);
+            document.getElementById("buttonLockdown").style.background = "orange";
             this.city.initialLockDownDelay = time / this.interIteratoryTime;
             this.city.targetFractionLockDownEfficacy = intensity * this.city.fractionMaxLockDownEfficacy;
             this.city.lockDownInProgress = true;
             this.city.lockDownStartIteration = this.city.currentIteration;
-            this.city.lockDownStopIteration = this.city.lockDownStartIteration + this.city.initialLockDownDelay + this.dialation*time;
+            this.city.lockDownStopIteration = this.city.lockDownStartIteration + this.city.initialLockDownDelay + this.dialation * time;
             console.log(this.city.currentIteration, "LDSI", this.city.lockDownStopIteration);
         }
         else if (option == "Masks") {
@@ -107,6 +123,7 @@ class Game {
                 return;
             }
             console.log("Turned on Masks");
+            document.getElementById("buttonMask").style.background = "orange";
             theGame.updateFundsDisplay(cost, false);
             this.city.initialMaskDelay = time / this.interIteratoryTime;
             this.city.targetFractionMasking = intensity * this.city.maxFractionMasking;

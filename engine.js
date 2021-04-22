@@ -51,8 +51,8 @@ class City {
         this.distancingStartIteration = null;
 
         //VAX
-        this.maxFractionVaxing = 0.95;
-        this.fractionVaxing = 0;                //PARAMETER
+        this.maxFractionVaxEfficacy = 0.95;
+        this.fractionVaxing = 0.8;                //PARAMETER
         this.fractionVaxingEfficacy = 0.9;      //PARAMETER
         this.initialVaxDelay = 100;             //PARAMETER
         this.vaxImplementationDelay = 50;       //PARAMETER
@@ -181,9 +181,9 @@ class City {
                             }
                             if (person1.risk < this.fractionDistancing) {
                                 interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
-                                document.getElementById("buttonDistance").style.background = "green";
-                                distanceIntensity = this.fractionDistancing;
                             }
+                            document.getElementById("buttonDistance").style.background = "green";
+                            distanceIntensity = this.fractionDistancing;
                         }
                     }
 
@@ -260,7 +260,6 @@ class City {
             distanceIntensity = "--";
         }
         else {
-            distanceIntensity = 1 - distanceIntensity;
             distanceIntensity = distanceIntensity.toFixed(2);
         }
         if (maskIntensity == null) {
@@ -369,7 +368,7 @@ class City {
     }
 
     vaccinate() {
-        let vaccinesPerDay = Math.floor(this.population / this.vaxImplementationDelay) / this.fractionVaxing;
+        let vaccinesPerDay = Math.floor(this.population / this.vaxImplementationDelay) * this.fractionVaxing;
         let vaccinatedPeople = 0;
         for (let i = 0; i < vaccinesPerDay; i++) {
             let person = this.citizens[Math.floor(Math.random() * this.population)];
@@ -380,7 +379,7 @@ class City {
 
             }
         }
-        //console.log("Vaccinated", vaccinatedPeople);
+        console.log("Vaccinated", vaccinatedPeople, "with efficacy:", this.fractionVaxingEfficacy);
     }
 }
 

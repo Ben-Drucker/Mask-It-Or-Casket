@@ -19,37 +19,8 @@ function clickedYes(option, modal, cost, maxCost, time) {
   let intensity = cost/maxCost;
   theGame.implementPolicy(option, cost, intensity, time);
   document.getElementById(modal).style.display='none';
-  if (option == "Vax" && theGame.city.vaxInProgress){
-    document.getElementById("buttonVaccine").style.background="orange";
-  }
-  else if (option == "Distance" && theGame.city.distancingInProgress){
-    document.getElementById("buttonDistance").style.background="orange";
-  }
-  else if (option == "Lockdown" && theGame.city.lockDownInProgress){
-    document.getElementById("buttonLockdown").style.background="orange";
-  }
-  else if (option == "Masks" && theGame.city.masksInProgress){
-    document.getElementById("buttonMask").style.background="orange";
-  }
 }
 
-function clickedYesTest(option, modal, cost, maxCost) {
-  let intensity = cost/maxCost;
-  theGame.implementPolicy(option, cost, intensity);
-  document.getElementById(modal).style.display='none';
-  if (option == "Vax" && theGame.city.vaxInProgress){
-    document.getElementById("buttonVaccine").className="loader"
-  }
-  else if (option == "Distance" && theGame.city.distancingInProgress){
-    document.getElementById("buttonDistance").style.background="orange";
-  }
-  else if (option == "Lockdown" && theGame.city.lockDownInProgress){
-    document.getElementById("buttonLockdown").style.background="orange";
-  }
-  else if (option == "Masks" && theGame.city.masksInProgress){
-    document.getElementById("buttonMask").style.background="orange";
-  }
-}
 
 function closeOthers(modalNum){
   if (modalNum != 'modal1') {
