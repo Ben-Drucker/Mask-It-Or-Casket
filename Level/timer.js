@@ -13,7 +13,7 @@ window.onload = function () {
     var countDownTimer = setInterval(function () {
         document.getElementById("timer").innerHTML = min + " : " + sec;
         score = computeScore(theGame.city.population, 60 * min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected, theGame.city.numVaxed);
-        console.log("Current Score: " + score);
+        //console.log("Current Score: " + score);
         sec--;
         theGame.secondsRemaining--;
         if (sec == -1 && min == 0 || theGame.hasEnded) {

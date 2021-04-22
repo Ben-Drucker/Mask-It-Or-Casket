@@ -224,7 +224,6 @@ class City {
                             document.getElementById("buttonLockdown").style.background = "yellow";
                         }
                         else if (progress >= 0 && this.currentIteration >= this.lockDownStopIteration + this.lockDownImplementationDelay) {//end
-                            console.log("DONNNNEEEE!!!!");
                             this.lockDownInProgress = false;
                             document.getElementById("buttonLockdown").style.background = "#00000000";
                             lockDownIntensity = null;
@@ -274,7 +273,7 @@ class City {
         else {
             lockDownIntensity = lockDownIntensity.toFixed(2);
         }
-        console.log("Distance intensity", distanceIntensity, "Mask Intensity", maskIntensity, "LockDown Intensity", lockDownIntensity);
+        //console.log("Distance intensity", distanceIntensity, "Mask Intensity", maskIntensity, "LockDown Intensity", lockDownIntensity);
     }
 
     iterate(i) {
@@ -294,7 +293,7 @@ class City {
 
     printGroups() {
         for (let i = 0; i < this.population; i++) {
-            console.log(this.getConnections(i));
+            //console.log(this.getConnections(i));
         }
     }
 
@@ -379,7 +378,7 @@ class City {
 
             }
         }
-        console.log("Vaccinated", vaccinatedPeople, "with efficacy:", this.fractionVaxingEfficacy);
+        //console.log("Vaccinated", vaccinatedPeople, "with efficacy:", this.fractionVaxingEfficacy);
     }
 }
 
