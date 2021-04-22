@@ -1,3 +1,5 @@
+var endMessage = ""
+
 function gameOver(){
     document.getElementById('endModal').style.display='block';
     if (theGame.won == true){
@@ -14,6 +16,7 @@ function gameOver(){
     }
     else {
         document.getElementById('endModal').innerHTML = '<h1 id="gameOver">Game Over!</h1>';
+        document.getElementById('endModal').innerHTML += "<h2>"+endMessage+"</h2>";
     }
 }
 // function submitScore() {

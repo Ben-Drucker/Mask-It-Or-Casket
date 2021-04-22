@@ -3,6 +3,7 @@
 class Game {
 
     constructor(population, numberInjected) {
+        this.dialation = 3;
         this.won = false;
         this.hasEnded = false;
         this.previousPercentage = 0;
@@ -11,11 +12,11 @@ class Game {
         this.secondsRemaining = null;
         this.interIteratoryTime = null;
         this.fractionMinGameLength = 0.2; //minimum length of game, as a fraction of the total game length
-        this.fractionMaxDead = 0.0015; //maximum number of dead people, as a fraction of the total population
-        this.maxRiskPoints = 20; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
-        this.maxPercentageInfected = 18;
+        this.fractionMaxDead = 0.005; //maximum number of dead people, as a fraction of the total population
+        this.maxRiskPoints = 25; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
+        this.maxPercentageInfected = 50;
         this.requiredProPoints = 50; //originally 65
-        this.fractionRiskPenaltyThreashold = 0.2;
+        this.fractionRiskPenaltyThreashold = 0.25;
         this.fundingIterations = 20;
         this.fundingIterationAmount = 150;
 
@@ -93,6 +94,8 @@ class Game {
             this.city.targetFractionLockDownEfficacy = intensity * this.city.fractionMaxLockDownEfficacy;
             this.city.lockDownInProgress = true;
             this.city.lockDownStartIteration = this.city.currentIteration;
+            this.city.lockDownStopIteration = this.city.lockDownStartIteration + this.city.initialLockDownDelay + this.dialation*time;
+            console.log(this.city.currentIteration, "LDSI", this.city.lockDownStopIteration);
         }
         else if (option == "Masks") {
             if (this.city.masksInProgress) {
@@ -122,17 +125,17 @@ class Game {
         if (city.numDead > this.fractionMaxDead * city.population) {
             console.log("GAME OVER! TOO MANY DEAD!");
             this.hasEnded = true;
-            return;
+            return "TOO MANY DIED!";
         }
         if (city.percentageInfected > this.maxPercentageInfected) {
             console.log("GAME OVER! TOO MANY INFECTED!");
             this.hasEnded = true;
-            return;
+            return "TOO MANY INFECTED!";
         }
         if (this.numRiskPoints > this.maxRiskPoints) {
             console.log("GAME OVER! ACCUMULATED TOO MANY RISK POINTS!");
             this.hasEnded = true;
-            return;
+            return "ACCUMULATED TOO MANY RED POINTS!";
         }
         if (this.numProPoints >= this.requiredProPoints) {
             this.hasEnded = true;
@@ -176,7 +179,7 @@ class Game {
         city.death();
         this.updateSlider(city);
         this.updateStatistics(city);
-        this.updateGameStatus(city);
+        endMessage = this.updateGameStatus(city);
         this.updateFunds();
     }
 

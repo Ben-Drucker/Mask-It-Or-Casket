@@ -65,6 +65,8 @@ class City {
         this.initialLockDownDelay = 10;             //PARAMETER
         this.lockDownImplementationDelay = 25; //PARAMETER
         this.lockDownStartIteration = null;
+        this.lockDownStopIteration = null;
+        this.maxIntensityAchieved = null;
 
         //DISTRIBUTE
         this.transmissionRisk = 0.2;        //PARAMETER
@@ -158,6 +160,7 @@ class City {
     }
 
     iteration() {
+        let subtract = true;
         let distanceIntensity;
         let maskIntensity;
         let lockDownIntensity;
@@ -202,11 +205,30 @@ class City {
 
                     if (this.lockDownInProgress) {
                         let progress = this.currentIteration - this.lockDownStartIteration - this.initialLockDownDelay;
-                        if (progress >= 0) {  //if we are past the initial delay
+                        if (progress >= 0 && this.currentIteration < this.lockDownStopIteration) {  //ramp up
                             this.fractionLockDownEfficacy = Math.min(this.targetFractionLockDownEfficacy, progress * this.targetFractionLockDownEfficacy / this.lockDownImplementationDelay);
                             interactionTransmissionRisk *= (1 - this.fractionLockDownEfficacy);
                             lockDownIntensity = this.fractionLockDownEfficacy;
                             document.getElementById("buttonLockdown").style.background = "green";
+                        }
+                        else if (progress >= 0 && this.lockDownStopIteration <= this.currentIteration && this.currentIteration < this.lockDownStopIteration + this.lockDownImplementationDelay) {//ramp down
+                            if (this.maxIntensityAchieved == null) {
+                                this.maxIntensityAchieved = this.fractionLockDownEfficacy;
+                            }
+                            if (subtract) {
+                                this.fractionLockDownEfficacy -= (this.maxIntensityAchieved / this.lockDownImplementationDelay);
+                                subtract = false;
+                            }
+                            interactionTransmissionRisk *= (1 - this.fractionLockDownEfficacy);
+                            lockDownIntensity = this.fractionLockDownEfficacy;
+                            document.getElementById("buttonLockdown").style.background = "yellow";
+                        }
+                        else if (progress >= 0 && this.currentIteration >= this.lockDownStopIteration + this.lockDownImplementationDelay) {//end
+                            console.log("DONNNNEEEE!!!!");
+                            this.lockDownInProgress = false;
+                            document.getElementById("buttonLockdown").style.background = "#00000000";
+                            lockDownIntensity = null;
+                            lockDownIntensity = 0;
                         }
                     }
 

@@ -217,7 +217,7 @@ p{
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 0.5vw;
+    width: 1.5vw;
     height: 3vw;
     background: black;
     outline: black;
