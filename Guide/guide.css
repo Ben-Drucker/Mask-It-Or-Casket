@@ -44,6 +44,27 @@ p {
 
 .next {
     float: right;
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    background-size: cover;
+    cursor: pointer;
+    background-image: url("images/next.png");
+}
+
+.back {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    background-size: cover;
+    cursor: pointer;
+    background-image: url("images/back.png");
 }
 
 #home {
@@ -56,4 +77,20 @@ p {
     background-size: cover;
     cursor: pointer;
     background-image: url("../Images/home.png");
+}
+
+#gameComponents {
+    display:none;
+}
+
+#policyBtn {
+    display:none;
+}
+
+#riskBar {
+    display:none;
+}
+
+#people {
+    display:none;
 }
