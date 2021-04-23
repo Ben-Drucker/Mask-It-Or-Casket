@@ -12,7 +12,7 @@
 <body>
     <div class="centralGrid">
         <div class="centralGridItem">
-            <div id="funds"></div>
+            <span style="color:lightblue">Money:<span id="funds"></span></span>
             <div id="timer"></div>
         </div>
         <div class="centralGridItem">
@@ -73,14 +73,14 @@
         <!-- Policy Buttons -->
         <div class="centralGridItem">
             <div class="policies">
-                <button id="buttonVaccine" onclick="closeOthers('modal1')" class="iButton">
-                    <img src="../Images/vaccine.svg" width="50px" alt="Vaccine" class='buttonIcon'></button>
-                <button id="buttonDistance" onclick="closeOthers('modal2')" class="iButton">
-                    <img src="../Images/distance.svg" width="50px" alt="Distance" class='buttonIcon'></button>
-                <button id="buttonLockdown" onclick="closeOthers('modal3')" class="iButton">
-                    <img src="../Images/shutdown.svg" width="50px" alt="Shut Down" class='buttonIcon'></button>
-                <button id="buttonMask" onclick="closeOthers('modal4')" class="iButton">
-                    <img src="../Images/mask.svg" width="50px" alt="Masks" class='buttonIcon'></button>
+                <button onclick="closeOthers('modal1')" class="iButton">
+                    <img src="../Images/vaccine.svg" width="50px" alt="Vaccine" class='buttonIcon' id="buttonVaccine"></button>
+                <button onclick="closeOthers('modal2')" class="iButton">
+                    <img src="../Images/distance.svg" width="50px" alt="Distance" class='buttonIcon' id="buttonDistance"></button>
+                <button onclick="closeOthers('modal3')" class="iButton">
+                    <img src="../Images/shutdown.svg" width="50px" alt="Shut Down" class='buttonIcon' id="buttonLockdown"></button>
+                <button onclick="closeOthers('modal4')" class="iButton">
+                    <img src="../Images/mask.svg" width="50px" alt="Masks" class='buttonIcon' id="buttonMask"></button>
             </div>
         </div>
         <div class="centralGridItem">
@@ -135,7 +135,7 @@
             <div id="slidercontainer">
                 <input type="range" min="0" max="8000" class="slider" id="myRange" disabled="true" value="0">
             </div>
-            <div id="mask1"></div>
+            <!-- <div id="mask1"></div> -->
         </div>
     </div>
     <!-- Home Button -->
@@ -145,6 +145,9 @@
                 <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
             </svg>
         </button>
+    <div class="centralGridItem">
+        <div id="mask"></div>
+    </div>
     <!-- </div> -->
 
     </div>

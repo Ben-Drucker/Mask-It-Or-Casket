@@ -10,7 +10,25 @@
 
     <div id="intro" class="main">
         <h2>Intro</h2>
-        <p>Mask-It and Casket is a game that ...</p>
+        <p>
+            Epidemics and pandemics are not going anywhere and will forever be a part of history.
+            Mask-It-Or-Casket was created to help visualize disease spread and the impact of 
+            policy implementations on it. Aspects of the game were included to make the game 
+            more realistic - money and time is needed for policies, vaccines need to be developed
+            before they can be used, the risk bar was based off a model the New York Times used
+            to assess transmission risk. We hope Mask-It-Or-Casket will give you some insight into
+            some of the work that goes into fighting against epidemics and pandemics! 
+        </p>
+        <br>
+        <h2>How to Win</h2>
+        <p>
+            Strategize and implement policies within your budget and in time. 
+            <br>
+            Keep the risk as low as possible so you can gain more green points and reduce your red points. 
+        </p>
+        <p>
+            Long story short: Protect the people from the disease in time to save as many people as you can!
+        </p>
         <button id="next1" class="next" onclick="openPage('gameComponents')" alt="next"></button>
     </div>
 
@@ -22,6 +40,39 @@
 
     <div id="policyBtn" class="main">
         <h2>Policies</h2>
+        <div class="grid-container">
+            <div class="grid-item"><img src="../Images/vaccine.svg" alt="vaccine" width="50px" style="
+                background-color: white;
+                padding:4px;
+                border: 4px solid lightblue;">
+            </div>
+            <div class="grid-item"><p>
+                Need to develop vaccine before getting people vaccinated.
+                <br>
+                Different number of vaccines you can buy at a time. 
+            </p></div>
+            <div class="grid-item"><img src="../Images/distance.svg" alt="distance" width="50px" style="
+                background-color: white;
+                padding:4px;
+                border: 4px solid lightblue;"></div>
+            <div class="grid-item"><p>
+                Social Distancing. The more expensive the policy, the more effective social distancing is. 
+            </p></div>
+            <div class="grid-item"><img src="../Images/shutdown.svg" alt="lockdown" width="50px" style="
+                background-color: white;
+                padding:4px;
+                border: 4px solid lightblue;"></div>
+            <div class="grid-item"><p>
+                Shutdown. Stay at home order, shutdown public places, and provide stimulus for shutdown. 
+            </p></div>
+            <div class="grid-item"><img src="../Images/mask.svg" alt="mask" width="50px" style="
+                background-color: white;
+                padding:4px;
+                border: 4px solid lightblue;"></div>
+            <div class="grid-item"><p>
+                Buy masks to give to people to wear!
+            </p></div>
+        </div>
         <button id="back3" class="back" onclick="openPage('gameComponents')" alt="back"></button>
         <button id="next3" class="next" onclick="openPage('riskBar')" alt="next"></button>
     </div>

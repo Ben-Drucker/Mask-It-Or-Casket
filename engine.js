@@ -182,7 +182,7 @@ class City {
                             if (person1.risk < this.fractionDistancing) {
                                 interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
                             }
-                            document.getElementById("buttonDistance").style.background = "green";
+                            document.getElementById("buttonDistance").style.borderColor = "green";
                             distanceIntensity = this.fractionDistancing;
                         }
                     }
@@ -197,7 +197,7 @@ class City {
                             if (person1.risk < this.fractionMasking) {
                                 interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
                             }
-                            document.getElementById("buttonMask").style.background = "green";
+                            document.getElementById("buttonMask").style.borderColor = "green";
                             maskIntensity = this.fractionMasking;
                         }
 
@@ -209,7 +209,7 @@ class City {
                             this.fractionLockDownEfficacy = Math.min(this.targetFractionLockDownEfficacy, progress * this.targetFractionLockDownEfficacy / this.lockDownImplementationDelay);
                             interactionTransmissionRisk *= (1 - this.fractionLockDownEfficacy);
                             lockDownIntensity = this.fractionLockDownEfficacy;
-                            document.getElementById("buttonLockdown").style.background = "green";
+                            document.getElementById("buttonLockdown").style.borderColor = "green";
                         }
                         else if (progress >= 0 && this.lockDownStopIteration <= this.currentIteration && this.currentIteration < this.lockDownStopIteration + this.lockDownImplementationDelay) {//ramp down
                             if (this.maxIntensityAchieved == null) {
@@ -221,11 +221,11 @@ class City {
                             }
                             interactionTransmissionRisk *= (1 - this.fractionLockDownEfficacy);
                             lockDownIntensity = this.fractionLockDownEfficacy;
-                            document.getElementById("buttonLockdown").style.background = "yellow";
+                            document.getElementById("buttonLockdown").style.borderColor = "yellow";
                         }
                         else if (progress >= 0 && this.currentIteration >= this.lockDownStopIteration + this.lockDownImplementationDelay) {//end
                             this.lockDownInProgress = false;
-                            document.getElementById("buttonLockdown").style.background = "#00000000";
+                            document.getElementById("buttonLockdown").style.borderColor = "lightblue";
                             lockDownIntensity = null;
                             lockDownIntensity = 0;
                         }
