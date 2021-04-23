@@ -23,22 +23,13 @@ function clickedYes(option, modal, cost, maxCost, time) {
 
 
 function closeOthers(modalNum){
-  if (modalNum != 'modal1') {
-    document.getElementById('modal1').style.display='none';
+  let modals = document.getElementsByClassName("modal");
+  for (let i = 0; i < modals.length; i++) {
+    modals[i].style.display = "none";
   }
-  if (modalNum != 'modal2') {
-    document.getElementById('modal2').style.display='none';
+  if (modalNum){
+    document.getElementById(modalNum).style.display='block';
   }
-  if (modalNum != 'modal3'){
-    document.getElementById('modal3').style.display='none';
-  }
-  if (modalNum != 'modal4'){
-    document.getElementById('modal4').style.display='none';
-  }
-  if (modalNum != 'modal5'){
-    document.getElementById('modal5').style.display='none';
-  }
-  document.getElementById(modalNum).style.display='block';
 }
 
   // get modal

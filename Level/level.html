@@ -20,39 +20,46 @@
             <br>
             <br>
             <span class="nowrap">
-            <span id="GreenPoints" class="statisticsDynamic"></span>
-            <span class="statisticsStatic"> green points to win!</span>
+            <span id="GreenPoints" style="color:white"></span>
+            <span style="color:lightblue"> green points to win!</span>
             </span>
             <span>
-            <span id="RedPoints" class="statisticsDynamic"></span>
-            <span class="statisticsStatic"> red points to lose!</span>
+            <span id="RedPoints" style="color:white"></span>
+            <span style="color:lightblue"> red points to lose!</span>
             </span>
             <br>
             <br>
         </div>
+        <!-- Stats -->
         <div class="centralGridItem">
             <div id="statistics">
-                <span id="numInfected" class="statisticsDynamic"></span>
-                <span class="statisticsStatic">Are infected out of </span>
-                <span id="population" class="statisticsDynamic"></span>
                 <span class="nowrap">
-                    <span class="statisticsStatic">&#40;</span>
+                    <span class="statisticsStatic">Score: </span>
+                </span>
+                <br>
+                <br>
+                <span class="nowrap">
+                    <span class="statisticsStatic">Infected: </span>
                     <span id="infectedPct" class="statisticsDynamic"></span>
-                    <span class="statisticsStatic">&percnt;&#41;</span>
                 </span>
                 <br>
                 <br>
-                <span id="numDead" class="statisticsDynamic"></span>
-                <span class="statisticsStatic"> are dead</span>
                 <span class="nowrap">
-                    <span class="statisticsStatic">&#40;</span>
+                    <span class="statisticsStatic">Dead: </span>
                     <span id="deadPct" class="statisticsDynamic"></span>
-                    <span class="statisticsStatic">&percnt;&#41;</span>
                 </span>
                 <br>
                 <br>
-                <span id="numRecovered" class="statisticsDynamic"></span>
-                <span class="statisticsStatic"> have recovered</span>
+                <span class="nowrap">
+                    <span class="statisticsStatic">Recovered: </span>
+                    <span id="numRecovered" class="statisticsDynamic"></span>
+                </span>
+                <br>
+                <br>
+                <span class="nowrap">
+                    <span class="statisticsStatic">Population: </span>
+                    <span id="population" class="statisticsDynamic"></span>
+                </span>
             </div>
         </div>
         <div class="centralGridItem"></div>
@@ -62,42 +69,8 @@
             </div>
         </div>
         <div class="centralGridItem"></div>
-        <!--Trigger/Open Modal-->
+        <!-- Policy Buttons -->
         <div class="centralGridItem">
-            <!-- <div class="policies">
-                <div class="loader">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <button id="buttonVaccine" onclick="closeOthers('modal1')" class="iButton"><img
-                            src="images/vaccine.png" width="50px" alt="Vaccine" class='buttonIcon'></button>
-                </div>
-                <div id="loader_container">
-                    <span></span>
-                    <span></span>
-                    <span></span> 
-                    <span></span>
-                    <button id="buttonDistance" onclick="closeOthers('modal2')" class="iButton"><img
-                        src="images/distance.png" width="50px" alt="Distance" class='buttonIcon'></button>
-                </div>
-                <div id="loader">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <button id="buttonLockdown" onclick="closeOthers('modal3')" class="iButton"><img
-                        src="images/ShutDown.png" width="50px" alt="Shut Down" class='buttonIcon'></button>
-                </div>
-                <div id="loader">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <button id="buttonMask" onclick="closeOthers('modal4')" class="iButton"><img src="images/mask.png"
-                        width="50px" alt="Masks" class='buttonIcon'></button>
-                    </div> 
-            </div> -->
             <div class="policies">
                 <button id="buttonVaccine" onclick="closeOthers('modal1')" class="iButton"><img
                         src="images/vaccine.png" width="50px" alt="Vaccine" class='buttonIcon'></button>
@@ -156,22 +129,25 @@
             <div id="endModal">
             </div>
         </div>
+        <!-- Slider -->
         <div class="centralGridItem" id="sliderGridItem">
             <div id="slidercontainer">
                 <input type="range" min="0" max="8000" class="slider" id="myRange" disabled="true" value="0">
             </div>
         </div>
-        <div class="clr"></div>
-
     </div>
-    <br>
+    <!-- Home Button -->
+    <div class="centralGridItem"></div>
+        <button class= "ibutton" onclick="if(theGame.hasEnded && !theGame.won){window.location.replace('../index.html');}; closeOthers('modal5');">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+            </svg>
+        </button>
+    </div>
+    <div class="centralGridItem"></div>
+        
+    </div>
     <div class="clr"></div>
-    <button class= "ibutton" onclick="if(theGame.hasEnded && !theGame.won){window.location.replace('../index.html');}; closeOthers('modal5');">
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
-        </svg>
-    </button>
-    <br>
 
     <!-- Load JavaScript Code -->
     <script src="../ageDistributions.js"></script>

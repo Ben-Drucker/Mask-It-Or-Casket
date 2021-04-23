@@ -260,11 +260,9 @@ class Game {
     }
 
     updateStatistics(city) {
-        document.getElementById("numInfected").innerHTML = city.numInfected;
-        document.getElementById("infectedPct").innerHTML = city.percentageInfected.toFixed(2);
-        document.getElementById("population").innerHTML = city.population;
-        document.getElementById("numDead").innerHTML = city.numDead
-        document.getElementById("deadPct").innerHTML = ((city.numDead / city.population) * 100).toFixed(3);
+        document.getElementById("infectedPct").innerHTML = city.percentageInfected.toFixed(2) + " %";
+        document.getElementById("population").innerHTML = city.population - city.numDead;
+        document.getElementById("deadPct").innerHTML = ((city.numDead / city.population) * 100).toFixed(3) + " %";
         document.getElementById("numRecovered").innerHTML = city.numRecovered;
         document.getElementById("GreenPoints").innerHTML = this.numProPoints + " of " + this.requiredProPoints;
         document.getElementById("RedPoints").innerHTML = Math.floor(this.numRiskPoints) + " of " + this.maxRiskPoints;

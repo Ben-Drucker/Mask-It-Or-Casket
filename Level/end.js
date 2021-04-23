@@ -1,11 +1,12 @@
 var endMessage = ""
 
 function gameOver(){
+    closeOthers(0);
     document.getElementById('endModal').style.display='block';
-    if (theGame.won == true){
+    if (theGame.won != true){
         document.getElementById('endModal').innerHTML = `
         <h1>You did it!</h1>
-        <form id="submitScore">
+        <form id="submitScore" onkeypress="return event.keyCode != 13">
             Name: <input type="text" id="name">
             <input type="button" onclick="submitScore()" value="SUBMIT">
         </form>
