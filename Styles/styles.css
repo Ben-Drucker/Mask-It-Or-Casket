@@ -2,7 +2,7 @@
 
 @font-face {
     font-family:"Karmatic Arcade";
-    src: url("Level/fonts/BenMaticArcade4.otf") format("opentype");
+    src: url("../Level/fonts/BenMaticArcade4.otf") format("opentype");
 }
 
 html{
@@ -12,7 +12,7 @@ html{
 
 body {
     background-color: #3b3963;
-    background-image: url("Images/index.png");
+    background-image: url("../Images/index.png");
     background-repeat: no-repeat;
     background-size: 100%;
     margin: 0;
@@ -36,7 +36,7 @@ div {
     padding: 0;
     background-color: transparent;
     border: none;
-    background-image: url("Images/start.png");
+    background-image: url("../Images/start.png");
     background-size: cover;
     background-repeat: no-repeat;
     width: 613px;
@@ -47,11 +47,11 @@ div {
 }
 
 .start:hover {
-    background-image: url("Images/startVac.png");
+    background-image: url("../Images/startVac.png");
 }
 
 .start:focus {
-    background-image: url("Images/startVacClick.png");
+    background-image: url("../Images/startVacClick.png");
 }
 
 .leader {
@@ -59,7 +59,7 @@ div {
     padding: 0;
     background-color: transparent;
     border: none;
-    background-image: url("Images/leader.png");
+    background-image: url("../Images/leader.png");
     background-size: cover;
     background-repeat: no-repeat;
     width: 613px;
@@ -69,11 +69,11 @@ div {
 }
 
 .leader:hover {
-    background-image: url("Images/leaderVac.png");
+    background-image: url("../Images/leaderVac.png");
 }
 
 .leader:active {
-    background-image: url("Images/leaderVacClick.png");
+    background-image: url("../Images/leaderVacClick.png");
 }
 
 .help {
@@ -81,7 +81,7 @@ div {
     padding: 0;
     background-color: transparent;
     border: none;
-    background-image: url("Images/help.png");
+    background-image: url("../Images/help.png");
     background-size: cover;
     background-repeat: no-repeat;
     width: 613px;
@@ -91,9 +91,9 @@ div {
 }
 
 .help:hover {
-    background-image: url("Images/helpVac.png");
+    background-image: url("../Images/helpVac.png");
 }
 
 .help:active {
-    background-image: url("Images/helpVacClick.png");
+    background-image: url("../Images/helpVacClick.png");
 }
