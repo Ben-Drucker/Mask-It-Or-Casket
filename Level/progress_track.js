@@ -22,7 +22,7 @@ let timeLeft = TIME_LIMIT;
 let timerInterval = null;
 let remainingPathColor = COLOR_CODES.info.color;
 
-document.getElementById("app").innerHTML = `
+document.getElementById("mask1").innerHTML = `
 <div class="base-timer">
   <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <g class="base-timer__circle">
@@ -40,9 +40,18 @@ document.getElementById("app").innerHTML = `
       ></path>
     </g>
   </svg>
-  <span id="base-timer-label" class="base-timer__label">${formatTime(
-    timeLeft
-  )}</span>
+  <span>
+    <img src="../Images/mask.svg" alt="Mask" style="
+    position: absolute;
+    height: 70px;
+    width: 40px;
+    top: 0;
+    left: 15px;
+    display: flex;
+    align-content: center;
+    justify-content: center;">
+    </img>
+  </span>
 </div>
 `;
 
@@ -56,9 +65,6 @@ function startTimer() {
   timerInterval = setInterval(() => {
     timePassed = timePassed += 1;
     timeLeft = TIME_LIMIT - timePassed;
-    document.getElementById("base-timer-label").innerHTML = formatTime(
-      timeLeft
-    );
     setCircleDasharray();
     setRemainingPathColor(timeLeft);
 
@@ -66,17 +72,6 @@ function startTimer() {
       onTimesUp();
     }
   }, 1000);
-}
-
-function formatTime(time) {
-  const minutes = Math.floor(time / 60);
-  let seconds = time % 60;
-
-  if (seconds < 10) {
-    seconds = `0${seconds}`;
-  }
-
-  return `${minutes}:${seconds}`;
 }
 
 function setRemainingPathColor(timeLeft) {

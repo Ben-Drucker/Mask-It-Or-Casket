@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap'); */
 
 @font-face {
     font-family:"Karmatic Arcade";
@@ -78,7 +79,8 @@ p{
 }
 
 .close-button {
-    font-family: 'VT323', monospace;
+    /* font-family: 'VT323', monospace; */
+    font-family: 'Press Start 2P', cursive;
     cursor: pointer;
     position: absolute;
     top: 0%;
@@ -142,6 +144,14 @@ p{
     z-index: 101;
 }
 
+/* #homeButton{
+    text-align:center;
+    display: flex;      From stack overflow
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+} */
+
 #LevelTitle {
     margin-top: 10px;
 }
@@ -155,9 +165,9 @@ p{
     width: 120px;
     height: 50px;
     font-size: 20px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     background-color: white;
-    border: 5px solid #8279ff;
+    border: 5px solid lightblue;
 
 }
 
@@ -190,6 +200,7 @@ p{
     position: relative;
     display: inline-block;
     padding: 20px;
+    z-index: 50;
 }
 
 .slider {
@@ -214,6 +225,7 @@ p{
     margin-left: -22.5vh;
     margin-right: -22.5vh;
     margin-bottom: 22.5vh;
+    z-index: 51;
 }
     
 .slider:hover {
@@ -234,6 +246,9 @@ p{
     align-content: center;
     height: 6vh;
     width: 6vh;
+    background-color: whitesmoke;
+    padding: 10px;
+    border: 5px solid lightblue;
 }
 
 #buttonVaccine{
@@ -271,7 +286,10 @@ p{
 }
 
 .policyBtn{
-    font-family: 'VT323', monospace;
+    /* font-family: 'VT323', monospace; */
+    font-family: 'Press Start 2P', cursive;
+    line-height: 165%;
+    font-size: 0.5em;
     width: inherit;
     margin-left: 5px;
     margin-right: 5px;
@@ -399,14 +417,13 @@ a {
     backdrop-filter: blur(5px);
 }
 
-/* For progress tracking
 .base-timer {
-    position: relative;
-    width: 150px;
-    height: 150px;
+    position: absolute;
+    width: 70px;
+    height: 70px;
   }
   
-  .base-timer__svg {
+.base-timer__svg {
     transform: scaleX(-1);
   }
   
@@ -440,5 +457,6 @@ a {
   
   .base-timer__path-remaining.red {
     color: red;
-  } */ 
+  } 
+
   
