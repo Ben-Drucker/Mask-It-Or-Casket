@@ -12,4 +12,7 @@
 **/.DS_Store
 
 #Other Files
-policyResults.txt
+**/policyResults.txt
+**/CountryReference.txt
+Notes
+Personal

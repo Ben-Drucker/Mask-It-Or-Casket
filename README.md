@@ -4,4 +4,4 @@ You can find the link to this project's website here: https://github.swarthmore.
 
 Below you will find an image representing the rough idea behind the graph created in engine.js. There are different groups with many connections in each group with a smaller number of connections _between_ groups. 
 
-<img alt="Network Explainer" src="NetworkExplainer.png" width="300" align="center">
+<img alt="Network Explainer" src="Images/NetworkExplainer.png" width="300" align="center">
