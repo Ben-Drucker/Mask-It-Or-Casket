@@ -15,8 +15,8 @@ class Game {
         this.fractionMaxDead = 0.01; //maximum number of dead people, as a fraction of the total population
         this.maxRiskPoints = 25; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
         this.maxPercentageInfected = 33;
-        this.requiredProPoints = 50; //originally 65
-        this.fractionRiskPenaltyThreashold = 0.33;
+        this.requiredProPoints = 100; //originally 65
+        this.fractionRiskPenaltyThreashold = 0.25;
         this.fundingIterations = 20;
         this.fundingIterationAmount = 150;
 
@@ -165,6 +165,7 @@ class Game {
     updateFunds() {
         if (this.currentSubIteration % this.fundingIterations == 2 && this.currentSubIteration != 2) {
             this.updateFundsDisplay(this.fundingIterationAmount, true);
+            this.displayMessage("Payday!",1000);
         }
     }
 

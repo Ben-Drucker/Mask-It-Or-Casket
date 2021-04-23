@@ -5,7 +5,7 @@ var score;
 window.onload = function () {
     theGame.interIteratoryTime = 0.5; //time between iterations, in seconds.
     document.getElementById("funds").innerHTML = "Money: " + theGame.funds;
-    var min = 3;
+    var min = 2;
     var sec = "00";
     theGame.secs = 60 * min + parseInt(sec);
     theGame.secondsRemaining = theGame.secs;
