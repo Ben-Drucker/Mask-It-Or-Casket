@@ -16,7 +16,12 @@ body {
 }
 
 h1 {
-    margin-left: 50%;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 0px;
+    padding-top: 5px;
 }
 
 p {
@@ -38,11 +43,19 @@ p {
     color: black;
 }
 
-.grid-container {
+.grid-container1 {
     display: grid;
-    grid-template-columns: auto auto;
-    padding:20px;
+    grid-template-columns: 80px auto;
     grid-gap: 20px;
+    padding: 20px;
+}
+
+.grid-container2 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+    padding:20px;
+    justify-items: center;
 }
 
 .next {
@@ -94,6 +107,12 @@ p {
     display:none;
 }
 
-#people {
+#people1 {
     display:none;
+    height: 505px;
+}
+
+#people2 {
+    display:none;
+    height: 650px;
 }

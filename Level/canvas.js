@@ -68,7 +68,6 @@ function changeStatus() {
      *      Distance
      *      Nothing
      */
-
     for (let i = 0; i < spritesA.length; i++) {
         if (spritesA[i].isDead) {   //DEAD
             setIcon(spritesA[i], 7);
@@ -116,7 +115,6 @@ function changeStatus() {
             }
         }
     }
-
 
     function setIcon(spritesA_i, pos){
         spritesA_i.frameX = pos;
