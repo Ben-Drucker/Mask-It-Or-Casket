@@ -197,7 +197,8 @@ p{
     background: rgb(201,5,5);
     /* background: linear-gradient(90deg, rgba(201,5,5,1) 0%, rgba(221,112,12,1) 25%, rgba(236,244,4,1) 50%, rgba(197,231,4,1) 65%, rgba(97,199,25,1) 83%, rgba(12,128,5,1) 100%); */
     /* background: linear-gradient(90deg, #636db8 10%, #e2e79c 50%, rgb(107, 55, 82) 95%); #95c6d0 */
-    background: linear-gradient(90deg, #518997 10%, #ffffff 50%, #796177 95%);
+    /* background: linear-gradient(90deg, #518997 10%, #ffffff 50%, #796177 95%); blue->white->grey */
+    background: linear-gradient(90deg, #1e7c1e 10%, #ffd500 50%, #ff4a2f 90%);
     border: 2px solid black;
     opacity: 1.0;
     transition: .2s;
@@ -218,7 +219,7 @@ p{
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 1.5vw;
+    width: 0.75vw;
     height: 3vw;
     background: black;
     outline: black;
@@ -295,7 +296,7 @@ a {
     height:70px; 
     width:70px;
     margin:auto;
-} */
+} 
 
 .loader
 {
@@ -359,7 +360,7 @@ a {
 .loader > span:nth-child(4):before
 {
     animation-delay:3s;
-}
+} */
 
 #statistics{
     text-align: left;
@@ -393,3 +394,48 @@ a {
     background-color: rgba(180, 183, 245, 0.103);
     backdrop-filter: blur(5px);
 }
+
+
+/* For progress tracking
+.base-timer {
+    position: relative;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .base-timer__svg {
+    transform: scaleX(-1);
+  }
+  
+  .base-timer__circle {
+    fill: none;
+    stroke: none;
+  }
+  
+  .base-timer__path-elapsed {
+    stroke-width: 7px;
+    stroke: grey;
+  }
+  
+  .base-timer__path-remaining {
+    stroke-width: 7px;
+    stroke-linecap: round;
+    transform: rotate(90deg);
+    transform-origin: center;
+    transition: 1s linear all;
+    fill-rule: nonzero;
+    stroke: currentColor;
+  }
+  
+  .base-timer__path-remaining.green {
+    color: rgb(65, 184, 131);
+  }
+  
+  .base-timer__path-remaining.orange {
+    color: orange;
+  }
+  
+  .base-timer__path-remaining.red {
+    color: red;
+  } */ 
+  
