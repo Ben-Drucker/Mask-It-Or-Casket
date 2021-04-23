@@ -12,7 +12,7 @@
 
     <div id="intro" class="main">
         <h2>Intro</h2>
-        <p>Mask-It and Casket is a game that ...</p>
+        <p class="helpPar">Mask-It and Casket is a game that ...</p>
         <button id="next1" class="next" onclick="openPage('gameComponents')" alt="next"></button>
     </div>
 
@@ -31,29 +31,58 @@
     <div id="riskBar" class="main">
         <h2>Risk Bar</h2>
         <button id="back4" class="back" onclick="openPage('policyBtn')" alt="back"></button>
-        <button id="next4" class="next" onclick="openPage('people')" alt="next"></button>
+        <button id="next4" class="next" onclick="openPage('people1')" alt="next"></button>
     </div>
 
-    <div id="people" class="main">
-    <h2>People</h2>
-    <div class="grid-container">
+    <div id="people1" class="main">
+    <h2>Citizens (Part 1)</h2>
+    <p class="helpPar">The citizens will have one of four base states:</p>
+    <div class="grid-container1">
         <div class="grid-item"><img src="images/normal.png" alt="plain circle"></div>
-        <div class="grid-item"><p>A plain circle represents normal people. 
-            These people have not been infected by the virus, have not been vaccinated and are still alive.</p></div>
-        <div class="grid-item"><img src="images/vaccinated.png" alt="masked circle"></div>
-        <div class="grid-item"><p>A circle wearing a mask represents a vaccinated person.</p></div>
-        <div class="grid-item"><img src="images/infected.png" alt="virus"></div>
-        <div class="grid-item"><p>A green virus represents an infected person.</p></div>
+        <div class="grid-item"><p class="helpPar">Citizens who have not been infected by the virus will be shown as a plain circle.</p></div>
+        <div class="grid-item"><img src="images/infected.png" alt="masked circle"></div>
+        <div class="grid-item"><p class="helpPar">Citizens who are infected by the virus will be shown as a green virus.</p></div>
+        <div class="grid-item"><img src="images/recovered.png" alt="virus"></div>
+        <div class="grid-item"><p class="helpPar">Citizens who were infected by the virus, but have recovered will be shown as a plain circle with green arms.</p></div>
         <div class="grid-item"><img src="images/dead.png" alt="skull"></div>
-        <div class="grid-item"><p>A skull represents a person is dead.</p></div>
+        <div class="grid-item"><p class="helpPar">Citizens who have died because of the virus will be shown as a skull.</p></div>
     </div>
     <button id="back5" class="back" onclick="openPage('riskBar')" alt="back"></button>
-    <button id="next5" class="next" onclick="openPage('intro')" alt="next"></button>
-
+    <button id="next5" class="next" onclick="openPage('people2')" alt="next"></button>
     </div>
+
+    <div id="people2" class="main">
+        <h2>Citizens (Part 2)</h2>
+        <p class="helpPar">If a citizen is following a certain policy, then their base icon will have one of the following effects over their icon.</p>
+        <p class="helpPar">*If the citizen is following multiple policies, then the policy that better protects them from the virus will be displayed. The policies are listed in order of effectiveness.</p>
+
+        <div class="grid-container2">
+            <div class="grid-item"><img src="images/normalVax.png" alt="plain circle"></div>
+            <div class="grid-item"><img src="images/infectedVax.png" alt="plain circle"></div>
+            <div class="grid-item"><img src="images/recoveredVax.png" alt="plain circle"></div>
+        </div>
+            <p class="helpPar">Citizens who have been vaccinated will have a blue aura around their base icon.</p>
+        <div class="grid-container2">
+            <div class="grid-item"><img src="images/normalMask.png" alt="plain circle"></div>
+            <div class="grid-item"><img src="images/infectedMask.png" alt="plain circle"></div>
+            <div class="grid-item"><img src="images/recoveredMask.png" alt="plain circle"></div>
+        </div>
+            <p class="helpPar">Citizens who are wearing a mask will be a shown with a mask over their base icon.</p>
+        <div class="grid-container2">
+            <div class="grid-item"><img src="images/normalDist.png" alt="plain circle"></div>
+            <div class="grid-item"><img src="images/infectedDist.png" alt="plain circle"></div>
+            <div class="grid-item"><img src="images/recoveredDist.png" alt="plain circle"></div>
+        </div>
+            <p class="helpPar">Citizens who are social distancing, will have an arrow pointing in both directions over their icon.</p>
+
+        <br>
+        <button id="back6" class="back" onclick="openPage('people1')" alt="back"></button>
+        <button id="next6" class="next" onclick="openPage('intro')" alt="next"></button>
+        </div>
 
     <br>
     <a href="../index.html"><button id="home" > Home</button></a>
+    <br>
     <br>
     <script src="pages.js"></script>
 

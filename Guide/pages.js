@@ -11,8 +11,11 @@ function openPage(page){
     if (page != 'riskBar'){
       document.getElementById('riskBar').style.display='none';
     }
-    if (page != 'people'){
-      document.getElementById('people').style.display='none';
+    if (page != 'people1'){
+      document.getElementById('people1').style.display='none';
+    }
+    if (page != 'people2'){
+      document.getElementById('people2').style.display='none';
     }
     document.getElementById(page).style.display='block';
   }
