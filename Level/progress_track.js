@@ -4,14 +4,14 @@ const ALERT_THRESHOLD = 5;
 
 const COLOR_CODES = {
   info: {
-    color: "green"
+    color: "red"
   },
   warning: {
     color: "orange",
     threshold: WARNING_THRESHOLD
   },
   alert: {
-    color: "red",
+    color: "green",
     threshold: ALERT_THRESHOLD
   }
 };
@@ -22,7 +22,7 @@ let timeLeft = TIME_LIMIT;
 let timerInterval = null;
 let remainingPathColor = COLOR_CODES.info.color;
 
-document.getElementById("mask1").innerHTML = `
+document.getElementById("mask").innerHTML = `
 <div class="base-timer">
   <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <g class="base-timer__circle">

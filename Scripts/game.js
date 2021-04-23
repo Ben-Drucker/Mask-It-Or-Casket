@@ -68,7 +68,7 @@ class Game {
                 this.displayMessage("Not enough money to implement this vaccine!", 3000);
                 return;
             }
-            document.getElementById("buttonVaccine").style.background = "orange";
+            document.getElementById("buttonVaccine").style.borderColor = "orange";
             theGame.updateFundsDisplay(cost, false);
             this.city.initialVaxDelay = time / this.interIteratoryTime;
             this.city.fractionVaxingEfficacy = intensity * this.city.maxFractionVaxEfficacy;
@@ -84,7 +84,7 @@ class Game {
                 this.displayMessage("Not enough money to implement this campaign!", 3000);
                 return;
             }
-            document.getElementById("buttonDistance").style.background = "orange";
+            document.getElementById("buttonDistance").style.borderColor = "orange";
             theGame.updateFundsDisplay(cost, false);
             this.city.initialDistancingDelay = time / this.interIteratoryTime;
             this.city.targetFractionDistancing = intensity * this.city.maxFractionDistancing;
@@ -101,7 +101,7 @@ class Game {
                 return;
             }
             theGame.updateFundsDisplay(cost, false);
-            document.getElementById("buttonLockdown").style.background = "orange";
+            document.getElementById("buttonLockdown").style.borderColor = "orange";
             this.city.initialLockDownDelay = time / this.interIteratoryTime;
             this.city.targetFractionLockDownEfficacy = intensity * this.city.fractionMaxLockDownEfficacy;
             this.city.lockDownInProgress = true;
@@ -117,7 +117,7 @@ class Game {
                 this.displayMessage("Not enough funds to implement this campaign!", 3000);
                 return;
             }
-            document.getElementById("buttonMask").style.background = "orange";
+            document.getElementById("buttonMask").style.borderColor = "orange";
             theGame.updateFundsDisplay(cost, false);
             this.city.initialMaskDelay = time / this.interIteratoryTime;
             this.city.targetFractionMasking = intensity * this.city.maxFractionMasking;
@@ -172,11 +172,11 @@ class Game {
     updateFundsDisplay(amount, willIncrease) {
         if (willIncrease) {
             this.funds += amount;
-            document.getElementById("funds").innerHTML = "Money: " + this.funds;
+            document.getElementById("funds").innerHTML = this.funds;
         }
         else {
             this.funds -= amount;
-            document.getElementById("funds").innerHTML = "Money: " + this.funds;
+            document.getElementById("funds").innerHTML = this.funds;
         }
     }
 
@@ -197,7 +197,7 @@ class Game {
         if (city.vaxInProgress && this.currentSubIteration >= city.initialVaxDelay + city.vaxStartIteration) {
             city.vaccinate();
             //TEMP:
-            document.getElementById("buttonVaccine").style.background = "green";
+            document.getElementById("buttonVaccine").style.borderColor = "green";
         }
         //console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected out of", city.population, "(", city.percentageInfected.toFixed(2), "% infected ) %delta = ", (city.percentageInfected - this.previousPercentage).toFixed(2), "Dead:", city.numDead); 
         this.previousPercentage = city.percentageInfected;
@@ -266,6 +266,7 @@ class Game {
         document.getElementById("numRecovered").innerHTML = city.numRecovered;
         document.getElementById("GreenPoints").innerHTML = this.numProPoints + " of " + this.requiredProPoints;
         document.getElementById("RedPoints").innerHTML = Math.floor(this.numRiskPoints) + " of " + this.maxRiskPoints;
+        document.getElementById("score").innerHTML = score;
     }
 
 }

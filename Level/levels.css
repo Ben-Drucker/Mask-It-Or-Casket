@@ -153,7 +153,10 @@ p{
 } */
 
 #LevelTitle {
-    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 2px;
+    background-color: rgba(180, 183, 245, 0.103);
+    backdrop-filter: blur(5px);
 }
 
 #timer {
@@ -214,7 +217,7 @@ p{
     /* background: linear-gradient(90deg, #636db8 10%, #e2e79c 50%, rgb(107, 55, 82) 95%); #95c6d0 */
     /* background: linear-gradient(90deg, #518997 10%, #ffffff 50%, #796177 95%); blue->white->grey */
     background: linear-gradient(90deg, #1e7c1e 10%, #ffd500 50%, #ff4a2f 90%);
-    border: 2px solid black;
+    border: 5px solid lightblue;
     opacity: 1.0;
     transition: .2s;
     transition: opacity .2s;
@@ -251,7 +254,16 @@ p{
     border: 5px solid lightblue;
 }
 
-#buttonVaccine{
+.buttonIcon:hover{
+    align-content: center;
+    height: 6vh;
+    width: 6vh;
+    background-color: lightblue;
+    padding: 10px;
+    border: 5px solid whitesmoke;
+}
+
+/* #buttonVaccine{
     width: 70px;
     height: 70px;
 }
@@ -266,7 +278,7 @@ p{
 #buttonMask{
     width: 70px;
     height: 70px;
-}
+} */
 
 #bottomGrid{
     display: grid;
@@ -305,84 +317,6 @@ a {
     padding:0;
     margin:0;
 }
-
-/* #loader_container
-{   
-    position: relative;
-    display: inline-block;
-    padding: 20px;
-    display:block ;
-    position:absolute;
-    top:90%;
-    left:50%;
-    height:70px; 
-    width:70px;
-    margin:auto;
-} 
-
-.loader
-{
-    display:block ;
-    position:absolute;
-    top:90%;
-    left:50%;
-    height:70px; 
-    width:70px;
-    margin:auto;
-}
-
-.loader > span
-{
-    display:block ;
-    position:absolute ;
-    height:100%; 
-    width:100%;
-    top:0;  
-    left:0;
-    overflow:hidden;
-}
-
-.loader > span:before {
-    content:"";
-    display:block ;
-    position:absolute ;
-    height:100%; width:100%;
-    top:0;  left:0;
-    border:none;
-    border-top:10px solid lightblue;
-    animation:animate 4s linear infinite;
-}
-
-@keyframes animate {
-    0% {left:-100%;}
-    25% {left:200;}
-    50%,100% {left:100%;}
-}
-
-.loader > span:nth-child(2)
-{
-    transform:rotate(90deg);
-}
-.loader > span:nth-child(3)
-{
-    transform:rotate(180deg);
-}
-.loader > span:nth-child(4)
-{
-    transform:rotate(270deg);
-}
-.loader > span:nth-child(2):before
-{
-    animation-delay:1s;
-}
-.loader > span:nth-child(3):before
-{
-    animation-delay:2s;
-}
-.loader > span:nth-child(4):before
-{
-    animation-delay:3s;
-} */
 
 #statistics{
     text-align: left;
