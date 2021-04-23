@@ -50,30 +50,75 @@ function drawCityPop() {
 
 //Change sprites displayed on canvas
 function changeStatus() {
+    /**     POLICY VISUALIZATION PRIORITY
+     * Dead
+     * Infected
+     *      Vax
+     *      Mask
+     *      Distance
+     *      Nothing
+     * Recovered
+     *      Vax
+     *      Mask
+     *      Distance
+     *      Nothing
+     * Normal
+     *      Vax
+     *      Mask
+     *      Distance
+     *      Nothing
+     */
+
     for (let i = 0; i < spritesA.length; i++) {
-        if (spritesA[i].risk < theGame.city.fractionMasking) {
-            spritesA[i].frameX = 1;
+        if (spritesA[i].isDead) {   //DEAD
+            setIcon(spritesA[i], 7);
         }
-        else if (spritesA[i].isDead) {
-            spritesA[i].frameX = 7;
+        else if(spritesA[i].isInfected){     //INFECTED
+            if(spritesA[i].isVaxed){
+                setIcon(spritesA[i], 4);
+            }
+            else if(spritesA[i].risk < theGame.city.fractionMasking){
+                setIcon(spritesA[i], 9);
+            }
+            else if(spritesA.risk < theGame.city.fractionDistancing){
+                setIcon(spritesA[i], 10);
+            }
+            else{
+                setIcon(spritesA[i], 3);
+            }
         }
-        else if (spritesA[i].isInfected && spritesA[i].isVaxed) {
-            spritesA[i].frameX = 4;
+        else if(spritesA[i].hasRecovered){   //RECOVERED
+            if(spritesA[i].isVaxed){
+                setIcon(spritesA[i], 5);
+            }
+            else if(spritesA[i].risk < theGame.city.fractionMasking){
+                setIcon(spritesA[i], 8);
+            }
+            else if(spritesA.risk < theGame.city.fractionDistancing){
+                setIcon(spritesA[i], 11);
+            }
+            else{
+                setIcon(spritesA[i], 6);
+            }
         }
-        else if (spritesA[i].isInfected) {
-            spritesA[i].frameX = 3;
+        else{                       //NORMAL
+            if(spritesA[i].isVaxed){
+                setIcon(spritesA[i], 2);
+            }
+            else if(spritesA[i].risk < theGame.city.fractionMasking){
+                setIcon(spritesA[i], 1);
+            }
+            else if(spritesA[i].risk < theGame.city.fractionDistancing){
+                setIcon(spritesA[i], 12);
+            }
+            else{
+                setIcon(spritesA[i], 0);
+            }
         }
-        else if (spritesA[i].hasRecovered && spritesA[i].isVaxed) {
-            spritesA[i].frameX = 5;
-        }
-        else if (spritesA[i].hasRecovered) {
-            spritesA[i].frameX = 6;
-        }
-        else if (spritesA[i].isVaxed) {
-            spritesA[i].frameX = 2;
-        }
-        else {
-            spritesA[i].frameX = 0;
-        }
+    }
+
+
+    function setIcon(spritesA_i, pos){
+        spritesA_i.frameX = pos;
     }
 }

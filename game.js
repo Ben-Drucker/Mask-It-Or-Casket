@@ -14,7 +14,7 @@ class Game {
         this.fractionMinGameLength = 0.2; //minimum length of game, as a fraction of the total game length
         this.fractionMaxDead = 0.01; //maximum number of dead people, as a fraction of the total population
         this.maxRiskPoints = 25; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
-        this.maxPercentageInfected = 50;
+        this.maxPercentageInfected = 33;
         this.requiredProPoints = 50; //originally 65
         this.fractionRiskPenaltyThreashold = 0.33;
         this.fundingIterations = 20;
