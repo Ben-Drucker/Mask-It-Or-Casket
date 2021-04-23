@@ -16,7 +16,7 @@ body {
 }
 
 h1 {
-    margin-left: 50%;
+    text-align: center;
 }
 
 h2 {
@@ -29,6 +29,11 @@ p {
     margin: 0px;
     padding-top: 10px;
     font-size: 13px;
+}
+
+p.helpPar{
+    font-family: 'VT323', monospace;
+    font-size: large;
 }
 
 .main {
