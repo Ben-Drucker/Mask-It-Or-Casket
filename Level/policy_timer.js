@@ -1,4 +1,3 @@
-//import {Game} from "./game.js";
 var theGame = new Game(75000, 75);
 
 window.onload = function () {
