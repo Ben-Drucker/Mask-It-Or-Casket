@@ -46,7 +46,6 @@ p {
     grid-template-columns: 80px auto;
     grid-gap: 20px;
     padding: 20px;
-    justify-items: center;
 }
 
 .grid-container2 {
