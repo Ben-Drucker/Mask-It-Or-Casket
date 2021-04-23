@@ -23,12 +23,18 @@ function clickedYes(option, modal, cost, maxCost, time) {
 
 
 function closeOthers(modalNum){
-  let modals = document.getElementsByClassName("modal");
-  for (let i = 0; i < modals.length; i++) {
-    modals[i].style.display = "none";
-  }
-  if (modalNum){
-    document.getElementById(modalNum).style.display='block';
+  if (document.getElementById('endModal').style.display != 'block') { // If game going, close other modals when opening another
+    let modals = document.getElementsByClassName("modal");
+    for (let i = 0; i < modals.length; i++) {
+      modals[i].style.display = "none";
+    }
+    if (modalNum){
+      document.getElementById(modalNum).style.display='block';
+    }
+  } else { // If game ended, only allow homeModal to display over endModal
+    if (modalNum == 'homeModal'){
+      document.getElementById(modalNum).style.display='block';
+    }
   }
 }
 

@@ -3,7 +3,7 @@ var endMessage = ""
 function gameOver(){
     closeOthers(0);
     document.getElementById('endModal').style.display='block';
-    if (theGame.won != true){
+    if (theGame.won == true){ // TESTING: Change this when you need to win or lose
         document.getElementById('endModal').innerHTML = `
         <h1>You did it!</h1>
         <form id="submitScore" onkeypress="return event.keyCode != 13">

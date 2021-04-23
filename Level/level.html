@@ -35,6 +35,7 @@
             <div id="statistics">
                 <span class="nowrap">
                     <span class="statisticsStatic">Score: </span>
+                    <span id="score" class="statisticsDynamic"></span>
                 </span>
                 <br>
                 <br>
@@ -72,14 +73,14 @@
         <!-- Policy Buttons -->
         <div class="centralGridItem">
             <div class="policies">
-                <button id="buttonVaccine" onclick="closeOthers('modal1')" class="iButton"><img
-                        src="images/vaccine.png" width="50px" alt="Vaccine" class='buttonIcon'></button>
-                <button id="buttonDistance" onclick="closeOthers('modal2')" class="iButton"><img
-                        src="images/distance.png" width="50px" alt="Distance" class='buttonIcon'></button>
-                <button id="buttonLockdown" onclick="closeOthers('modal3')" class="iButton"><img
-                        src="images/ShutDown.png" width="50px" alt="Shut Down" class='buttonIcon'></button>
-                <button id="buttonMask" onclick="closeOthers('modal4')" class="iButton"><img src="images/mask.png"
-                        width="50px" alt="Masks" class='buttonIcon'></button>
+                <button id="buttonVaccine" onclick="closeOthers('modal1')" class="iButton">
+                    <img src="images/vaccine.png" width="50px" alt="Vaccine" class='buttonIcon'></button>
+                <button id="buttonDistance" onclick="closeOthers('modal2')" class="iButton">
+                    <img src="images/distance.png" width="50px" alt="Distance" class='buttonIcon'></button>
+                <button id="buttonLockdown" onclick="closeOthers('modal3')" class="iButton">
+                    <img src="images/ShutDown.png" width="50px" alt="Shut Down" class='buttonIcon'></button>
+                <button id="buttonMask" onclick="closeOthers('modal4')" class="iButton">
+                    <img src="images/mask.png" width="50px" alt="Masks" class='buttonIcon'></button>
             </div>
         </div>
         <div class="centralGridItem">
@@ -118,15 +119,15 @@
                     <button id="mask5" class="policyBtn" onclick="clickedYes('Masks', 'modal4', 2000, 2000, 90)">100,000 masks: $2000 1:30</button><br>
                     <button class="close-button" onclick="document.getElementById('modal4').style.display='none'"><b>X</b></button>
             </div>
-            <div id="modal5" class="modal" >
+            <div id="homeModal" class="modal" >
                 <h3>Would you like to return to the home screen? <br>Your progress will not be saved.</h3>
                 <a href="../index.html"><button id="yes" class="policyBtn">Yes </button></a><br>
-                <button id="no" class="policyBtn" onclick="document.getElementById('modal5').style.display='none'">No</button><br>
-                <button class="close-button" onclick="document.getElementById('modal5').style.display='none'"><b>X</b></button>
+                <button id="no" class="policyBtn" onclick="document.getElementById('homeModal').style.display='none'">No</button><br>
+                <button class="close-button" onclick="document.getElementById('homeModal').style.display='none'"><b>X</b></button>
             </div>
             <!--End of Modal Section-->
             <!-- endModal Game Over Section -->
-            <div id="endModal">
+            <div id="endModal" class="modal">
             </div>
         </div>
         <!-- Slider -->
@@ -137,14 +138,14 @@
         </div>
     </div>
     <!-- Home Button -->
-    <div class="centralGridItem"></div>
-        <button class= "ibutton" onclick="if(theGame.hasEnded && !theGame.won){window.location.replace('../index.html');}; closeOthers('modal5');">
+    <div class="centralGridItem">
+        <button class= "ibutton" onclick="if(theGame.hasEnded && !theGame.won){window.location.replace('../index.html');}; closeOthers('homeModal');">
             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
             </svg>
         </button>
     </div>
-    <div class="centralGridItem"></div>
+    <!-- <div class="centralGridItem"></div>  TODO: Why is this even here? -->
         
     </div>
     <div class="clr"></div>
