@@ -15,7 +15,7 @@ class Game {
         this.fractionMaxDead = 0.01; //maximum number of dead people, as a fraction of the total population
         this.maxRiskPoints = 25; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
         this.maxPercentageInfected = 33;
-        this.requiredProPoints = 100; //originally 65
+        this.requiredProPoints = 50; //originally 65
         this.fractionRiskPenaltyThreashold = 0.25;
         this.fundingIterations = 20;
         this.fundingIterationAmount = 150;
@@ -89,7 +89,8 @@ class Game {
             this.city.initialDistancingDelay = time / this.interIteratoryTime;
             this.city.targetFractionDistancing = intensity * this.city.maxFractionDistancing;
             this.city.distancingInProgress = true;
-            this.city.distancingStartIteration = this.city.currentIteration
+            this.city.distancingStartIteration = this.city.currentIteration;
+            this.city.distanceStopIteration = this.city.distancingStartIteration + this.city.initialDistancingDelay + this.dialation * time;
         }
         else if (option == "Lockdown") {
             if (this.city.lockDownInProgress) {
