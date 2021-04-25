@@ -74,9 +74,17 @@
                 <div id="game_screen_text">Policy options & grid with icons representing people </div>
                 <div id="game_screen_text">Risk bar</div>
             </div>
-        <button id="back2" class="back" onclick="openPage('intro')" alt="back"></button>
-        <button id="next2" class="next" onclick="openPage('policyBtn')" alt="next"></button>
-        <a href="../index.html"><button id="home" style="position: relative; margin-left:45%"> Home</button></a>
+        <div class="grid-container2">
+            <div class="grid-item">
+                <button id="back2" class="back" onclick="openPage('intro')" alt="back"></button>
+            </div class="grid-item">
+            <div class="grid-item">
+                <a href="../index.html"><button id="home"> Home</button></a>
+            </div class="grid-item">
+            <div class="grid-item">
+                <button id="next2" class="next" onclick="openPage('policyBtn')" alt="next"></button>
+            </div class="grid-item">
+        </div class="grid-container2">
     </div>
 
 <!-- POLICIES -->
@@ -126,7 +134,7 @@
         <h2>Risk Bar</h2>
         <div class="grid-container1">
             <div class="grid-item">
-                <video id="game_screen_vid" height="500px" muted autoplay loop>
+                <video id="game_screen_vid" muted autoplay loop>
                     <source src="../Images/help_risk_bar.mp4" type="video/mp4">
                     Your browser does not support the video tag. 
                 </video>
