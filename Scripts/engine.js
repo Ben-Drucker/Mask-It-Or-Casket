@@ -229,7 +229,7 @@ class City {
                             }
                             if (person2.risk < this.fractionMasking) {
                                 if(Math.random() < 0.005){
-                                    console.log("In here", (progress * (this.targetFractionMasking - this.previousFractionMasking) / this.maskImplementationDelay) );
+                                    //console.log("In here", (progress * (this.targetFractionMasking - this.previousFractionMasking) / this.maskImplementationDelay) );
                                 }
                                 interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
                             }

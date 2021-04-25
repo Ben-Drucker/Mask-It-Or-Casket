@@ -209,7 +209,7 @@ class Game {
         this.updateStatistics(city);
         endMessage = this.updateGameStatus(city);
         this.updateFunds();
-        console.log("Q:", this.messageQueue);
+        //console.log("Q:", this.messageQueue);
         this.runQueue();
     }
 
