@@ -15,10 +15,12 @@ class Game {
         this.fractionMaxDead = 0.01; //maximum number of dead people, as a fraction of the total population
         this.maxRiskPoints = 25; //maxRiskPoints occurs when above fractionRiskPenaltyThreashold
         this.maxPercentageInfected = 33;
-        this.requiredProPoints = 100; //originally 65
+        this.requiredProPoints = 50; //originally 65
         this.fractionRiskPenaltyThreashold = 0.25;
         this.fundingIterations = 20;
         this.fundingIterationAmount = 150;
+        this.messageQueue = [];
+        this.numMaskings = 0;
 
         this.numRiskPoints = 0;
         this.numProPoints = 0;
@@ -43,16 +45,24 @@ class Game {
     }
 
     displayMessage(message, length) {
+        this.messageQueue.push([message, length]);  //enqueue
+        this.runQueue();
+    }
+
+    runQueue(){
         let box = document.getElementById("msgBox");
-        box.innerHTML = message;
-        let interval = setInterval(() => {
-            if (box.innerHTML == "") {
-                clearInterval(interval);
-            }
-            else {
+        if(box.innerHTML == "" && this.messageQueue.length > 0){
+            let msg = this.messageQueue[0];
+            let message = msg[0];
+            let length = msg[1];
+            box.innerHTML = message;
+            let interval = setInterval(() => {
                 box.innerHTML = "";
-            }
-        }, length)
+                this.messageQueue.splice(0, 1);     //dequeue
+                clearInterval(interval);
+            }, length);
+
+        }
     }
 
     /**
@@ -76,7 +86,7 @@ class Game {
             this.city.vaxStartIteration = this.city.currentIteration;
         }
         else if (option == "Distance") {
-            if (this.city.DistanceInProgress) {
+            if (this.city.distancingInProgress) {
                 this.displayMessage("Social Distancing already implemented!", 3000);
                 return;
             }
@@ -89,7 +99,8 @@ class Game {
             this.city.initialDistancingDelay = time / this.interIteratoryTime;
             this.city.targetFractionDistancing = intensity * this.city.maxFractionDistancing;
             this.city.distancingInProgress = true;
-            this.city.distancingStartIteration = this.city.currentIteration
+            this.city.distancingStartIteration = this.city.currentIteration;
+            this.city.distanceStopIteration = this.city.distancingStartIteration + this.city.initialDistancingDelay + this.dialation * time;
         }
         else if (option == "Lockdown") {
             if (this.city.lockDownInProgress) {
@@ -97,7 +108,7 @@ class Game {
                 return;
             }
             if (this.expense(cost) == false) {
-                console.log("Not enough funds to implement this lockdown!");
+                this.displayMessage("Not enough funds to implement this lockdown!", 3000);
                 return;
             }
             theGame.updateFundsDisplay(cost, false);
@@ -109,20 +120,28 @@ class Game {
             this.city.lockDownStopIteration = this.city.lockDownStartIteration + this.city.initialLockDownDelay + this.dialation * time;
         }
         else if (option == "Masks") {
-            if (this.city.masksInProgress) {
-                this.displayMessage("Masking already implemented!", 3000);
+            if (this.city.masksStable == false) {
+                this.displayMessage("Please wait for mask usage to stabilize before increasing usage.", 3000);
                 return;
             }
             if (this.expense(cost) == false) {
                 this.displayMessage("Not enough funds to implement this campaign!", 3000);
                 return;
             }
+            this.numMaskings ++;
+            this.city.previousFractionMasking = this.city.targetFractionMasking;
             document.getElementById("buttonMask").style.borderColor = "orange";
             theGame.updateFundsDisplay(cost, false);
             this.city.initialMaskDelay = time / this.interIteratoryTime;
-            this.city.targetFractionMasking = intensity * this.city.maxFractionMasking;
+            this.city.targetFractionMasking += intensity * this.city.maxFractionMasking;
+            console.log("target:", this.city.targetFractionMasking);
+            if(this.city.targetFractionDistancing+ intensity * this.city.maxFractionMasking > this.city.maxFractionMasking){
+                this.displayMessage("Sorry, that option would exceed the maximum possible maskers.", 5000);
+                return;
+            }
             this.city.masksInProgress = true;
             this.city.maskStartIteration = this.city.currentIteration;
+            
         }
         else {
             throw "Error! Invalid implementPolicy option! Quitting implementPolicy.";
@@ -190,6 +209,8 @@ class Game {
         this.updateStatistics(city);
         endMessage = this.updateGameStatus(city);
         this.updateFunds();
+        console.log("Q:", this.messageQueue);
+        this.runQueue();
     }
 
     timedIteration(city, numberOfIterationsDesired, iterationTimer) {

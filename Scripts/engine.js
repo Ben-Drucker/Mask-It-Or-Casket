@@ -30,25 +30,31 @@ class City {
             this.citizens.push(new Person(i, age, risk));
         }
 
-        /*PARAMETERS*/
+        /*PARAMETERS & Policies*/
         //MASKING
         this.masksFullyImplemented = false;
         this.maxFractionMasking = 0.9;
-        this.targetFractionMasking = 0;
+        this.targetFractionMasking = 0;          //User Selected — Efficacy
+        this.previousFractionMasking = 0;
         this.fractionMaskEfficacy = 0.5;        //PARAMETER
-        this.fractionMasking = 0;             //PARAMETER
-        this.initialMaskDelay = 20;             //PARAMETER
+        this.fractionMasking = 0;             //Implemented Value — Changing Value
+        this.initialMaskDelay = 20;             //User Selected — Time
         this.maskImplementationDelay = 35;      //PARAMETER
         this.maskStartIteration = null;
+        this.masksStable = null;
+        this.stabMsgDisp = false;
+        this.notOnFirst = null;
 
         //DISTANCING
-        this.targetFractionDistancing = 0;
-        this.maxFractionDistancing = 0.8;
-        this.fractionDistancing = 0;          //PARAMETER
+        this.maxFractionDistancing = 0.8;       //PARAMETER
+        this.fractionDistancing = 0;            //Implemented Value — Changing Value
+        this.targetFractionDistancing = 0;      //User Selected — Efficacy
+        this.distancingImplementationDelay = 20;//User Selected — Time
         this.fractionDistancingEfficacy = 0.5;  //PARAMETER
         this.initialDistancingDelay = 20;       //PARAMETER
-        this.distancingImplementationDelay = 20;//PARAMETER
         this.distancingStartIteration = null;
+        this.distanceStopIteration = null;
+        this.maxDistanceIntsinsityAchieved = null;
 
         //VAX
         this.maxFractionVaxEfficacy = 0.95;
@@ -59,14 +65,14 @@ class City {
         this.vaxStartIteration = null;
 
         //LOCKDOWN
-        this.fractionMaxLockDownEfficacy = 0.75;
-        this.fractionLockDownEfficacy = 0;      //PARAMETER
-        this.targetFractionLockDownEfficacy = 0;
+        this.fractionMaxLockDownEfficacy = 0.75;    //PARAMETER
+        this.fractionLockDownEfficacy = 0;          //Implemented Value — Changing Value
+        this.targetFractionLockDownEfficacy = 0;    //User Selected — Efficacy
         this.initialLockDownDelay = 10;             //PARAMETER
-        this.lockDownImplementationDelay = 25; //PARAMETER
+        this.lockDownImplementationDelay = 25;      //User Selected — time
         this.lockDownStartIteration = null;
         this.lockDownStopIteration = null;
-        this.maxIntensityAchieved = null;
+        this.maxLockdownIntensityAchieved = null;
 
         //DISTRIBUTE
         this.transmissionRisk = 0.2;        //PARAMETER
@@ -160,7 +166,8 @@ class City {
     }
 
     iteration() {
-        let subtract = true;
+        let lockDownSubtract = true;
+        let distanceSubtract = true;
         let distanceIntensity;
         let maskIntensity;
         let lockDownIntensity;
@@ -174,7 +181,7 @@ class City {
 
                     if (this.distancingInProgress) {
                         let progress = this.currentIteration - this.distancingStartIteration - this.initialDistancingDelay
-                        if (progress >= 0) {  //if we are past the initial delay
+                        if (progress >= 0 && this.currentIteration < this.distanceStopIteration) {  //if we are past the initial delay
                             this.fractionDistancing = Math.min(this.targetFractionDistancing, progress * this.targetFractionDistancing / this.distancingImplementationDelay);
                             if (person2.risk < this.fractionDistancing) {
                                 interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
@@ -185,13 +192,45 @@ class City {
                             document.getElementById("buttonDistance").style.borderColor = "green";
                             distanceIntensity = this.fractionDistancing;
                         }
+                        else if (progress >= 0 && this.distanceStopIteration <= this.currentIteration && this.currentIteration < this.distanceStopIteration + this.distancingImplementationDelay) {
+                            if (this.maxDistanceIntsinsityAchieved == null) {
+                                this.maxDistanceIntsinsityAchieved = this.fractionDistancing;
+                            }
+                            if (distanceSubtract) {
+                                this.fractionDistancing -= (this.maxDistanceIntsinsityAchieved / this.distancingImplementationDelay);
+                                distanceSubtract = false;
+                            }
+                            if (person2.risk < this.fractionDistancing) {
+                                interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
+                            }
+                            if (person1.risk < this.fractionDistancing) {
+                                interactionTransmissionRisk *= (1 - this.fractionDistancingEfficacy);
+                            }
+                            distanceIntensity = this.fractionDistancing;
+                            document.getElementById("buttonDistance").style.borderColor = "yellow";
+                        }
+                        else if (progress >= 0 && this.currentIteration >= this.distanceStopIteration + this.distancingImplementationDelay) {
+                            this.distancingInProgress = false;
+                            document.getElementById("buttonDistance").style.borderColor = "lightblue";
+                            distanceIntensity = null;
+                        }
                     }
 
+                    
                     if (this.masksInProgress) {
+                        this.masksStable = false;
                         let progress = this.currentIteration - this.maskStartIteration - this.initialMaskDelay;
-                        if (progress >= 0) {  //if we are past the initial delay
-                            this.fractionMasking = Math.min(this.targetFractionMasking, progress * this.targetFractionMasking / this.maskImplementationDelay);
+                        if (progress >= 0 || theGame.numMaskings >=2) {  //if we are past the initial delay
+                            if(progress < 0){
+                                this.fractionMasking = this.previousFractionMasking;
+                            }
+                            else{
+                                this.fractionMasking = Math.min(this.targetFractionMasking, (progress * (this.targetFractionMasking - this.previousFractionMasking) / this.maskImplementationDelay) + this.previousFractionMasking);
+                            }
                             if (person2.risk < this.fractionMasking) {
+                                if(Math.random() < 0.005){
+                                    console.log("In here", (progress * (this.targetFractionMasking - this.previousFractionMasking) / this.maskImplementationDelay) );
+                                }
                                 interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
                             }
                             if (person1.risk < this.fractionMasking) {
@@ -199,8 +238,17 @@ class City {
                             }
                             document.getElementById("buttonMask").style.borderColor = "green";
                             maskIntensity = this.fractionMasking;
+                            if (this.currentIteration >= this.maskStartIteration + this.maskImplementationDelay + this.initialMaskDelay) {
+                                this.masksStable = true;
+                                if (!this.stabMsgDisp) {
+                                    theGame.displayMessage("Mask usage has stabilized!", 5000);
+                                    this.stabMsgDisp = true;
+                                }
+                            }
+                            else {
+                                this.masksStable = false;
+                            }
                         }
-
                     }
 
                     if (this.lockDownInProgress) {
@@ -212,12 +260,12 @@ class City {
                             document.getElementById("buttonLockdown").style.borderColor = "green";
                         }
                         else if (progress >= 0 && this.lockDownStopIteration <= this.currentIteration && this.currentIteration < this.lockDownStopIteration + this.lockDownImplementationDelay) {//ramp down
-                            if (this.maxIntensityAchieved == null) {
-                                this.maxIntensityAchieved = this.fractionLockDownEfficacy;
+                            if (this.maxLockdownIntensityAchieved == null) {
+                                this.maxLockdownIntensityAchieved = this.fractionLockDownEfficacy;
                             }
-                            if (subtract) {
-                                this.fractionLockDownEfficacy -= (this.maxIntensityAchieved / this.lockDownImplementationDelay);
-                                subtract = false;
+                            if (lockDownSubtract) {
+                                this.fractionLockDownEfficacy -= (this.maxLockdownIntensityAchieved / this.lockDownImplementationDelay);
+                                lockDownSubtract = false;
                             }
                             interactionTransmissionRisk *= (1 - this.fractionLockDownEfficacy);
                             lockDownIntensity = this.fractionLockDownEfficacy;
@@ -227,7 +275,6 @@ class City {
                             this.lockDownInProgress = false;
                             document.getElementById("buttonLockdown").style.borderColor = "lightblue";
                             lockDownIntensity = null;
-                            lockDownIntensity = 0;
                         }
                     }
 
@@ -273,7 +320,7 @@ class City {
         else {
             lockDownIntensity = lockDownIntensity.toFixed(2);
         }
-        //console.log("Distance intensity", distanceIntensity, "Mask Intensity", maskIntensity, "LockDown Intensity", lockDownIntensity);
+        console.log("Distance intensity", distanceIntensity, "Mask Intensity", this.fractionMasking, "LockDown Intensity", lockDownIntensity);
     }
 
     iterate(i) {

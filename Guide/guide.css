@@ -35,7 +35,7 @@ p {
     margin: auto;
     padding: 20px;
     width: 90%;
-    height: 500px;
+    /* height: 500px; */
     background-color: rgba(255,255,255,0.75);
     border: 5px solid black;
     color: black;
@@ -117,10 +117,10 @@ p {
 
 #people1 {
     display:none;
-    height: 505px;
+    /* height: 505px; */
 }
 
 #people2 {
     display:none;
-    height: 650px;
+    /* height: 650px; */
 }
