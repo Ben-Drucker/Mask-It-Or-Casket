@@ -1,6 +1,3 @@
-//import {Game} from "./game.js";
-//var theGame = new Game(75000, 75);
-
 var i = 0;
 function progress_move() {
   if (i == 0) {
