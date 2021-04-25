@@ -155,8 +155,8 @@ p{
 #LevelTitle {
     padding-top: 10px;
     padding-bottom: 2px;
-    background-color: rgba(180, 183, 245, 0.103);
-    backdrop-filter: blur(5px);
+    /* background-color: rgba(180, 183, 245, 0.103);
+    backdrop-filter: blur(5px); */
 }
 
 #timer {
