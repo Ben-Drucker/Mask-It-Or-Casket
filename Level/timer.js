@@ -4,8 +4,8 @@ var score;
 window.onload = function () {
     theGame.interIteratoryTime = 0.5; //time between iterations, in seconds.
     document.getElementById("funds").innerHTML = theGame.funds;
-    var min = 1;
-    var sec = "30";
+    var min = 2;
+    var sec = "00";
     theGame.secs = 60 * min + parseInt(sec);
     theGame.secondsRemaining = theGame.secs;
     theGame.iterateByTime(theGame.city, theGame.interIteratoryTime, (theGame.secs) / theGame.interIteratoryTime);
@@ -14,14 +14,16 @@ window.onload = function () {
         onTimerChange();
     }, 1000);
 
-    function onTimerChange(){
+    function onTimerChange() {
         document.getElementById("timer").innerHTML = min + " : " + sec;
-        score = computeScore(theGame.city.population, 60 * min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected, theGame.city.numVaxed);
+        score = computeScore(theGame.city.population, 60 * min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected, theGame.city.numVaxed * theGame.city.fractionVaxingEfficacy);
         //console.log("Current Score: " + score);
         sec--;
         theGame.secondsRemaining--;
         if (sec == -1 && min == 0 || theGame.hasEnded) {
-            endMessage = "Your time ran out!"
+            if (endMessage == null) {
+                endMessage = "Your time ran out!";
+            }
             gameOver();
             clearInterval(countDownTimer);
         }

@@ -1,27 +1,9 @@
 function computeScore(population, secondsRemaining, fundsRemaining, numDead, numInfected, numVaxed) {
-    let secondExponent = 1;
-    let fundsExponent = 1;
-    let numVaxedExponent = 0.8;
-    let deadExponent = -2;
-    let infectedExponent = -1.5;
-    let populationExponent = -1 * (deadExponent + infectedExponent);
-    let scaleFactor = 1 / 5000000;        //PARAMETER
-    let magnitudeFactor = 1;
-    secondsRemaining **= secondExponent;
-    fundsRemaining **= fundsExponent;
-    numDead **= deadExponent;
-    numInfected **= infectedExponent;
-    population **= populationExponent;
-    numVaxed **= numVaxedExponent
-    return magnitudeFactor * Math.floor(scaleFactor * (secondsRemaining + fundsRemaining + numVaxed) * population * numDead * numInfected);
-}
-
-/* For testing purposes only
-
-for (let i = 0; i <= 600; i += 50) {
-    for (let j = 100; j > 0; j-=5) {
-        //console.log("Dead", i, "Infected", 100 * i, "Time Left", j, "SCORE:", computeScore(75000, j, 1000, i, 100 * i));
-    }
-}
-
-*/
+    let maxPnts = 1000000;
+    let sharpness = 0.03;
+    sharpness += numDead*sharpness/(population*0.1);
+    sharpness += numInfected*sharpness/(population*0.25);
+    sharpness -= numVaxed*sharpness/(population*1);
+    console.log("sharpness:", sharpness); 
+    
+    return Math.floor((0.5 + 0.5*(fundsRemaining/2000))*maxPnts*(Math.E**(sharpness*(secondsRemaining-theGame.secs))));
