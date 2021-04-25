@@ -81,6 +81,9 @@ function changeStatus() {
             }
             else if(spritesA.risk < theGame.city.fractionDistancing){
                 setIcon(spritesA[i], 10);
+                if(spritesA.risk < theGame.city.fractionDistancing && Math.random() < 0.5){
+                    setIcon(spritesA[i], 10);
+                }
             }
             else{
                 setIcon(spritesA[i], 3);
@@ -92,6 +95,9 @@ function changeStatus() {
             }
             else if(spritesA[i].risk < theGame.city.fractionMasking){
                 setIcon(spritesA[i], 8);
+                if(spritesA.risk < theGame.city.fractionDistancing && Math.random() < 0.5){
+                    setIcon(spritesA[i], 11);
+                }
             }
             else if(spritesA.risk < theGame.city.fractionDistancing){
                 setIcon(spritesA[i], 11);
@@ -106,6 +112,9 @@ function changeStatus() {
             }
             else if(spritesA[i].risk < theGame.city.fractionMasking){
                 setIcon(spritesA[i], 1);
+                if(spritesA[i].risk < theGame.city.fractionDistancing && Math.random() < 0.5){
+                    setIcon(spritesA[i], 12);
+                }
             }
             else if(spritesA[i].risk < theGame.city.fractionDistancing){
                 setIcon(spritesA[i], 12);

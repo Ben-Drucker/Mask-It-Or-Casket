@@ -5,7 +5,7 @@ var score;
 window.onload = function () {
     theGame.interIteratoryTime = 0.5; //time between iterations, in seconds.
     document.getElementById("funds").innerHTML = theGame.funds;
-    var min = 2;
+    var min = 1;
     var sec = "00";
     theGame.secs = 60 * min + parseInt(sec);
     theGame.secondsRemaining = theGame.secs;
@@ -22,6 +22,7 @@ window.onload = function () {
         sec--;
         theGame.secondsRemaining--;
         if (sec == -1 && min == 0 || theGame.hasEnded) {
+            endMessage = "Your time ran out!"
             gameOver();
             clearInterval(countDownTimer);
         }
