@@ -10,7 +10,12 @@ window.onload = function () {
     theGame.secs = 60 * min + parseInt(sec);
     theGame.secondsRemaining = theGame.secs;
     theGame.iterateByTime(theGame.city, theGame.interIteratoryTime, (theGame.secs) / theGame.interIteratoryTime);
+    onTimerChange();
     var countDownTimer = setInterval(function () {
+        onTimerChange();
+    }, 1000);
+
+    function onTimerChange(){
         document.getElementById("timer").innerHTML = min + " : " + sec;
         score = computeScore(theGame.city.population, 60 * min + parseInt(sec), theGame.funds, theGame.city.numDead, theGame.city.numInfected, theGame.city.numVaxed);
         //console.log("Current Score: " + score);
@@ -31,5 +36,5 @@ window.onload = function () {
             sec = "0" + sec;
         }
 
-    }, 1000);
+    }
 }
