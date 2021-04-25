@@ -45,24 +45,21 @@ class Game {
     }
 
     displayMessage(message, length) {
-        this.messageQueue.push([message, length]);
+        this.messageQueue.push([message, length]);  //enqueue
+        this.runQueue();
     }
 
     runQueue(){
         let box = document.getElementById("msgBox");
         if(box.innerHTML == "" && this.messageQueue.length > 0){
             let msg = this.messageQueue[0];
-            this.messageQueue.splice(0, 1);
             let message = msg[0];
             let length = msg[1];
             box.innerHTML = message;
             let interval = setInterval(() => {
-                if (box.innerHTML == "") {
-                    clearInterval(interval);
-                }
-                else {
-                    box.innerHTML = "";
-                }
+                box.innerHTML = "";
+                this.messageQueue.splice(0, 1);     //dequeue
+                clearInterval(interval);
             }, length);
 
         }
@@ -89,7 +86,7 @@ class Game {
             this.city.vaxStartIteration = this.city.currentIteration;
         }
         else if (option == "Distance") {
-            if (this.city.DistanceInProgress) {
+            if (this.city.distancingInProgress) {
                 this.displayMessage("Social Distancing already implemented!", 3000);
                 return;
             }
@@ -111,7 +108,7 @@ class Game {
                 return;
             }
             if (this.expense(cost) == false) {
-                this.displayMessage("Not enough funds to implement this lockdown!");
+                this.displayMessage("Not enough funds to implement this lockdown!", 3000);
                 return;
             }
             theGame.updateFundsDisplay(cost, false);
@@ -212,6 +209,7 @@ class Game {
         this.updateStatistics(city);
         endMessage = this.updateGameStatus(city);
         this.updateFunds();
+        console.log("Q:", this.messageQueue);
         this.runQueue();
     }
 
