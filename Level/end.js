@@ -3,7 +3,7 @@ var endMessage = "" //for undefined losing reasons
 function gameOver(){
     closeOthers(0);
     document.getElementById('endModal').style.display='block';
-    if (theGame.won == false){ // TESTING: Change this when you need to win or lose
+    if (theGame.won == true){ // TESTING: Change this when you need to win or lose
         endModalPrint()
     }
     else {
