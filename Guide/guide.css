@@ -103,6 +103,19 @@ p {
     background-image: url("../Images/home.png");
 }
 
+#game_screen_vid {
+    position: relative;
+    width: 95%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#game_screen_text {
+    line-height: 100%;
+    font-size: 20px;
+    font-family: 'VT323', monospace;
+}
+
 #gameComponents {
     display:none;
 }

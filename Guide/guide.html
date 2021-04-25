@@ -10,6 +10,8 @@
 
     <h1>Help</h1>
 
+<!-- INTRODUCTION -->
+
     <div id="intro" class="main">
         <h2>Intro</h2>
         <p class="helpPar">
@@ -32,19 +34,56 @@
             Long story short: Protect the people from the disease in time to save as many people as you can!
         </p>
         <button id="next1" class="next" onclick="openPage('gameComponents')" alt="next"></button>
-        <a href="../index.html"><button id="home" > Home</button></a>
+        <a href="../index.html"><button id="home" style="position: relative; margin-left:50%"> Home</button></a>
     </div>
+
+<!-- GAME SCREEN -->
 
     <div id="gameComponents" class="main">
         <h2>Game Screen</h2>
+        <div class="grid-item">
+        <video id="game_screen_vid" muted autoplay loop>
+            <source src="../Images/game_screen_top.mp4" type="video/mp4">
+            Your browser does not support the video tag. 
+        </video>
+        </div>
+        <div class="grid-container2">
+            <div id="game_screen_text">Money Tracker & Timer </div>
+            <div id="game_screen_text">Green and Red point Tracker </div>
+            <div id="game_screen_text">Stats about people</div>
+        </div>
+        <div class="grid-item">
+            <video id="game_screen_vid" muted autoplay loop>
+                <source src="../Images/game_screen_messages.mp4" type="video/mp4">
+                Your browser does not support the video tag. 
+            </video>
+            </div>
+            <div class="grid-container2">
+                <div class="grid-item"></div>
+                <div id="game_screen_text">Information such as payday, ...????? </div>
+                <div class="grid-item"></div>
+            </div>
+        <div class="grid-item">
+            <video id="game_screen_vid" muted autoplay loop>
+                <source src="../Images/game_screen_canvas.mp4" type="video/mp4">
+                Your browser does not support the video tag. 
+            </video>
+            </div>
+            <div class="grid-container2">
+                <div id="game_screen_text">Policy buttons </div>
+                <div id="game_screen_text">Policy options & grid with icons representing people </div>
+                <div id="game_screen_text">Risk bar</div>
+            </div>
         <button id="back2" class="back" onclick="openPage('intro')" alt="back"></button>
         <button id="next2" class="next" onclick="openPage('policyBtn')" alt="next"></button>
-        <a href="../index.html"><button id="home" > Home</button></a>
+        <a href="../index.html"><button id="home" style="position: relative; margin-left:45%"> Home</button></a>
     </div>
+
+<!-- POLICIES -->
 
     <div id="policyBtn" class="main">
         <h2>Policies</h2>
-        <div class="grid-container">
+        <div class="grid-container1">
             <div class="grid-item"><img src="../Images/vaccine.svg" alt="vaccine" width="50px" style="
                 background-color: white;
                 padding:4px;
@@ -52,42 +91,53 @@
             </div>
             <div class="grid-item"><p>
                 Need to develop vaccine before getting people vaccinated.
-                <br>
-                Different number of vaccines you can buy at a time. 
+                Different number of vaccines you can buy at a time.
             </p></div>
             <div class="grid-item"><img src="../Images/distance.svg" alt="distance" width="50px" style="
                 background-color: white;
                 padding:4px;
                 border: 4px solid lightblue;"></div>
             <div class="grid-item"><p>
-                Social Distancing. The more expensive the policy, the more effective social distancing is. 
+                Social Distancing. More expensive the policy, more effective social distancing is. 
             </p></div>
             <div class="grid-item"><img src="../Images/shutdown.svg" alt="lockdown" width="50px" style="
                 background-color: white;
                 padding:4px;
                 border: 4px solid lightblue;"></div>
             <div class="grid-item"><p>
-                Shutdown. Stay at home order, shutdown public places, and provide stimulus for shutdown. 
+                Shutdown. Stay at home order, shutdown public places, and stimulus for shutdown. 
             </p></div>
             <div class="grid-item"><img src="../Images/mask.svg" alt="mask" width="50px" style="
                 background-color: white;
                 padding:4px;
                 border: 4px solid lightblue;"></div>
             <div class="grid-item"><p>
-                Buy masks to give to people to wear!
+                Buy masks to give people to wear!
             </p></div>
         </div>
         <button id="back3" class="back" onclick="openPage('gameComponents')" alt="back"></button>
         <button id="next3" class="next" onclick="openPage('riskBar')" alt="next"></button>
-        <a href="../index.html"><button id="home" > Home</button></a>
+        <a href="../index.html"><button id="home" style="position: absolute; margin-left:40%"> Home</button></a>
     </div>
+
+<!-- RISK BAR, GREEN AND RED POINTS -->
 
     <div id="riskBar" class="main">
         <h2>Risk Bar</h2>
+        <div class="grid-container1">
+            <div class="grid-item">
+                <video id="game_screen_vid" height="500px" muted autoplay loop>
+                    <source src="../Images/help_risk_bar.mp4" type="video/mp4">
+                    Your browser does not support the video tag. 
+                </video>
+            </div>
+        </div>
         <button id="back4" class="back" onclick="openPage('policyBtn')" alt="back"></button>
         <button id="next4" class="next" onclick="openPage('people1')" alt="next"></button>
-        <a href="../index.html"><button id="home" > Home</button></a>
+        <a href="../index.html"><button id="home" style="position: absolute; margin-left:40%"> Home</button></a>
     </div>
+
+<!-- PEOPLE ICONS PT. 1 -->
 
     <div id="people1" class="main">
     <h2>Citizens (Part 1)</h2>
@@ -104,8 +154,10 @@
     </div>
     <button id="back5" class="back" onclick="openPage('riskBar')" alt="back"></button>
     <button id="next5" class="next" onclick="openPage('people2')" alt="next"></button>
-    <a href="../index.html"><button id="home" > Home</button></a>
+    <a href="../index.html"><button id="home" style="position: absolute; margin-left:40%"> Home</button></a>
     </div>
+
+<!-- PEOPLE ICONS PT. 2 -->
 
     <div id="people2" class="main">
         <h2>Citizens (Part 2)</h2>
@@ -134,7 +186,7 @@
         <br>
         <button id="back6" class="back" onclick="openPage('people1')" alt="back"></button>
         <button id="next6" class="next" onclick="openPage('intro')" alt="next"></button>
-        <a href="../index.html"><button id="home" > Home</button></a>
+        <a href="../index.html"><button id="home" style="position: absolute; margin-left:40%"> Home</button></a>
         </div>
 
     <br>
