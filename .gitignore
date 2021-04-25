@@ -2,7 +2,7 @@
 **/._*
 
 #VS Code config files
-**/.vscode
+**/.vscode*
 **/workspace*
 
 #R files
