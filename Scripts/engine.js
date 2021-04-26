@@ -75,11 +75,11 @@ class City {
         this.maxLockdownIntensityAchieved = null;
 
         //DISTRIBUTE
-        this.transmissionRisk = 0.2;                //PARAMETER
-        this.bipartiteRatio = 0.18;                 //PARAMETER Determining the ratio of in-group, out-group graph connections
-        this.maxGroupSize = 25;                     //PARAMETER
-        this.densityFactor = 2;                     //PARAMETER
-        this.maxConnectionsInGroup = 50;            //PARAMETER
+        this.transmissionRisk = 0.2;                    //PARAMETER
+        this.bipartiteRatio = 0.18;                     //PARAMETER Determining the ratio of in-group, out-group graph connections
+        this.maxGroupSize = 25;                         //PARAMETER
+        this.densityFactor = 2;                         //PARAMETER
+        this.maxConnectionsInGroup = 50;                //PARAMETER
     }
 
     generateGroups() {
