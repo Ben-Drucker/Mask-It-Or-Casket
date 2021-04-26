@@ -33,6 +33,9 @@ function closeOthers(modalNum){
     }
   } else { // If game ended, only allow homeModal to display over endModal
     if (modalNum == 'homeModal'){
+      if (scoreSubmitted && !theGame.won) {
+        window.location.replace('../index.html');
+      }
       document.getElementById(modalNum).style.display='block';
     }
   }
