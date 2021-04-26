@@ -2,7 +2,7 @@
 ## The main repository of group 7's CS71 project
 You can find the link to this project's website here: 
 
-<a href="https://github.swarthmore.edu/pages/CS71-S21-G7/Mask-It-Or-Casket/"> <font size=3><b>Project Website Link</b></font></a>
+### <a href="https://github.swarthmore.edu/pages/CS71-S21-G7/Mask-It-Or-Casket/">Project Website Link</font></a>
 
 ## Browser Compatibility
 
@@ -14,4 +14,4 @@ Below you will find an image representing the rough idea behind our social netwo
 
 <img alt="Network Explainer" src="Images/NetworkExplainer.png" width="300" align="center">
 
-<font size=1><figcaption><i >Bottom panel, with permission, from <a>https://commons.wikimedia.org/wiki/File:Network_self-organization_stages.png.</a></i></figcaption></font>
+<figcaption><i >Bottom panel, with permission, from <a>https://commons.wikimedia.org/wiki/File:Network_self-organization_stages.png.</a></i></figcaption>
