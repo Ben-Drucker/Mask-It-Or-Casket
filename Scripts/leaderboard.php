@@ -7,9 +7,6 @@ error_reporting(E_ALL);
 
 $db = new SQLite3('MIOC-Leaderboard.db');
 
-// $validRegEx = array("options"=>array("regexp"=>"/^[a-zA-Z0-9 \.,_-]{0,16}/"));
-// $name = filter_input(INPUT_POST, "name", FILTER_VALIDATE_REGEXP, $validRegEx);
-
 if ($_REQUEST["type"] == "insert"){
 
    $valid = (strlen(filter_var($_REQUEST["name"], FILTER_SANITIZE_STRING))<16);

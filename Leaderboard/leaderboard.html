@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Leaderboard</title>
     <link rel="stylesheet" href="leaderboard.css">
     <link rel="shortcut icon" type="image/png" href="../Images/mask.svg" />
 </head>
+
 <body onload="getLeaderboard()">
 
-<h1>Leaderboard</h1>
+    <h1>Leaderboard</h1>
 
-<div class="grid-container">
-    <div class="grid-item-header">
-        name
+    <div class="grid-container">
+        <div class="grid-item-header">
+            name
+        </div>
+        <div class="grid-item-header">
+            score
+        </div>
+        <div class="grid-item-header">
+            date
+        </div>
     </div>
-    <div class="grid-item-header">
-        score
+
+    <div id="leaderboard" class="grid-container">
     </div>
-    <div class="grid-item-header">
-        date
-    </div>
-</div>
 
-<div id="leaderboard" class="grid-container">
-</div>
+    <br>
+    <a href="../index.html"><button class="home"> Home</button></a>
 
-<br>
-<a href="../index.html"><button class="home" > Home</button></a>
-
-<script src="leaderboard.js"></script>
+    <script src="leaderboard.js"></script>
 
 </body>
+
 </html>

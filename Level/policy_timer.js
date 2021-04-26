@@ -3,8 +3,8 @@ var theGame = new Game(75000, 75);
 window.onload = function () {
     let interIteratoryTime = 0.5 //time between iterations, in seconds.
     var min = 0;
-    var sec = 25; 
-    theGame.iterateByTime(theGame.city, interIteratoryTime, (60*min + sec)/interIteratoryTime);
+    var sec = 25;
+    theGame.iterateByTime(theGame.city, interIteratoryTime, (60 * min + sec) / interIteratoryTime);
     var countDownTimer = setInterval(function () {
         document.getElementById("policy_timer").innerHTML = min + " : " + sec;
         sec--;

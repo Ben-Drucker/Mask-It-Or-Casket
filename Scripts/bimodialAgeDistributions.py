@@ -1,8 +1,6 @@
 import numpy
 import random
 import json
-#import matplotlib.pyplot as plt
-
 
 def generate(population):
     ages = {"ages": []}

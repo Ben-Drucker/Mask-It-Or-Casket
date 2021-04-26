@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 @font-face {
-    font-family:"Karmatic Arcade";
+    font-family: "Karmatic Arcade";
     src: url("../Level/fonts/BenMaticArcade4.otf") format("opentype");
 }
 
-html{
+html {
     text-align: center;
     font-family: "Karmatic Arcade";
 }
@@ -43,7 +43,7 @@ div {
     height: 30px;
     display: block;
     cursor: pointer;
-    
+
 }
 
 .start:hover {

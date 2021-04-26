@@ -49,9 +49,9 @@ class Game {
         this.runQueue();
     }
 
-    runQueue(){
+    runQueue() {
         let box = document.getElementById("msgBox");
-        if(box.innerHTML == "" && this.messageQueue.length > 0){
+        if (box.innerHTML == "" && this.messageQueue.length > 0) {
             let msg = this.messageQueue[0];
             let message = msg[0];
             let length = msg[1];
@@ -128,20 +128,20 @@ class Game {
                 this.displayMessage("Not enough funds to implement this campaign!", 3000);
                 return;
             }
-            this.numMaskings ++;
+            this.numMaskings++;
             this.city.previousFractionMasking = this.city.targetFractionMasking;
             document.getElementById("buttonMask").style.borderColor = "orange";
             theGame.updateFundsDisplay(cost, false);
             this.city.initialMaskDelay = time / this.interIteratoryTime;
             this.city.targetFractionMasking += intensity * this.city.maxFractionMasking;
             console.log("target:", this.city.targetFractionMasking);
-            if(this.city.targetFractionDistancing+ intensity * this.city.maxFractionMasking > this.city.maxFractionMasking){
+            if (this.city.targetFractionDistancing + intensity * this.city.maxFractionMasking > this.city.maxFractionMasking) {
                 this.displayMessage("Sorry, that option would exceed the maximum possible maskers.", 5000);
                 return;
             }
             this.city.masksInProgress = true;
             this.city.maskStartIteration = this.city.currentIteration;
-            
+
         }
         else {
             throw "Error! Invalid implementPolicy option! Quitting implementPolicy.";
@@ -184,7 +184,7 @@ class Game {
     updateFunds() {
         if (this.currentSubIteration % this.fundingIterations == 2 && this.currentSubIteration != 2) {
             this.updateFundsDisplay(this.fundingIterationAmount, true);
-            this.displayMessage("Payday!",1000);
+            this.displayMessage("Payday!", 1000);
         }
     }
 
@@ -217,7 +217,6 @@ class Game {
         this.iterationItems(city);
         if (city.vaxInProgress && this.currentSubIteration >= city.initialVaxDelay + city.vaxStartIteration) {
             city.vaccinate();
-            //TEMP:
             document.getElementById("buttonVaccine").style.borderColor = "green";
         }
         //console.log("Iteration", city.currentIteration, ".", city.numOfTransmissions, "were infected out of", city.population, "(", city.percentageInfected.toFixed(2), "% infected ) %delta = ", (city.percentageInfected - this.previousPercentage).toFixed(2), "Dead:", city.numDead); 

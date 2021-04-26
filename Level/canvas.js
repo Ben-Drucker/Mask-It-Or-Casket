@@ -72,60 +72,60 @@ function changeStatus() {
         if (spritesA[i].isDead) {   //DEAD
             setIcon(spritesA[i], 7);
         }
-        else if(spritesA[i].isInfected){     //INFECTED
-            if(spritesA[i].isVaxed){
+        else if (spritesA[i].isInfected) {     //INFECTED
+            if (spritesA[i].isVaxed) {
                 setIcon(spritesA[i], 4);
             }
-            else if(spritesA[i].risk < theGame.city.fractionMasking){
+            else if (spritesA[i].risk < theGame.city.fractionMasking) {
                 setIcon(spritesA[i], 9);
             }
-            else if(spritesA.risk < theGame.city.fractionDistancing){
+            else if (spritesA.risk < theGame.city.fractionDistancing) {
                 setIcon(spritesA[i], 10);
-                if(spritesA.risk < theGame.city.fractionDistancing && Math.random() < 0.5){
+                if (spritesA.risk < theGame.city.fractionDistancing && Math.random() < 0.5) {
                     setIcon(spritesA[i], 10);
                 }
             }
-            else{
+            else {
                 setIcon(spritesA[i], 3);
             }
         }
-        else if(spritesA[i].hasRecovered){   //RECOVERED
-            if(spritesA[i].isVaxed){
+        else if (spritesA[i].hasRecovered) {   //RECOVERED
+            if (spritesA[i].isVaxed) {
                 setIcon(spritesA[i], 5);
             }
-            else if(spritesA[i].risk < theGame.city.fractionMasking){
+            else if (spritesA[i].risk < theGame.city.fractionMasking) {
                 setIcon(spritesA[i], 8);
-                if(spritesA.risk < theGame.city.fractionDistancing && Math.random() < 0.5){
+                if (spritesA.risk < theGame.city.fractionDistancing && Math.random() < 0.5) {
                     setIcon(spritesA[i], 11);
                 }
             }
-            else if(spritesA.risk < theGame.city.fractionDistancing){
+            else if (spritesA.risk < theGame.city.fractionDistancing) {
                 setIcon(spritesA[i], 11);
             }
-            else{
+            else {
                 setIcon(spritesA[i], 6);
             }
         }
-        else{                       //NORMAL
-            if(spritesA[i].isVaxed){
+        else {                       //NORMAL
+            if (spritesA[i].isVaxed) {
                 setIcon(spritesA[i], 2);
             }
-            else if(spritesA[i].risk < theGame.city.fractionMasking){
+            else if (spritesA[i].risk < theGame.city.fractionMasking) {
                 setIcon(spritesA[i], 1);
-                if(spritesA[i].risk < theGame.city.fractionDistancing && Math.random() < 0.5){
+                if (spritesA[i].risk < theGame.city.fractionDistancing && Math.random() < 0.5) {
                     setIcon(spritesA[i], 12);
                 }
             }
-            else if(spritesA[i].risk < theGame.city.fractionDistancing){
+            else if (spritesA[i].risk < theGame.city.fractionDistancing) {
                 setIcon(spritesA[i], 12);
             }
-            else{
+            else {
                 setIcon(spritesA[i], 0);
             }
         }
     }
 
-    function setIcon(spritesA_i, pos){
+    function setIcon(spritesA_i, pos) {
         spritesA_i.frameX = pos;
     }
 }

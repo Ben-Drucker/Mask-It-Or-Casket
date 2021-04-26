@@ -34,52 +34,52 @@ class City {
         //MASKING
         this.masksFullyImplemented = false;
         this.maxFractionMasking = 0.8;
-        this.targetFractionMasking = 0;          //User Selected — Efficacy
+        this.targetFractionMasking = 0;                 //User Selected — Efficacy
         this.previousFractionMasking = 0;
-        this.fractionMaskEfficacy = 0.65;        //PARAMETER
-        this.fractionMasking = 0;             //Implemented Value — Changing Value
-        this.initialMaskDelay = 20;             //User Selected — Time
-        this.maskImplementationDelay = 35;      //PARAMETER
+        this.fractionMaskEfficacy = 0.65;               //PARAMETER
+        this.fractionMasking = 0;                       //Implemented Value — Changing Value
+        this.initialMaskDelay = 20;                     //User Selected — Time
+        this.maskImplementationDelay = 35;              //PARAMETER
         this.maskStartIteration = null;
         this.masksStable = null;
         this.stabMsgDisp = false;
         this.notOnFirst = null;
 
         //DISTANCING
-        this.maxFractionDistancing = 0.8;       //PARAMETER
-        this.fractionDistancing = 0;            //Implemented Value — Changing Value
-        this.targetFractionDistancing = 0;      //User Selected — Efficacy
-        this.distancingImplementationDelay = 20;//User Selected — Time
-        this.fractionDistancingEfficacy = 0.5;  //PARAMETER
-        this.initialDistancingDelay = 20;       //PARAMETER
+        this.maxFractionDistancing = 0.8;               //PARAMETER
+        this.fractionDistancing = 0;                    //Implemented Value — Changing Value
+        this.targetFractionDistancing = 0;              //User Selected — Efficacy
+        this.distancingImplementationDelay = 20;        //User Selected — Time
+        this.fractionDistancingEfficacy = 0.5;          //PARAMETER
+        this.initialDistancingDelay = 20;               //PARAMETER
         this.distancingStartIteration = null;
         this.distanceStopIteration = null;
         this.maxDistanceIntsinsityAchieved = null;
 
         //VAX
         this.maxFractionVaxEfficacy = 0.95;
-        this.fractionVaxing = 0.8;                //PARAMETER
-        this.fractionVaxingEfficacy = 0.9;      //PARAMETER
-        this.initialVaxDelay = 100;             //PARAMETER
-        this.vaxImplementationDelay = 50;       //PARAMETER
+        this.fractionVaxing = 0.8;                      //PARAMETER
+        this.fractionVaxingEfficacy = 0.9;              //PARAMETER
+        this.initialVaxDelay = 100;                     //PARAMETER
+        this.vaxImplementationDelay = 50;               //PARAMETER
         this.vaxStartIteration = null;
 
         //LOCKDOWN
-        this.fractionMaxLockDownEfficacy = 0.75;    //PARAMETER
-        this.fractionLockDownEfficacy = 0;          //Implemented Value — Changing Value
-        this.targetFractionLockDownEfficacy = 0;    //User Selected — Efficacy
-        this.initialLockDownDelay = 10;             //PARAMETER
-        this.lockDownImplementationDelay = 25;      //User Selected — time
+        this.fractionMaxLockDownEfficacy = 0.75;        //PARAMETER
+        this.fractionLockDownEfficacy = 0;              //Implemented Value — Changing Value
+        this.targetFractionLockDownEfficacy = 0;        //User Selected — Efficacy
+        this.initialLockDownDelay = 10;                 //PARAMETER
+        this.lockDownImplementationDelay = 25;          //User Selected — time
         this.lockDownStartIteration = null;
         this.lockDownStopIteration = null;
         this.maxLockdownIntensityAchieved = null;
 
         //DISTRIBUTE
-        this.transmissionRisk = 0.2;        //PARAMETER
-        this.bipartiteRatio = 0.18;         //PARAMETER Determining the ratio of in-group, out-group graph connections
-        this.maxGroupSize = 25;             //PARAMETER
-        this.densityFactor = 2;             //PARAMETER
-        this.maxConnectionsInGroup = 50;    //PARAMETER
+        this.transmissionRisk = 0.2;                //PARAMETER
+        this.bipartiteRatio = 0.18;                 //PARAMETER Determining the ratio of in-group, out-group graph connections
+        this.maxGroupSize = 25;                     //PARAMETER
+        this.densityFactor = 2;                     //PARAMETER
+        this.maxConnectionsInGroup = 50;            //PARAMETER
     }
 
     generateGroups() {
@@ -216,19 +216,19 @@ class City {
                         }
                     }
 
-                    
+
                     if (this.masksInProgress) {
                         this.masksStable = false;
                         let progress = this.currentIteration - this.maskStartIteration - this.initialMaskDelay;
-                        if (progress >= 0 || theGame.numMaskings >=2) {  //if we are past the initial delay
-                            if(progress < 0){
+                        if (progress >= 0 || theGame.numMaskings >= 2) {  //if we are past the initial delay
+                            if (progress < 0) {
                                 this.fractionMasking = this.previousFractionMasking;
                             }
-                            else{
+                            else {
                                 this.fractionMasking = Math.min(this.targetFractionMasking, (progress * (this.targetFractionMasking - this.previousFractionMasking) / this.maskImplementationDelay) + this.previousFractionMasking);
                             }
                             if (person2.risk < this.fractionMasking) {
-                                if(Math.random() < 0.005){
+                                if (Math.random() < 0.005) {
                                     //console.log("In here", (progress * (this.targetFractionMasking - this.previousFractionMasking) / this.maskImplementationDelay) );
                                 }
                                 interactionTransmissionRisk *= (1 - this.fractionMaskEfficacy);
