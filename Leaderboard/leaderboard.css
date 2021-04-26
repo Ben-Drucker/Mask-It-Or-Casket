@@ -17,6 +17,7 @@ body {
 
 h1 {
     text-align: center;
+    font-size: 40px;
 }
 
 button {
@@ -45,6 +46,6 @@ button {
   }
 
 .home {
-    margin-left: 10px;
+    margin-left: 49%;
     background-image: url("../Images/home.png");
 }

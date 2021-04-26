@@ -70,7 +70,9 @@
         </div>
         <div class="grid-container2">
             <div class="grid-item"></div>
-            <div id="game_screen_text">Information such as payday, ...????? </div>
+            <div id="game_screen_text">
+                Information about updates on game status such as payday and status of policies.
+                 </div>
             <div class="grid-item"></div>
         </div>
         <div class="grid-item">
@@ -105,7 +107,7 @@
             <div class="grid-item"><img src="../Images/vaccine.svg" alt="vaccine" width="50px" style="
                 background-color: white;
                 padding:4px;
-                border: 4px solid lightblue;">
+                border: 4px solid black;">
             </div>
             <div class="grid-item">
                 <p>
@@ -116,7 +118,7 @@
             <div class="grid-item"><img src="../Images/distance.svg" alt="distance" width="50px" style="
                 background-color: white;
                 padding:4px;
-                border: 4px solid lightblue;"></div>
+                border: 4px solid black;"></div>
             <div class="grid-item">
                 <p>
                     Social Distancing. More expensive the policy, more effective social distancing is.
@@ -125,7 +127,7 @@
             <div class="grid-item"><img src="../Images/shutdown.svg" alt="lockdown" width="50px" style="
                 background-color: white;
                 padding:4px;
-                border: 4px solid lightblue;"></div>
+                border: 4px solid black;"></div>
             <div class="grid-item">
                 <p>
                     Shutdown. Stay at home order, shutdown public places, and stimulus for shutdown.
@@ -134,13 +136,57 @@
             <div class="grid-item"><img src="../Images/mask.svg" alt="mask" width="50px" style="
                 background-color: white;
                 padding:4px;
-                border: 4px solid lightblue;"></div>
+                border: 4px solid black;"></div>
             <div class="grid-item">
                 <p>
                     Buy masks to give people to wear!
                 </p>
             </div>
         </div>
+        <h2>Meaning of border colors</h2>
+        <div class="grid-container1">
+            <div class="grid-item"><img src="../Images/vaccine.svg" alt="vaccine" width="50px" style="
+                background-color: white;
+                padding:4px;
+                border: 4px solid lightblue;">
+            </div>
+            <div class="grid-item">
+                <p>
+                    You have not implemented this policy yet. 
+                </p>
+            </div>
+            <div class="grid-item"><img src="../Images/vaccine.svg" alt="vaccine" width="50px" style="
+                background-color: white;
+                padding:4px;
+                border: 4px solid orange;">
+            </div>
+            <div class="grid-item">
+                <p>
+                    Policy is getting ready to be implemented. 
+                </p>
+            </div>
+            <div class="grid-item"><img src="../Images/vaccine.svg" alt="vaccine" width="50px" style="
+                background-color: white;
+                padding:4px;
+                border: 4px solid green;">
+            </div>
+            <div class="grid-item">
+                <p>
+                    Policy is being implemented at full capacity. 
+                </p>
+            </div>
+            <div class="grid-item"><img src="../Images/vaccine.svg" alt="vaccine" width="50px" style="
+                background-color: white;
+                padding:4px;
+                border: 4px solid yellow;">
+            </div>
+            <div class="grid-item">
+                <p>
+                    Intensity of the policy is dwinding.
+                </p>
+            </div>
+        </div>
+
         <div class="grid-container2">
             <div class="grid-item">
                 <button id="back3" class="back" onclick="openPage('gameComponents')" alt="back"></button>
@@ -160,10 +206,30 @@
         <h2>Risk Bar</h2>
         <div class="grid-container1">
             <div class="grid-item">
-                <video id="game_screen_vid" muted autoplay loop>
+                <video id="game_screen_vid" style="width:150%; margin-top: unset" muted autoplay loop>
                     <source src="../Images/help_risk_bar.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+            </div>
+            <div class="grid-item" style="text-align: left; margin-left: 70px; margin-top:50px; color: green">
+                Green Points 
+                <p style="color: black">
+                    You can earn green points by keeping your risk level low, or in the green 
+                    section of the risk bar. 
+                    <br>
+                    Earn green points to win the game! 
+                </p>
+                <br>
+                <br>
+                <div style="color: red">
+                    Red Points
+                    <p style="color: black">
+                    You gain red points when your risk level is high, or in the red section of 
+                    the risk bar. 
+                    <br>
+                    You lose if you gain too many red points!
+                    </p>
+                </div>
             </div>
         </div>
         <div class="grid-container2">
