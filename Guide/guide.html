@@ -21,7 +21,7 @@
             Mask-It-Or-Casket was created to help visualize disease spread and the impact of
             policy implementations on it. Aspects of the game were included to make the game
             more realistic - money and time is needed for policies, vaccines need to be developed
-            before they can be used, the risk bar was based off a model the New York Times used
+            before they can be used, and the risk bar was based off a model the <a href="https://www.nytimes.com/interactive/2021/us/covid-risk-map.html">New York Times</a> used
             to assess transmission risk. We hope Mask-It-Or-Casket will give you some insight into
             some of the work that goes into fighting against epidemics and pandemics!
         </p>
@@ -51,6 +51,7 @@
 
     <div id="gameComponents" class="main">
         <h2>Game Screen</h2>
+        <p>Below, you will find videos demonstrating each component of the game screen.</p>
         <div class="grid-item">
             <video id="game_screen_vid" muted autoplay loop>
                 <source src="../Images/game_screen_top.mp4" type="video/mp4">
@@ -112,7 +113,8 @@
             <div class="grid-item">
                 <p>
                     Need to develop vaccine before getting people vaccinated.
-                    Different number of vaccines you can buy at a time.
+                    The more expensive, the more effective the vaccine. It will also take more time to develop. 
+                    You can only choose one vaccine to develop each time you play the game, so choose wisely!
                 </p>
             </div>
             <div class="grid-item"><img src="../Images/distance.svg" alt="distance" width="50px" style="
@@ -121,7 +123,7 @@
                 border: 4px solid black;"></div>
             <div class="grid-item">
                 <p>
-                    Social Distancing. More expensive the policy, more effective social distancing is.
+                    Social Distancing. The more expensive the policy, the more people social distance.
                 </p>
             </div>
             <div class="grid-item"><img src="../Images/shutdown.svg" alt="lockdown" width="50px" style="
@@ -130,7 +132,7 @@
                 border: 4px solid black;"></div>
             <div class="grid-item">
                 <p>
-                    Shutdown. Stay at home order, shutdown public places, and stimulus for shutdown.
+                    Shutdown. Stay at home order, shutdown public places, and add stimulus for the shutdown.
                 </p>
             </div>
             <div class="grid-item"><img src="../Images/mask.svg" alt="mask" width="50px" style="
@@ -211,23 +213,24 @@
                     Your browser does not support the video tag.
                 </video>
             </div>
-            <div class="grid-item" style="text-align: left; margin-left: 70px; margin-top:50px; color: green">
-                Green Points 
+            <div class="grid-item" style="text-align: left; margin-left: 70px; margin-top:50px; color: red">
+                Red Points 
                 <p style="color: black">
-                    You can earn green points by keeping your risk level low, or in the green 
-                    section of the risk bar. 
+                    You gain red points when your risk level is high, or in the red section of 
+                    the risk bar.
+                     
                     <br>
-                    Earn green points to win the game! 
+                    You lose if you gain too many red points!
                 </p>
                 <br>
                 <br>
-                <div style="color: red">
-                    Red Points
+                <div style="color: green">
+                    Green Points
                     <p style="color: black">
-                    You gain red points when your risk level is high, or in the red section of 
-                    the risk bar. 
+                    You can earn green points by keeping your risk level low, or in the green 
+                    section of the risk bar.
                     <br>
-                    You lose if you gain too many red points!
+                    Earn green points to win the game!
                     </p>
                 </div>
             </div>
@@ -287,7 +290,7 @@
     <div id="people2" class="main">
         <h2>Citizens (Part 2)</h2>
         <p class="helpPar">If a citizen is following a certain policy, then their base icon will have one of the following effects over their icon.</p>
-        <p class="helpPar">*If the citizen is following multiple policies, then the policy that better protects them from the virus will be displayed. The policies are listed in order of effectiveness.</p>
+        <p class="helpPar">*If the citizen is vaccinated, no other policies will be displayed. Otherwise, if the citizen is following a mask mandate and social distancing mandate, their icon will randomly swap between these policies.</p>
 
         <div class="grid-container2">
             <div class="grid-item"><img src="images/normalVax.png" alt="plain circle"></div>
