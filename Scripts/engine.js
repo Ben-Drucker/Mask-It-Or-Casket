@@ -33,10 +33,10 @@ class City {
         /*PARAMETERS & Policies*/
         //MASKING
         this.masksFullyImplemented = false;
-        this.maxFractionMasking = 0.9;
+        this.maxFractionMasking = 0.8;
         this.targetFractionMasking = 0;          //User Selected — Efficacy
         this.previousFractionMasking = 0;
-        this.fractionMaskEfficacy = 0.5;        //PARAMETER
+        this.fractionMaskEfficacy = 0.65;        //PARAMETER
         this.fractionMasking = 0;             //Implemented Value — Changing Value
         this.initialMaskDelay = 20;             //User Selected — Time
         this.maskImplementationDelay = 35;      //PARAMETER
