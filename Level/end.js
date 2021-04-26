@@ -1,4 +1,5 @@
 var endMessage = "" //for undefined losing reasons
+var scoreSubmitted = false;
 
 function gameOver(){
     closeOthers(0);
@@ -29,6 +30,7 @@ function submitScore() {
           } else{
             document.getElementById("submitScore").innerHTML = "Your Score has been submitted";
             document.getElementById("submitResponse").innerHTML = this.responseText;
+            scoreSubmitted = true;
           }
       }
     };
