@@ -4,7 +4,7 @@ You can find the link to this project's website here:
 
 ### <a href="https://github.swarthmore.edu/pages/CS71-S21-G7/Mask-It-Or-Casket/">Project Website Link</font></a>
 
-### Project Description
+## Project Description
 
 The recent outbreak of COVID-19 caused a global pandemic. In addition to the disease itself, the world had to contend with social problems it brought to the surface. Many were caused by misunderstandings about the source of the disease, who the disease affects, and diseases in general. 
 
