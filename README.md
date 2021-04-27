@@ -16,7 +16,7 @@ COVID-19 will not likely be the last pandemic humans will encounter. For society
 
 ## Browser Compatibility
 
-For best results, use Chrome, Edge, Opera, or Safari.
+For best results, use Chrome, Opera, or Safari. (Edge has not been tested)
 
 In Firefox, for best results (to enable one visual effect), type `about:config` in the search bar. Then click the "Accept Risk and Continue" if you choose to do so. In the search bar on this preferences page, type `layout.css.backdrop-filter.enabled`. On the right hand side next to this option, click the double harpoon icon (<img alt="Network Explainer" src="Images/DoubleHarpoon.png" width="25" align="center">) to switch this option to "true." Then you may procceed to the website. **This only needs to be done once for each device.**
 ## Our "Social Netork" Simulation
