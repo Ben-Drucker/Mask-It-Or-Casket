@@ -6,10 +6,6 @@
     src: url("fonts/BenMaticArcade4.otf") format("opentype");
 }
 
-h1 {
-    white-space: nowrap;
-}
-
 body {
     background-color: #3b3963;
     background-image: url("images/Background.png");
