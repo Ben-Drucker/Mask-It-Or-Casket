@@ -1,4 +1,5 @@
 # Mask It Or Casket
+### By Ben Drucker (me), Christian Galo, Hyeyun Chae, and Mari Quiroz (Swarthmore College Group)
 ## The main repository of group 7's CS71 project
 You can find the link to this project's website here: 
 
