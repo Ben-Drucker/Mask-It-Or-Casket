@@ -2,7 +2,7 @@
 ## The main repository of group 7's CS71 project
 You can find the link to this project's website here: 
 
-### <a href="https://github.swarthmore.edu/pages/CS71-S21-G7/Mask-It-Or-Casket/">Project Website Link</font></a>
+### <a href="https://ben-drucker.github.io/Mask-It-Or-Casket/">Project Website Link</font></a>
 
 ## Project Description
 
