@@ -1,10 +1,10 @@
 # Mask It Or Casket
-### By Ben Drucker (me), Christian Galo, Hyeyun Chae, and Mari Quiroz (Swarthmore College Group)
+### By Ben Drucker (me), Christian Galo '22, Hyeyun Chae '21, and Mari Quiroz '23 (Swarthmore College Group)
 ## The main repository of group 7's CS71 project
 
 ### You can find the link to this project's website [here](https://ben-drucker.github.io/Mask-It-Or-Casket/): 
 
-### You can find the presentation poster inside the git repository as `poster.pdf`.
+### You can find the presentation poster inside the git repository as [`poster.pdf`](https://github.com/Ben-Drucker/Mask-It-Or-Casket/blob/master/poster.pdf).
 
 ### You can find a demo video of Mask-It or Casket [here](https://www.youtube.com/watch?v=4icUOo1R2F8). 
 
